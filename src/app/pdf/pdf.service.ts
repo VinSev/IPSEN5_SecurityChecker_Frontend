@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import {ScanCategoryType} from "../scan/scan-category.type";
-import {scan} from "rxjs";
-import {JsonObject} from "@angular/compiler-cli/ngcc/src/packages/entry_point";
 pdfMake.vfs = pdfFonts.pdfMake.vfs
 
 @Injectable({
