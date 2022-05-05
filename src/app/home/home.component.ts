@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
-import {ScanService} from "../scan/scan.service";
+import {ScanService} from "../scan-progress/scan/scan.service";
 import {NgForm} from "@angular/forms";
 
 @Component({
