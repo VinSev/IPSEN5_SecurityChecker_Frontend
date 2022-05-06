@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {ScanService} from "../scan/scan.service";
 import {NgForm} from "@angular/forms";
+import { ValidatieService } from '../shared/validatie.service';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,8 @@ import {NgForm} from "@angular/forms";
 export class HomeComponent {
 
   constructor(private router: Router,
-              private scanService: ScanService) {
+              private scanService: ScanService,
+              private validatieService: ValidatieService) {
   }
 
   public submit(name: HTMLInputElement, email: HTMLInputElement, website: HTMLInputElement, ownership: HTMLInputElement, form: NgForm): boolean {
@@ -32,21 +34,28 @@ export class HomeComponent {
   }
 
   //Preventing placing anything but alfabetic key types plus the minus (-) for names using -
-  keyPressAlphabet(event: any){
-    var inp = String.fromCharCode(event.keyCode);
+  keyPressAlphabet(event: Event){
+    //check type of event
+    const target = event.target as HTMLInputElement;
+    console.log(target.type);
     
-    //Name input
-    var mask = /[a-zA-ZáéóúíÁÉÓÚÍäëöüïÄËÖÜÏ-]/
-    //Phone input
-    var mask = /[0-9+]/
-    //Email input
-    var mask = /[a-zA-Z0-9áéóúíÁÉÓÚÍäëöüïÄËÖÜÏ+_~@-]/
-
-    if(mask.test(inp)){
-      return true;
-    } else {
-      event?.preventDefault();
-      return false;
+    //create mask
+    switch((event.target as HTMLInputElement).type){
+      case "text":
+        //Name input
+        var mask = /[a-zA-ZáéóúíÁÉÓÚÍäëöüïÄËÖÜÏ-]/
+        break;
+      case "tell":
+        //Phone input
+        var mask = /[0-9+]/
+        break;
+      default:
+        //Email input
+        var mask = /[a-zA-Z0-9áéóúíÁÉÓÚÍäëöüïÄËÖÜÏ+_~@-]/
+        break;
     }
+
+      this.validatieService.validateInputOfInputfield(event, mask);
+    
   }
 }
