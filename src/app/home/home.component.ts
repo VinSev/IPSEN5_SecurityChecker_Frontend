@@ -1,6 +1,6 @@
 import {Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
-import {ScanService} from "../scan/scan.service";
+import {ScanService} from "../scan-progress/scan/scan.service";
 import {NgForm} from "@angular/forms";
 import { ValidatieService } from '../shared/validatie.service';
 import { homedir } from 'os';

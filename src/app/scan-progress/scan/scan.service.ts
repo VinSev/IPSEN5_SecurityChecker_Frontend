@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ScanCategoryType} from "./scan-category.type";
+import {ScanCategoryType} from "../../shared/models/scan-category.type";
 import {Iterator} from "./iterator.model";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
