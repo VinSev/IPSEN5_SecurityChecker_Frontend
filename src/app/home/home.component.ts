@@ -2,8 +2,9 @@ import {Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {ScanService} from "../scan-progress/scan/scan.service";
 import {NgForm} from "@angular/forms";
-import { ValidatieService } from '../shared/validatie.service';
+import { ValidatieService } from '../shared/services/validatie.service';
 import { homedir } from 'os';
+import { httpService } from '../shared/services/htttp.service';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,8 @@ import { homedir } from 'os';
 export class HomeComponent {
   constructor(private router: Router,
               private scanService: ScanService,
-              private validatieService: ValidatieService) {}
+              private validatieService: ValidatieService,
+              private httpService: httpService) {}
 
   public submit(name: HTMLInputElement, email: HTMLInputElement, website: HTMLInputElement, ownership: HTMLInputElement, form: NgForm): boolean {    
     for(let input of [name, email, website, ownership]) {
@@ -35,6 +37,12 @@ export class HomeComponent {
   //Check if the given input is allowed in the given inputfield, if not let user know that this input is not allowed.
   CheckInputValidation(event: Event){
      if (!this.validatieService.validateInputOfInputfield(event)){
+       //TODO: show warning of not allowed input
+       this.httpService.get('/users/test')
+      //  .subscribe((data) => {
+      //    console.log(data);
+      //  })
+
      }else{
        
      }
