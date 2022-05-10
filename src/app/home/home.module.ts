@@ -4,6 +4,7 @@ import { HomeComponent } from './home.component';
 import {FormsModule} from "@angular/forms";
 import {HomeRoutingModule} from "./home-routing.module";
 import {ScanModule} from "../scan-progress/scan.module";
+import {SharedModule} from "../shared/shared.module";
 
 
 
@@ -11,6 +12,7 @@ import {ScanModule} from "../scan-progress/scan.module";
   imports: [
     CommonModule,
     HomeRoutingModule,
+    SharedModule,
     ScanModule,
     FormsModule
   ],
