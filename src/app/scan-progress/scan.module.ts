@@ -3,13 +3,17 @@ import { CommonModule } from '@angular/common';
 import { ScanComponent } from './scan/scan.component';
 import {ScanRoutingModule} from "./scan-routing.module";
 import {TipsComponent} from "./tips/tips.component";
+import {ResultModule} from "../result/result.module";
+import {SharedModule} from "../shared/shared.module";
 
 
 
 @NgModule({
   imports: [
     CommonModule,
-    ScanRoutingModule
+    ScanRoutingModule,
+    SharedModule,
+    ResultModule
   ],
   declarations: [
     ScanComponent,
