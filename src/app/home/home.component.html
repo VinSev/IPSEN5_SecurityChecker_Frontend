@@ -14,9 +14,9 @@
       <div class="col-lg-12 col-md-12">
         <div class="execute-right ">
           <form id="scanForm" #scanForm="ngForm" (ngSubmit)="submit(name, email, website, ownership, scanForm)"><div class="form-row">
-            <div class="form-column"><input name="naam" ngModel #name required type="text" placeholder="Naam*" class="form-control bg1" aria-label="Naam"></div>
-            <div class="form-column"><input name="email" ngModel #email required type="email" placeholder="Email*" class="form-control bg2" aria-label="Email"></div>
-            <div class="form-column"><input name="website" ngModel #website required type="text" placeholder="Website*" class="form-control" aria-label="Website"></div>
+            <div class="form-column"><input name="naam"     ngModel #name     required type="text"  placeholder="Naam*"     (keydown)="CheckInputValidation($event)" class="form-control bg1" aria-label="Naam" minlength="3" maxlength="15"></div>
+            <div class="form-column"><input name="email"    ngModel #email    required type="email" placeholder="Email*"    (keydown)="CheckInputValidation($event)" class="form-control bg2" aria-label="Email"></div>
+            <div class="form-column"><input name="website"  ngModel #website  required type="tell"  placeholder="Website*"  (keydown)="CheckInputValidation($event)" class="form-control"     aria-label="Website"></div>
             <div class="form-column d-flex justify-content-center">
               <p id="ownership-label">Eigenaar*</p>
               <input name="ownership" ngModel #ownership required="true" type="checkbox" class="form-control checkbox key" id="ownership" data-key="68" />
@@ -28,9 +28,14 @@
             <div class="form-column"><input type="submit" value="GRATIS SCAN AANVRAGEN" aria-label="Verzenden"></div>
           </div>
             <noscript>Activeer JavaScript om gebruik te maken van dit formulier.</noscript>
+            <div *ngIf="wrongSign">
+              <small style="color: red;">Dit teken: [teken] is niet geldig in dit veld.</small>
+            </div>
           </form>
         </div>
       </div>
     </div>
-  </div></section>
+  </div>
+</section>
+  
 
