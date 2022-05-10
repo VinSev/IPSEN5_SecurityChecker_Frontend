@@ -38,13 +38,7 @@ export class HomeComponent {
   CheckInputValidation(event: Event){
      if (!this.validatieService.validateInputOfInputfield(event)){
        //TODO: show warning of not allowed input
-       this.httpService.get('/users/test')
-      //  .subscribe((data) => {
-      //    console.log(data);
-      //  })
-
      }else{
-       
      }
   }
 }
