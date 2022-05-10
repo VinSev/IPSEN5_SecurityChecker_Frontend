@@ -12,10 +12,10 @@ import { httpService } from '../shared/services/htttp.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+  public wrongSign: boolean = false;
   constructor(private router: Router,
               private scanService: ScanService,
-              private validatieService: ValidatieService,
-              private httpService: httpService) {}
+              private validatieService: ValidatieService) {}
 
   public submit(name: HTMLInputElement, email: HTMLInputElement, website: HTMLInputElement, ownership: HTMLInputElement, form: NgForm): boolean {    
     for(let input of [name, email, website, ownership]) {
@@ -36,9 +36,9 @@ export class HomeComponent {
 
   //Check if the given input is allowed in the given inputfield, if not let user know that this input is not allowed.
   CheckInputValidation(event: Event){
-     if (!this.validatieService.validateInputOfInputfield(event)){
-       //TODO: show warning of not allowed input
-     }else{
-     }
+    this.wrongSign = false;
+    if (!this.validatieService.validateInputOfInputfield(event)){
+      this.wrongSign = true;
+    }     
   }
 }
