@@ -2,6 +2,7 @@ import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {GeneralErrorComponent} from "./error-components/general-error/general-error.component";
 import {SpinningComponent} from "./loading-components/spinning/spinning.component";
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   imports: [
@@ -9,7 +10,8 @@ import {SpinningComponent} from "./loading-components/spinning/spinning.componen
   ],
   declarations: [
     GeneralErrorComponent,
-    SpinningComponent
+    SpinningComponent,
+    NotFoundComponent
   ],
   exports:[
     GeneralErrorComponent,
