@@ -1,9 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ScanService} from "./scan.service";
 import {ToastrService} from "ngx-toastr";
 import {PdfService} from "../pdf/pdf.service";
-import {FunFactsService} from "./fun-facts.service";
-import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-scan',
