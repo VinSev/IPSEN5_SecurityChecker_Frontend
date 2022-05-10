@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import {FormsModule} from "@angular/forms";
 import {HomeRoutingModule} from "./home-routing.module";
+import {ScanModule} from "../scan-progress/scan.module";
 
 
 
@@ -10,6 +11,7 @@ import {HomeRoutingModule} from "./home-routing.module";
   imports: [
     CommonModule,
     HomeRoutingModule,
+    ScanModule,
     FormsModule
   ],
   declarations: [
