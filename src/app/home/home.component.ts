@@ -3,8 +3,6 @@ import {Router} from "@angular/router";
 import {ScanService} from "../scan-progress/scan/scan.service";
 import {NgForm} from "@angular/forms";
 import { ValidatieService } from '../shared/services/validatie.service';
-import { homedir } from 'os';
-import { httpService } from '../shared/services/htttp.service';
 
 @Component({
   selector: 'app-home',
@@ -36,7 +34,7 @@ export class HomeComponent {
   }
 
   //Check if the given input is allowed in the given inputfield, if not let user know that this input is not allowed.
-  CheckInputValidation(event: Event){
+  CheckInputValidation(event: Event){    
     this.wrongSign = false;
     if (!this.validatieService.validateInputOfInputfield(event)){
       this.wrongSign = true;

@@ -23,8 +23,10 @@ import { Injectable } from "@angular/core";
     }
       
       var inp = String.fromCharCode(event.keyCode);
-  
-      if(mask.test(inp) || event.keyCode == 8){
+
+      console.log(event.keyCode);
+      
+      if(mask.test(inp) || event.keyCode == 8 || event.keyCode == 16){
         return true;
       } else {
         event?.preventDefault();
