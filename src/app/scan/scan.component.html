@@ -8,14 +8,8 @@
     <h2>Scannen Website - {{this.scanService.website}}</h2>
     <div class="vwrap">
       <div class="vmove">
-        <div class="vslide">
-          <p>62% van alle websites worden gehost op WordPress.</p>
-        </div>
-        <div class="vslide">
-          <p>XSS en Injection zijn de meest voorkomende website aanvallen.</p>
-        </div>
-        <div class="vslide">
-          <p>Get Big Marketing bied gratis advies aan voor je bedrijf over websites.</p>
+        <div class="vslide" *ngFor="let funFact of funFacts">
+          <p>{{funFact}}</p>
         </div>
       </div>
     </div>

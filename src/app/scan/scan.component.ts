@@ -9,6 +9,8 @@ import {PdfService} from "../pdf/pdf.service";
   styleUrls: ['./scan.component.scss']
 })
 export class ScanComponent implements OnInit {
+  public funFacts: string[] = ["Hello", "Test", "World"];
+
   constructor(public scanService: ScanService,
               private toastr: ToastrService,
               private pdfService: PdfService) {
