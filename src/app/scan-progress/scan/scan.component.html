@@ -6,13 +6,7 @@
   </div>
   <div *ngSwitchCase="false">
     <h2>Scannen Website - {{this.scanService.website}}</h2>
-    <div class="vwrap">
-      <div class="vmove">
-        <div class="vslide" *ngFor="let funFact of funFacts">
-          <p>{{funFact}}</p>
-        </div>
-      </div>
-    </div>
+<!--    <app-tips></app-tips>-->
   </div>
   <div *ngSwitchCase="true">
     <h2>Scannen Website - {{this.scanService.website}} - Voltooid</h2>

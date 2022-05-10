@@ -1,33 +1,22 @@
 import {Component, OnInit} from '@angular/core';
 import {ScanService} from "./scan.service";
 import {ToastrService} from "ngx-toastr";
-import {PdfService} from "../pdf/pdf.service";
+import {PdfService} from "../../shared/services/pdf.service";
 
 @Component({
   selector: 'app-scan',
   templateUrl: './scan.component.html',
   styleUrls: ['./scan.component.scss']
 })
-export class ScanComponent implements OnInit, OnDestroy {
-  private subscription!: Subscription;
-  public funFacts: string[] = [];
+export class ScanComponent implements OnInit {
 
   constructor(public scanService: ScanService,
               private toastr: ToastrService,
-              private pdfService: PdfService,
-              private funFactsService: FunFactsService) {
+              private pdfService: PdfService) {
   }
 
   public ngOnInit() {
     this.startScan();
-    this.subscription = this.funFactsService.get()
-      .subscribe(response => {
-        this.funFacts = response;
-      });
-  }
-
-  public ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 
   private startScan(): void {
