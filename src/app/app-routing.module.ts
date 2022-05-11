@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {NotFoundComponent} from "./shared/not-found/not-found.component";
-import {ResultComponent} from "./result/result/result.component";
+import {NotFoundComponent} from "./shared/error-components/not-found/not-found.component";
 
 const routes: Routes = [
 
@@ -17,10 +16,6 @@ const routes: Routes = [
   {
     path: 'scan',
     loadChildren: () => import("./scan-progress/scan.module").then(m => m.ScanModule)
-  },
-  {
-    path: 'result',
-    component: ResultComponent
   },
   {
     path: '**',
