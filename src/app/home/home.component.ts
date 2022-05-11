@@ -2,7 +2,8 @@ import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {ScanService} from "../scan/scan/scan.service";
 import {NgForm} from "@angular/forms";
-import { ValidationService } from '../shared/services/validation.service';
+import {ValidationService} from "../shared/services/validation.service";
+
 
 @Component({
   selector: 'app-home',

@@ -23,8 +23,16 @@ export class ScanComponent implements OnInit {
     this.scanService.start();
   }
 
-  public submit(email: HTMLInputElement): void {
+  public submit(email: HTMLInputElement): boolean {
+    for(let input of [email]) {
+      if(!input.checkValidity()) {
+        input.reportValidity();
+        return false;
+      }
+    }
+
     this.mailResults();
+    return true;
   }
 
   public mailResults(): void {
