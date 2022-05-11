@@ -28,9 +28,8 @@ export class HomeComponent {
     this.scanService.website = website.value;
     this.scanService.ownership = ownership.value == "on";
 
-    
-    this.router.navigate(["scan"]);
-    return true;
+      this.router.navigate(["scan"]);
+      return true;
   }
 
   //Check if the given input is allowed in the given inputfield, if not let user know that this input is not allowed.

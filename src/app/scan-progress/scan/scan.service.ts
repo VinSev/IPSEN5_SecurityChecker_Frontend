@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {ScanCategoryType} from "../../shared/models/scan-category.type";
 import {Iterator} from "./iterator.model";
-import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import { httpService } from 'src/app/shared/services/htttp.service';
+import { userValidatie } from 'src/app/shared/models/userValidatie.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class ScanService {
   private _ownership: boolean = false;
   private _scanCategories: ScanCategoryType[] = [];
 
-  constructor(private http: HttpClient) {
+  constructor(private httpService: httpService,
+              private validatieModel: userValidatie) {
     this._scanCategories.push({title: "Headers", path: "", loading: false});
   }
 
@@ -105,10 +107,19 @@ export class ScanService {
   }
 
   private invokeHeaderScan(): Observable<any> {
-    return this.http.get("https://http-observatory.security.mozilla.org/api/v1/analyze?host=" + this.website);
+    return this.httpService.get("https://http-observatory.security.mozilla.org/api/v1/analyze?host=" + this.website, null);
   }
 
   private getHeaderScanResult(scanId: any): Observable<any> {
-    return this.http.get("https://http-observatory.security.mozilla.org/api/v1/getScanResults?scan=" + scanId);
+    return this.httpService.get("https://http-observatory.security.mozilla.org/api/v1/getScanResults?scan=" + scanId, null);
+  }
+
+  public postUserValidatieToDatabase(){
+    let validatieData = new userValidatie();
+    validatieData.name = this._name;
+    validatieData.email = this._email;
+    validatieData.website = this._website;
+    validatieData.ownership = this._ownership;
+    this.httpService.post('/user/userValidatie', validatieData)
   }
 }

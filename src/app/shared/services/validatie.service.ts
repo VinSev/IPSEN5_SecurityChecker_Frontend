@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { httpService } from "./htttp.service";
 
 @Injectable({
     providedIn: 'root'
@@ -21,11 +22,8 @@ import { Injectable } from "@angular/core";
         var mask = /[a-zA-Z0-9 áéóúíÁÉÓÚÍäëöüïÄËÖÜÏ+_~@-]/
         break;
     }
-      
-      var inp = String.fromCharCode(event.keyCode);
 
-      console.log(event.keyCode);
-      
+      var inp = String.fromCharCode(event.keyCode);      
       if(mask.test(inp) || event.keyCode == 8 || event.keyCode == 16){
         return true;
       } else {
