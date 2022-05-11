@@ -16,4 +16,4 @@ import {SpinningComponent} from "./loading-components/spinning/spinning.componen
     SpinningComponent
   ]
 })
-export class ScanModule { }
+export class SharedModule { }
