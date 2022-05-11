@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import {ScanCategoryType} from "../models/scan-category.type";
+
 pdfMake.vfs = pdfFonts.pdfMake.vfs
 
 @Injectable({
@@ -9,7 +10,8 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs
 })
 export class PdfService {
 
-  constructor() { }
+  constructor() {
+  }
 
   public generatePDF(scanCategories: ScanCategoryType[], name: string, website: string): void {
     let columns: any = [{text: "Naam", italics: true}, {text: "Geslaagd", italics: true}, {text: "Uitleg", italics: true}];
