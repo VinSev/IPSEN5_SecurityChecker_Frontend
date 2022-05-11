@@ -10,13 +10,20 @@
     <h2>Scannen Website - {{this.scanService.website}}</h2>
     <app-tips></app-tips>
   </div>
-  <div *ngSwitchCase="true">
+  <div *ngSwitchCase="false">
     <h2>Scannen Website - {{this.scanService.website}} - Voltooid</h2>
-    <input type="submit" value="Mail Uitgebreide Resultaten" aria-label="Verzenden" (click)="mailResults()">
+
+    <form id="emailForm" #emailForm="ngForm" (ngSubmit)="submit(email)">
+      <div class="form-row">
+        <div class="form-column"><input name="email"    ngModel #email    required type="email" placeholder="Email*"    class="form-control bg2" aria-label="Email"></div>
+        <div class="form-column"><input type="submit"   value="Mail Uitgebreide Resultaten"     aria-label="Verzenden"></div>
+      </div>
+      <noscript>Activeer JavaScript om gebruik te maken van dit formulier.</noscript>
+    </form>
   </div>
 
-    <app-result></app-result>
-  </div>
+  <app-result></app-result>
+</div>
 
 
 

@@ -23,6 +23,10 @@ export class ScanComponent implements OnInit {
     this.scanService.start();
   }
 
+  public submit(email: HTMLInputElement): void {
+    this.mailResults();
+  }
+
   public mailResults(): void {
     this.toastr.success("Resultaten verzonden", "", {
       tapToDismiss: true,
