@@ -15,7 +15,7 @@ const routes: Routes = [
   },
   {
     path: 'scan',
-    loadChildren: () => import("./scan-progress/scan.module").then(m => m.ScanModule)
+    loadChildren: () => import("./scan/scan.module").then(m => m.ScanModule)
   },
   {
     path: '**',
