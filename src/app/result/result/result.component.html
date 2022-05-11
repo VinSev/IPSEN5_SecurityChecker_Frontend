@@ -12,6 +12,6 @@
     <h4>
       {{scanCategory.title}}
     </h4>
-    <div *ngIf="scanCategory.loading == true && scanCategory.grade == undefined" class="loading-bar"></div>
+    <app-spinning *ngIf="scanCategory.loading == true && scanCategory.grade == undefined"></app-spinning>
   </div>
 </div>
