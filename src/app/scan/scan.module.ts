@@ -26,9 +26,6 @@ import {BrowserDynamicTestingModule} from "@angular/platform-browser-dynamic/tes
     ScanComponent,
     TipsComponent,
     ResultComponent
-  ],
-  providers: [
-    InjectionToken
   ]
 })
 export class ScanModule { }
