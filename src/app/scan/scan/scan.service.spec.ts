@@ -20,4 +20,10 @@ describe('ScanService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should filter website url',  () => {
+    service.website = "https://www.google.com/?gws_rd=ssl";
+    (<any>service).filterWebsite();
+    expect(service.website).toEqual("www.google.com");
+  });
 });
