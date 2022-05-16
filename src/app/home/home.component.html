@@ -17,6 +17,7 @@
             <div class="form-row">
               <div class="form-column"><input name="naam"     ngModel #name     required type="text"  placeholder="Naam*"     class="form-control bg1" aria-label="Naam"></div>
               <div class="form-column"><input name="website"  ngModel #website  required type="text"  placeholder="Website*"  class="form-control"     aria-label="Website"></div>
+
               <div class="form-column d-flex justify-content-center">
                 <p id="ownership-label">Eigenaar*</p>
                 <input name="ownership" ngModel #ownership required="true" oninvalid="this.setCustomValidity('Je moet de eigenaar zijn van de website om een scan te mogen doen!')" type="checkbox" class="form-control checkbox key" id="ownership"/>
@@ -25,7 +26,7 @@
                 </label>
               </div>
 
-              <div class="form-column"><input type="submit" value="GRATIS SCAN AANVRAGEN" aria-label="Verzenden"></div>
+              <div [hidden]="captcha" class="form-column"><input type="submit" value="GRATIS SCAN AANVRAGEN" aria-label="Verzenden"></div>
             </div>
             <noscript>Activeer JavaScript om gebruik te maken van dit formulier.</noscript>
             <div *ngIf="wrongSign">
