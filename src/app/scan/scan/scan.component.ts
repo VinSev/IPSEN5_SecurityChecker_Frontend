@@ -11,8 +11,8 @@ import {PdfService} from "../../shared/services/pdf.service";
 export class ScanComponent implements OnInit {
 
   constructor(public scanService: ScanService,
-              private toastr: ToastrService,
-              private pdfService: PdfService) {
+              public toastr: ToastrService,
+              public pdfService: PdfService) {
   }
 
   public ngOnInit() {
@@ -36,12 +36,17 @@ export class ScanComponent implements OnInit {
   }
 
   public mailResults(): void {
-    this.toastr.success("Resultaten verzonden", "", {
-      tapToDismiss: true,
-      positionClass: "toast-bottom-right",
-      timeOut: 1500
-    });
-    this.pdfService.generatePDF(this.scanService.scanCategories, this.scanService.name, this.scanService.website);
+    try {
+      this.toastr.success("Resultaten verzonden", "", {
+        tapToDismiss: true,
+        positionClass: "toast-bottom-right",
+        timeOut: 1500
+      });
+    } catch (ignore) {}
+    //TODO:
+    // - Should send request to API to send mail to user;
+
+    // this.pdfService.generatePDF(this.scanService.scanCategories, this.scanService.name, this.scanService.website);
   }
 
 }

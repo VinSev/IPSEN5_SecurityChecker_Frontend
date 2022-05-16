@@ -8,16 +8,20 @@ import {BrowserDynamicTestingModule} from "@angular/platform-browser-dynamic/tes
 import {ScanService} from "./scan.service";
 import {ScanModule} from "../scan.module";
 import {FormsModule} from "@angular/forms";
+import {PdfService} from "../../shared/services/pdf.service";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {BrowserModule} from "@angular/platform-browser";
 
 describe('ScanComponent', () => {
   let component: ScanComponent;
+  let toastr: ToastrService;
   let fixture: ComponentFixture<ScanComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ScanComponent ],
       imports: [ HttpClientTestingModule, FormsModule],
-      providers: [ ScanService, {provide: ToastrService, useClass: ToastrModule} ]
+      providers: [ ScanService, PdfService, {provide: ToastrService, useClass: ToastrModule} ]
     })
     .compileComponents();
   });
@@ -25,6 +29,7 @@ describe('ScanComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ScanComponent);
     component = fixture.componentInstance;
+    component.scanService.scanCategories[0].result = {};
     fixture.detectChanges();
   });
 
@@ -33,7 +38,9 @@ describe('ScanComponent', () => {
   });
 
   it('should return false if mail is empty', () => {
-    expect(component.submit(document.createElement('input') as HTMLInputElement)).toBeFalse();
+    let inputElement: HTMLInputElement = document.createElement('input') as HTMLInputElement
+    inputElement.required = true;
+    expect(component.submit(inputElement)).toBeFalse();
   });
 
   it('should return true if mail is filled', () => {
