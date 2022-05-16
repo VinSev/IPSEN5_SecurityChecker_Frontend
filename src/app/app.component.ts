@@ -6,5 +6,5 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Get_Big_Marketing-Prototype';
+  title = 'IPSEN5_SecurityChecker_Frontend';
 }

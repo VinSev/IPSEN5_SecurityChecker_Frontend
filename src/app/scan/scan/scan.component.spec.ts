@@ -1,6 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ScanComponent } from './scan.component';
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {InjectionToken} from "@angular/core";
+import {TOAST_CONFIG, ToastContainerModule} from "ngx-toastr";
+import {BrowserDynamicTestingModule} from "@angular/platform-browser-dynamic/testing";
+import {ScanService} from "./scan.service";
+import {ScanModule} from "../scan.module";
 
 describe('ScanComponent', () => {
   let component: ScanComponent;
@@ -8,7 +14,9 @@ describe('ScanComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ScanComponent ]
+      declarations: [ ScanComponent ],
+      imports: [ HttpClientTestingModule, ScanModule],
+      providers: [ ScanService ]
     })
     .compileComponents();
   });

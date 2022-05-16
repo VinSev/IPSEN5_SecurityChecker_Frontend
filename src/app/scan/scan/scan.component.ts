@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, NgModule, OnInit} from '@angular/core';
 import {ScanService} from "./scan.service";
 import {ToastrService} from "ngx-toastr";
 import {PdfService} from "../../shared/services/pdf.service";
