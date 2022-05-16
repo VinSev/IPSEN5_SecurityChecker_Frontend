@@ -16,7 +16,7 @@ export class HomeComponent {
               private scanService: ScanService,
               private validatieService: ValidationService) {}
 
-  public submit(name: HTMLInputElement, website: HTMLInputElement, ownership: HTMLInputElement, form: NgForm): boolean {
+  public submit(name: HTMLInputElement, website: HTMLInputElement, ownership: HTMLInputElement): boolean {
     for(let input of [name, website, ownership]) {
       if(!input.checkValidity()) {
         input.reportValidity();
@@ -34,9 +34,6 @@ export class HomeComponent {
 
   //Check if the given input is allowed in the given inputfield, if not let user know that this input is not allowed.
   CheckInputValidation(event: Event){
-    this.wrongSign = false;
-    if (!this.validatieService.validateInput(event)){
-      this.wrongSign = true;
-    }
+    this.wrongSign = !this.validatieService.validateInput(event);
   }
 }
