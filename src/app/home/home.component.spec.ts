@@ -13,7 +13,7 @@ describe('HomeComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ HomeComponent ],
-      imports: [RouterTestingModule, HttpClientTestingModule, HomeModule],
+      imports: [RouterTestingModule, HttpClientTestingModule, FormsModule],
 
     })
     .compileComponents();

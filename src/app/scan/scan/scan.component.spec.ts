@@ -7,6 +7,7 @@ import {TOAST_CONFIG, ToastContainerModule} from "ngx-toastr";
 import {BrowserDynamicTestingModule} from "@angular/platform-browser-dynamic/testing";
 import {ScanService} from "./scan.service";
 import {ScanModule} from "../scan.module";
+import {FormsModule} from "@angular/forms";
 
 describe('ScanComponent', () => {
   let component: ScanComponent;
@@ -15,7 +16,7 @@ describe('ScanComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ScanComponent ],
-      imports: [ HttpClientTestingModule, ScanModule],
+      imports: [ HttpClientTestingModule, FormsModule],
       providers: [ ScanService ]
     })
     .compileComponents();

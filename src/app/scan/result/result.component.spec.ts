@@ -11,7 +11,7 @@ describe('ResultComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ResultComponent ],
-      imports: [ HttpClientTestingModule, ScanModule ]
+      imports: [ HttpClientTestingModule ]
     })
     .compileComponents();
   });
