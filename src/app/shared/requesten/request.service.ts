@@ -3,7 +3,6 @@ import {HttpClient} from "@angular/common/http";
 import {tap} from "rxjs";
 import {User} from "../models/user.type";
 import {httpService} from "./htttp.service";
-import {ScanService} from "../../scan-progress/scan/scan.service";
 import {ScanResult} from "../models/ScanResult.type";
 import {UserScanService} from "../services/user-scan.service";
 
