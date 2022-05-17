@@ -6,7 +6,7 @@ import {HomeRoutingModule} from "./home-routing.module";
 import {ScanModule} from "../scan/scan.module";
 import {SharedModule} from "../shared/shared.module";
 import {RecaptchaModule} from "ng-recaptcha";
-
+import { CaptchaComponent } from './captcha/captcha.component';
 
 
 @NgModule({
@@ -20,6 +20,7 @@ import {RecaptchaModule} from "ng-recaptcha";
   ],
   declarations: [
     HomeComponent,
+    CaptchaComponent,
   ],
   exports:[
 

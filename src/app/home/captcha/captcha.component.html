@@ -1,0 +1,8 @@
+<ng-template #content>
+  <div class="modal-header justify-content-center">
+    <h4 class="modal-title" id="modal-basic-title">Verification</h4>
+  </div>
+  <div class="modal-body justify-content-center">
+    <re-captcha (resolved)="resolved($event)" [siteKey]="captchaKey"></re-captcha>
+  </div>
+</ng-template>
