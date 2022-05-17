@@ -6,6 +6,7 @@ import {TipsComponent} from "./tips/tips.component";
 import {SharedModule} from "../shared/shared.module";
 import {ResultComponent} from "./result/result.component";
 import {FormsModule} from "@angular/forms";
+import { PdfComponent } from './pdf/pdf.component';
 
 
 
@@ -19,7 +20,8 @@ import {FormsModule} from "@angular/forms";
   declarations: [
     ScanComponent,
     TipsComponent,
-    ResultComponent
+    ResultComponent,
+    PdfComponent
   ],
   exports:[
     ScanComponent,
