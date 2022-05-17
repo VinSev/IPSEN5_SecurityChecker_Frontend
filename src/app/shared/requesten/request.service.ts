@@ -5,20 +5,21 @@ import {User} from "../models/user.type";
 import {httpService} from "./htttp.service";
 import {ScanService} from "../../scan-progress/scan/scan.service";
 import {ScanResult} from "../models/ScanResult.type";
+import {UserScanService} from "../services/user-scan.service";
 
 @Injectable({providedIn: "root"})
 export class RequestService {
 
   constructor(private http: HttpClient,
               private httpService: httpService,
-              private scanService: ScanService) {
+              private userScanService: UserScanService) {
     // this.isFinished =  this.scanProgressService.isScanFinished()
   }
 
                 // ?admin
   requestToScan(userInfo?: User) {
     return this.httpService.get<any>("/result/start",
-      {url: this.scanService.getCurrentScan().website}
+      {url: this.userScanService.userScan.value.website}
     ).pipe(
       tap(
         (scans: ScanResult) => {
