@@ -5,7 +5,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {HomeModule} from "./home.module";
 import {FormsModule} from "@angular/forms";
-import {ElementRef} from "@angular/core";
+import {ElementRef, ViewChild} from "@angular/core";
 import {CaptchaComponent} from "./captcha/captcha.component";
 
 describe('HomeComponent', () => {
@@ -35,18 +35,17 @@ describe('HomeComponent', () => {
     let name: HTMLInputElement = document.createElement('input') as HTMLInputElement
     let website: HTMLInputElement = document.createElement('input') as HTMLInputElement
     let ownership: HTMLInputElement = document.createElement('input') as HTMLInputElement
-    let content: CaptchaComponent = new CaptchaComponent()
     name.required = true;
     website.required = true;
     ownership.required = true;
-    expect(component.submit(name, website, ownership, content)).toBeFalse();
+    expect(component.submit(name, website, ownership, null)).toBeFalse();
   });
 
-  it('should return true if mail is filled', () => {
+  it('should return true if inputs are filled', () => {
     let name: HTMLInputElement = document.createElement('input') as HTMLInputElement
     let website: HTMLInputElement = document.createElement('input') as HTMLInputElement
     let ownership: HTMLInputElement = document.createElement('input') as HTMLInputElement
-    let content: CaptchaComponent = new CaptchaComponent()
+    let content: any = document.getElementById("content");
     name.value = "test";
     website.value = "test";
     ownership.value = "on"
@@ -57,7 +56,7 @@ describe('HomeComponent', () => {
     let name: HTMLInputElement = document.createElement('input') as HTMLInputElement
     let website: HTMLInputElement = document.createElement('input') as HTMLInputElement
     let ownership: HTMLInputElement = document.createElement('input') as HTMLInputElement
-    let content: ElementRef = new ElementRef<any>(null);
+    let content: any = document.getElementById("content");
     name.value = "test";
     website.value = "test";
     ownership.value = "on"
