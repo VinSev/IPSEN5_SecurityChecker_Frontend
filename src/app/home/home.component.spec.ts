@@ -3,10 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
 import {RouterTestingModule} from "@angular/router/testing";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {HomeModule} from "./home.module";
 import {FormsModule} from "@angular/forms";
-import {ElementRef, ViewChild} from "@angular/core";
-import {CaptchaComponent} from "./captcha/captcha.component";
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
