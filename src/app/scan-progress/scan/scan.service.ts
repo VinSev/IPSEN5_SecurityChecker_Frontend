@@ -1,61 +1,32 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {ScanCategoryType} from "../../shared/models/scan-category.type";
 import {Iterator} from "./iterator.model";
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
+import {RequestService} from "../../shared/requesten/request.service";
+import {Scan} from "../../shared/models/scan.model";
+import {UserScanService} from "../../shared/services/user-scan.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class ScanService {
-  private _name: string = "";
-  private _email: string = "";
-  private _website: string = "";
-  private _ownership: boolean = false;
-  private _scanCategories: ScanCategoryType[] = [];
+export class ScanService implements OnDestroy{
+  private scanInfo: Scan = new Scan("", false);
+  scanSubscription: Subscription = new Subscription();
 
-  constructor(private http: HttpClient) {
-    this._scanCategories.push({title: "Headers", path: "", loading: false});
+  constructor(private http: HttpClient,
+              private requestService: RequestService,
+              private userScanService: UserScanService) {
+    this.setSubscriptions();
   }
 
-  get name(): string {
-    return this._name;
-  }
-
-  set name(value: string) {
-    this._name = value;
-  }
-
-  get email(): string {
-    return this._email;
-  }
-
-  set email(value: string) {
-    this._email = value;
-  }
-
-  get website(): string {
-    return this._website;
-  }
-
-  set website(value: string) {
-    this._website = value;
-  }
-
-  get ownership(): boolean {
-    return this._ownership;
-  }
-
-  set ownership(value: boolean) {
-    this._ownership = value;
-  }
-
-  get scanCategories(): ScanCategoryType[] {
-    return this._scanCategories;
-  }
-
-  set scanCategories(value: ScanCategoryType[]) {
-    this._scanCategories = value;
+  private setSubscriptions() {
+    this.scanSubscription = this.userScanService.userScan.subscribe(
+      (userScan) => {
+        this.scanInfo = userScan;
+        this.scanInfo.scanCategories.push({title: "Headers", path: "", loading: false});
+      }
+    )
   }
 
   private filterWebsite() {
@@ -64,17 +35,18 @@ export class ScanService {
       "http://"
     ]
     for (let searchValue of searchValues) {
-      if(this.website.startsWith(searchValue)) {
-        this.website = this.website.slice(searchValue.length, this.website.length - 1)
+      if (this.scanInfo.website.startsWith(searchValue)) {
+        this.scanInfo.website = this.scanInfo.website.slice(searchValue.length, this.scanInfo.website.length - 1)
       }
     }
-    let pathIndex = this.website.indexOf("/") > -1 ? this.website.indexOf("/") : this.website.length;
-    this.website = this.website.slice(0, pathIndex);
+    let pathIndex = this.scanInfo.website.indexOf("/") > -1 ? this.scanInfo.website.indexOf("/") : this.scanInfo.website.length;
+    this.scanInfo.website = this.scanInfo.website.slice(0, pathIndex);
   }
 
   public start(): void {
+    this.requestService.requestToScan();
     this.filterWebsite();
-    let iterator: Iterator<ScanCategoryType> = new Iterator<ScanCategoryType>(this._scanCategories);
+    let iterator: Iterator<ScanCategoryType> = new Iterator<ScanCategoryType>(this.scanInfo.scanCategories);
     this.scan(iterator);
   }
 
@@ -105,10 +77,18 @@ export class ScanService {
   }
 
   private invokeHeaderScan(): Observable<any> {
-    return this.http.get("https://http-observatory.security.mozilla.org/api/v1/analyze?host=" + this.website);
+    return this.http.get("https://http-observatory.security.mozilla.org/api/v1/analyze?host=" + this.scanInfo.website);
   }
 
   private getHeaderScanResult(scanId: any): Observable<any> {
     return this.http.get("https://http-observatory.security.mozilla.org/api/v1/getScanResults?scan=" + scanId);
+  }
+
+  getCurrentScan(): Scan {
+    return this.scanInfo
+  }
+
+  ngOnDestroy(): void {
+    this.scanSubscription.unsubscribe();
   }
 }
