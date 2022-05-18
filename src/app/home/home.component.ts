@@ -28,7 +28,7 @@ export class HomeComponent {
     this.scanService.website = website.value;
     this.scanService.ownership = ownership.value == "on";
 
-    this.router.navigate(["scan"]);
+    this.scanService.postUserValidatieToDatabase()
     return true;
   }
 

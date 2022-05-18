@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import {environment} from "../../../environments/environment";
 
 @Injectable({
@@ -10,12 +10,15 @@ export class httpService {
 
   constructor(private http: HttpClient){}
 
-  public get<T>(endpoint: string, body: T) : Observable<T>{
+  public get<T>(endpoint: string, body: T, ) : Observable<T>{
    return this.http.get<T>(environment.baseURL + endpoint, body);
   }
 
   public post<T>(endpoint: string, body: T) : Observable<T>{
-   return this.http.post<T>(environment.baseURL + endpoint, body);
+   return this.http.post<T>(environment.baseURL + endpoint, body).pipe(tap(val => {
+    console.log(val);
+    
+   }));
   }
 
   public put<T>(endpoint: string, body : T) : Observable<T>{

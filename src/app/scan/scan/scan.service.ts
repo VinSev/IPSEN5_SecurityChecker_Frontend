@@ -3,6 +3,9 @@ import {ScanCategoryType} from "../../shared/models/scan-category.type";
 import {Iterator} from "../../shared/models/iterator.model";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import { userValidatie } from 'src/app/shared/models/UserValidatie.model';
+import { httpService } from 'src/app/shared/services/http.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +17,7 @@ export class ScanService {
   private _ownership: boolean = false;
   private _scanCategories: ScanCategoryType[] = [];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private httpService: httpService, private router: Router) {
     this._scanCategories.push({title: "Headers", path: "", loading: false});
   }
 
@@ -110,5 +113,26 @@ export class ScanService {
 
   private getHeaderScanResult(scanId: any): Observable<any> {
     return this.http.get("https://http-observatory.security.mozilla.org/api/v1/getScanResults?scan=" + scanId);
+  }
+
+  public postUserValidatieToDatabase(){
+    let validatieData = new userValidatie();
+    validatieData.name = this._name;
+    validatieData.email = this._email;
+    validatieData.website = this._website;
+    validatieData.ownership = this._ownership;
+
+    this.httpService.post<any>('/test/test', validatieData )
+    .subscribe((data) => { 
+      console.log(data.response);
+                
+      if(data.response == 'SUCCESS'){
+        this.router.navigate(["scan"]);
+      }else{
+        //Let User know something went wrong
+        
+        }
+    })
+
   }
 }
