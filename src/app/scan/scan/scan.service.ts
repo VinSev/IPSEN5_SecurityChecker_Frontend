@@ -3,6 +3,10 @@ import {ScanCategoryType} from "../../shared/models/scan-category.type";
 import {Iterator} from "../../shared/models/iterator.model";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import { httpService } from 'src/app/shared/services/http.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import {userValidation} from "../../shared/models/user-validation.model";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +18,10 @@ export class ScanService {
   private _ownership: boolean = false;
   private _scanCategories: ScanCategoryType[] = [];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private httpService: httpService,
+              private router: Router,
+              private toastr: ToastrService) {
     this._scanCategories.push({title: "Headers", path: "", loading: false});
   }
 
@@ -110,5 +117,32 @@ export class ScanService {
 
   private getHeaderScanResult(scanId: any): Observable<any> {
     return this.http.get("https://http-observatory.security.mozilla.org/api/v1/getScanResults?scan=" + scanId);
+  }
+
+  public postUserValidationToDatabase(){
+    let validationUser = new userValidation();
+    validationUser.name = this._name;
+    validationUser.email = this._email;
+    validationUser.website = this._website;
+    validationUser.ownership = this._ownership;
+
+    this.httpService.post<any>('/test/test', validationUser)
+    .subscribe((data) => {
+      if(data.response == 'SUCCESS'){
+        this.toastr.success("Uw gegevens zijn juist verstuurd!", "", {
+          tapToDismiss: true,
+          positionClass: "toast-bottom-right",
+          timeOut: 1500
+        });
+        this.router.navigate(["scan"]);
+      }else{
+        this.toastr.error("Het versturen van uw gegevens is niet gelukt. Controleer uw ingevoerde gegevens!", "", {
+          tapToDismiss: true,
+          positionClass: "toast-bottom-right",
+          timeOut: 1500
+        });
+        }
+    })
+
   }
 }

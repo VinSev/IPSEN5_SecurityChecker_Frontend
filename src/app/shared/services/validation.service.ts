@@ -3,11 +3,13 @@ import { Injectable } from "@angular/core";
 @Injectable({
   providedIn: 'root'
 })
+
+// Validation.service.ts is up to tebate
+// to keep it in and improve
+// or
+// Remove the code from the app
+
 export class ValidationService {
-  //Werkt niet zoals behoeven.
-  //Niet alle benodigde characters zitten erin.
-  //Wordt tijdelijk niet gebruikt.
-  //Aub eerst volledig testen voordat het weer gebruikt wordt.
   private getMask(event: any): RegExp {
     let mask: RegExp;
     switch((event.target as HTMLInputElement).type){
