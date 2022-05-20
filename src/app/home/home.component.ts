@@ -11,9 +11,8 @@ import {ValidationService} from "../shared/services/validation.service";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  public wrongSign: boolean = false;
-  constructor(private router: Router,
-              private scanService: ScanService,
+  public failedValueRecievedFrombackend: boolean = false;
+  constructor(private scanService: ScanService,
               private validatieService: ValidationService) {}
 
   public submit(name: HTMLInputElement, website: HTMLInputElement, ownership: HTMLInputElement, form: NgForm): boolean {
@@ -32,11 +31,4 @@ export class HomeComponent {
     return true;
   }
 
-  //Check if the given input is allowed in the given inputfield, if not let user know that this input is not allowed.
-  CheckInputValidation(event: Event){
-    this.wrongSign = false;
-    if (!this.validatieService.validateInput(event)){
-      this.wrongSign = true;
-    }
-  }
 }
