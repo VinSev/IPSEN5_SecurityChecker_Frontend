@@ -15,10 +15,7 @@ export class httpService {
   }
 
   public post<T>(endpoint: string, body: T) : Observable<T>{
-   return this.http.post<T>(environment.baseURL + endpoint, body).pipe(tap(val => {
-    console.log(val);
-    
-   }));
+   return this.http.post<T>(environment.baseURL + endpoint, body)
   }
 
   public put<T>(endpoint: string, body : T) : Observable<T>{
