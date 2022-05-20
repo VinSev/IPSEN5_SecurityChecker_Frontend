@@ -11,10 +11,8 @@ import {ValidationService} from "../shared/services/validation.service";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  public wrongSign: boolean = false;
-  constructor(private router: Router,
-              private scanService: ScanService,
-              private validatieService: ValidationService) {}
+  public failedValueRecievedFrombackend: boolean = false;
+  constructor(private scanService: ScanService) {}
 
   public submit(name: HTMLInputElement, website: HTMLInputElement, ownership: HTMLInputElement): boolean {
     for(let input of [name, website, ownership]) {
@@ -28,12 +26,7 @@ export class HomeComponent {
     this.scanService.website = website.value;
     this.scanService.ownership = ownership.value == "on";
 
-    this.router.navigate(["scan"]);
+    this.scanService.postUserValidationToDatabase()
     return true;
-  }
-
-  //Check if the given input is allowed in the given inputfield, if not let user know that this input is not allowed.
-  CheckInputValidation(event: Event){
-    this.wrongSign = !this.validatieService.validateInput(event);
   }
 }
