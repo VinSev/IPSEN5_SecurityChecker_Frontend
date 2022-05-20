@@ -3,9 +3,9 @@ import {ScanCategoryType} from "../../shared/models/scan-category.type";
 import {Iterator} from "../../shared/models/iterator.model";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import { userValidation } from 'src/app/shared/models/user-validation.model';
 import { httpService } from 'src/app/shared/services/http.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,10 @@ export class ScanService {
   private _ownership: boolean = false;
   private _scanCategories: ScanCategoryType[] = [];
 
-  constructor(private http: HttpClient, private httpService: httpService, private router: Router) {
+  constructor(private http: HttpClient,
+              private httpService: httpService,
+              private router: Router,
+              private toastr: ToastrService) {
     this._scanCategories.push({title: "Headers", path: "", loading: false});
   }
 
@@ -127,10 +130,18 @@ export class ScanService {
       console.log(data.response);
 
       if(data.response == 'SUCCESS'){
+        this.toastr.success("Uw gegevens zijn juist verstuurd!", "", {
+          tapToDismiss: true,
+          positionClass: "toast-bottom-right",
+          timeOut: 1500
+        });
         this.router.navigate(["scan"]);
       }else{
-        //Let User know something went wrong
-
+        this.toastr.error("Het versturen van uw gegevens is niet gelukt. Controleer uw ingevoerde gegevens!", "", {
+          tapToDismiss: true,
+          positionClass: "toast-bottom-right",
+          timeOut: 1500
+        });
         }
     })
 

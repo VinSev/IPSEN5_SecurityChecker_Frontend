@@ -13,7 +13,7 @@
       </div>
       <div class="col-lg-12 col-md-12">
         <div class="execute-right">
-          <form id="scanForm" #scanForm="ngForm" (ngSubmit)="submit(name, website, ownership)">
+          <form id="scanForm" ngForm #scanForm="ngForm" (ngSubmit)="submit(name, website, ownership)">
             <div class="form-row">
               <div class="form-column"><input name="naam"     ngModel #name     required type="text"  placeholder="Naam*"     class="form-control bg1" aria-label="Naam"></div>
               <div class="form-column"><input name="website"  ngModel #website  required type="text"  placeholder="Website*"  class="form-control"     aria-label="Website"></div>
@@ -28,8 +28,8 @@
               <div class="form-column"><input type="submit" value="GRATIS SCAN AANVRAGEN" aria-label="Verzenden"></div>
             </div>
             <noscript>Activeer JavaScript om gebruik te maken van dit formulier.</noscript>
-            <div *ngIf="wrongSign">
-              <small style="color: red;">Dit teken is niet geldig in dit veld.</small>
+            <div *ngIf="failedValueRecievedFrombackend">
+              <small style="color: red;">er is iets niet goed gegaan met versteuren.</small>
             </div>
           </form>
         </div>

@@ -11,10 +11,8 @@ import {ValidationService} from "../shared/services/validation.service";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  public wrongSign: boolean = false;
-  constructor(private router: Router,
-              private scanService: ScanService,
-              private validatieService: ValidationService) {}
+  public failedValueRecievedFrombackend: boolean = false;
+  constructor(private scanService: ScanService) {}
 
   public submit(name: HTMLInputElement, website: HTMLInputElement, ownership: HTMLInputElement): boolean {
     for(let input of [name, website, ownership]) {
@@ -30,9 +28,5 @@ export class HomeComponent {
 
     this.scanService.postUserValidatieToDatabase()
     return true;
-  }
-
-  public CheckInputValidation(event: Event){
-    this.wrongSign = !this.validatieService.validateInput(event);
   }
 }
