@@ -15,7 +15,7 @@ export class HomeComponent {
   constructor(private scanService: ScanService,
               private validatieService: ValidationService) {}
 
-  public submit(name: HTMLInputElement, website: HTMLInputElement, ownership: HTMLInputElement, form: NgForm): boolean {
+  public submit(name: HTMLInputElement, website: HTMLInputElement, ownership: HTMLInputElement): boolean {
     for(let input of [name, website, ownership]) {
       if(!input.checkValidity()) {
         input.reportValidity();
@@ -30,5 +30,4 @@ export class HomeComponent {
     this.scanService.postUserValidatieToDatabase()
     return true;
   }
-
 }

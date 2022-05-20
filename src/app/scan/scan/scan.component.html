@@ -14,7 +14,7 @@
     <h2>Scannen Website - {{this.scanService.website}} - Voltooid</h2>
 
     <div class="execute-right">
-      <form id="emailForm" #emailForm="ngForm" (ngSubmit)="submit(email)">
+      <form id="emailForm" ngForm #emailForm="ngForm" (ngSubmit)="submit(email)">
         <div class="form-row">
           <div class="form-column"><input name="email"    ngModel #email    required type="email" placeholder="Email*"    class="form-control bg2" aria-label="Email"></div>
 
