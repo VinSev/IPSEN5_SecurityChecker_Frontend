@@ -26,7 +26,7 @@ export class HomeComponent {
     this.scanService.website = website.value;
     this.scanService.ownership = ownership.value == "on";
 
-    this.scanService.postUserValidatieToDatabase()
+    this.scanService.postUserValidationToDatabase()
     return true;
   }
 }

@@ -6,6 +6,7 @@ import {Observable} from "rxjs";
 import { httpService } from 'src/app/shared/services/http.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import {userValidation} from "../../shared/models/user-validation.model";
 
 @Injectable({
   providedIn: 'root'
@@ -118,17 +119,15 @@ export class ScanService {
     return this.http.get("https://http-observatory.security.mozilla.org/api/v1/getScanResults?scan=" + scanId);
   }
 
-  public postUserValidatieToDatabase(){
-    let validatieData = new userValidation();
-    validatieData.name = this._name;
-    validatieData.email = this._email;
-    validatieData.website = this._website;
-    validatieData.ownership = this._ownership;
+  public postUserValidationToDatabase(){
+    let validationUser = new userValidation();
+    validationUser.name = this._name;
+    validationUser.email = this._email;
+    validationUser.website = this._website;
+    validationUser.ownership = this._ownership;
 
-    this.httpService.post<any>('/test/test', validatieData )
+    this.httpService.post<any>('/test/test', validationUser)
     .subscribe((data) => {
-      console.log(data.response);
-
       if(data.response == 'SUCCESS'){
         this.toastr.success("Uw gegevens zijn juist verstuurd!", "", {
           tapToDismiss: true,
