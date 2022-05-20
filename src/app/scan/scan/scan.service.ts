@@ -3,7 +3,7 @@ import {ScanCategoryType} from "../../shared/models/scan-category.type";
 import {Iterator} from "../../shared/models/iterator.model";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import { userValidatie } from 'src/app/shared/models/UserValidatie.model';
+import { userValidation } from 'src/app/shared/models/user-validation.model';
 import { httpService } from 'src/app/shared/services/http.service';
 import { Router } from '@angular/router';
 
@@ -116,21 +116,21 @@ export class ScanService {
   }
 
   public postUserValidatieToDatabase(){
-    let validatieData = new userValidatie();
+    let validatieData = new userValidation();
     validatieData.name = this._name;
     validatieData.email = this._email;
     validatieData.website = this._website;
     validatieData.ownership = this._ownership;
 
     this.httpService.post<any>('/test/test', validatieData )
-    .subscribe((data) => { 
+    .subscribe((data) => {
       console.log(data.response);
-                
+
       if(data.response == 'SUCCESS'){
         this.router.navigate(["scan"]);
       }else{
         //Let User know something went wrong
-        
+
         }
     })
 

@@ -1,4 +1,4 @@
-export class userValidatie {
+export class userValidation {
     name  : string;
     email : string;
     website : string;
