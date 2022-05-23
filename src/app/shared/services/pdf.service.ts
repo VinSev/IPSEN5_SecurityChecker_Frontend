@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import {ScanCategoryType} from "../models/scan-category.type";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs
 
@@ -10,7 +11,22 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs
 })
 export class PdfService {
 
-  constructor() {
+  baseURL = "http://localhost:8080/api/v1/"
+
+  constructor(private http: HttpClient) {
+  }
+
+  public sendPdfData( name: string, website: string){
+    let requestOptions: any = {
+      headers: new HttpHeaders(),
+    };
+    let body: any = {
+      "name":name,
+      "website": website
+    }
+    console.log("before posting")
+    return this.http.post(this.baseURL + "pdf",body,requestOptions).subscribe();
+
   }
 
   public generatePDF(scanCategories: ScanCategoryType[], name: string, website: string): void {
@@ -93,7 +109,7 @@ export class PdfService {
         this.createTable(scanCategories[0], columns)
       ]
     };
-    // pdfMake.createPdf(docDefinition).download('GetBigMarketing_Scan-Resultaten.pdf');
+    pdfMake.createPdf(docDefinition).download('GetBigMarketing_Scan-Resultaten.pdf');
     pdfMake.createPdf(docDefinition).open();
   }
 

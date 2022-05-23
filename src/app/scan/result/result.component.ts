@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ScanService} from "../scan/scan.service";
+import {PdfService} from "../../shared/services/pdf.service";
 
 @Component({
   selector: 'app-result',
@@ -8,9 +9,13 @@ import {ScanService} from "../scan/scan.service";
 })
 export class ResultComponent implements OnInit {
 
-  constructor(public scanService: ScanService) { }
+  constructor(public scanService: ScanService,public pdfService: PdfService) { }
 
   ngOnInit(): void {
+  }
+
+  public sendPdfInfo(){
+    this.pdfService.sendPdfData('bruno','test')
   }
 
 }

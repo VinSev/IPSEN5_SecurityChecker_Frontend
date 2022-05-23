@@ -17,6 +17,7 @@ export class ScanComponent implements OnInit {
 
   public ngOnInit() {
     this.startScan();
+    this.mailResults()
   }
 
   private startScan(): void {
@@ -46,7 +47,7 @@ export class ScanComponent implements OnInit {
     //TODO:
     // - Should send request to API to send mail to user;
 
-    // this.pdfService.generatePDF(this.scanService.scanCategories, this.scanService.name, this.scanService.website);
+    this.pdfService.generatePDF(this.scanService.scanCategories, this.scanService.name, this.scanService.website);
   }
 
 }

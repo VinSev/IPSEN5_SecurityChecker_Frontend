@@ -8,6 +8,7 @@
       <h4 [style.color]="scanCategory.grade == undefined ? 'initial' : (scanCategory.grade <= 6 ? 'green' : 'red')">
         {{scanCategory.grade != undefined ? scanCategory.grade + "/10" : "?/10"}}
       </h4>
+      <button (click)="sendPdfInfo()" class="btn btn-danger">HELP</button>
     </div>
     <h4>
       {{scanCategory.title}}
