@@ -1,8 +1,5 @@
 import {Component} from '@angular/core';
-import {Router} from "@angular/router";
 import {ScanService} from "../scan/scan/scan.service";
-import {NgForm} from "@angular/forms";
-import {ValidationService} from "../shared/services/validation.service";
 
 
 @Component({
@@ -11,7 +8,6 @@ import {ValidationService} from "../shared/services/validation.service";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  public failedValueRecievedFrombackend: boolean = false;
   constructor(private scanService: ScanService) {}
 
   public submit(name: HTMLInputElement, website: HTMLInputElement, ownership: HTMLInputElement): boolean {
