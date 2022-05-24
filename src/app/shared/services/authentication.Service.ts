@@ -21,20 +21,17 @@ export class authenticationService{
         this.http.post<any>('/auth/login', request)
         .subscribe((data) => {          
          if(data !== null){
-           this.saveAuthenticatedAdminInLocalStorage(data);
+          let role = data.user.roles;
+          this.role.next(role);
+           this.saveAuthenticatedAdminInLocalStorage(role, data.user.email, data.token);
          }
-         //do stuff
         })
       }
 
-    saveAuthenticatedAdminInLocalStorage(data: any){
-      let role = data.user.roles;
-      this.role.next(role);
-      this.email = data.user.email;
-      
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("role", role);
-      localStorage.setItem("email", this.email);
+    saveAuthenticatedAdminInLocalStorage(roles: string, email: string, token: string ){      
+      localStorage.setItem("token", token);
+      localStorage.setItem("role", roles);
+      localStorage.setItem("email", email);
 
       this.router.navigate(['']);      
     }
