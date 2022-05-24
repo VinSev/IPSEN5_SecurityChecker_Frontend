@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
+import {ScanService} from "../scan-progress/scan/scan.service";
 import {NgForm} from "@angular/forms";
 import { ValidatieService } from '../shared/services/validatie.service';
-import {UserScanService} from "../shared/services/user-scan.service";
 
 @Component({
   selector: 'app-home',
@@ -14,17 +14,22 @@ export class HomeComponent {
   constructor(private router: Router,
               private userScanService: UserScanService,
               private validateService: ValidatieService) {}
+              private scanService: ScanService,
+              private validatieService: ValidationService) {}
 
-  public submit(name: HTMLInputElement, email: HTMLInputElement, website: HTMLInputElement, ownership: HTMLInputElement, form: NgForm): boolean {
-    for(let input of [name, email, website, ownership]) {
+  public submit(name: HTMLInputElement, website: HTMLInputElement, ownership: HTMLInputElement, form: NgForm): boolean {
+    for(let input of [name, website, ownership]) {
       if(!input.checkValidity()) {
         input.reportValidity();
         return false;
       }
     }
 
-    this.userScanService.setScanInfo(website.value ,true, name.value, email.value);
+    this.scanService.name = name.value;
+    this.scanService.website = website.value;
+    this.scanService.ownership = ownership.value == "on";
 
+    this.userScanService.setScanInfo(website.value ,true, name.value, email.value);
 
     this.router.navigate(["scan"]);
     return true;
@@ -33,9 +38,8 @@ export class HomeComponent {
   //Check if the given input is allowed in the given inputfield, if not let user know that this input is not allowed.
   CheckInputValidation(event: Event){
     this.wrongSign = false;
-    if (!this.validateService.validateInputOfInputfield(event)){
+    if (!this.validatieService.validateInput(event)){
       this.wrongSign = true;
     }
-    // ??     this.wrongSign = !this.validateService.validateInputOfInputfield(event);
   }
 }

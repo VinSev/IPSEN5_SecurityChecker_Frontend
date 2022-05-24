@@ -31,6 +31,18 @@ export class ScanComponent implements OnInit {
     this.userScan = this.scanService.getCurrentScan();
   }
 
+  public submit(email: HTMLInputElement): boolean {
+    for(let input of [email]) {
+      if(!input.checkValidity()) {
+        input.reportValidity();
+        return false;
+      }
+    }
+
+    this.mailResults();
+    return true;
+  }
+
   public mailResults(): void {
     this.toastr.success("Resultaten verzonden", "", {
       tapToDismiss: true,

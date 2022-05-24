@@ -3,25 +3,28 @@ import { CommonModule } from '@angular/common';
 import { ScanComponent } from './scan/scan.component';
 import {ScanRoutingModule} from "./scan-routing.module";
 import {TipsComponent} from "./tips/tips.component";
-import {ResultModule} from "../result/result.module";
 import {SharedModule} from "../shared/shared.module";
+import {ResultComponent} from "./result/result.component";
+import {FormsModule} from "@angular/forms";
 
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ScanRoutingModule,
-    SharedModule,
-    ResultModule
-  ],
+    imports: [
+        CommonModule,
+        ScanRoutingModule,
+        SharedModule,
+        FormsModule
+    ],
   declarations: [
     ScanComponent,
-    TipsComponent
+    TipsComponent,
+    ResultComponent
   ],
   exports:[
     ScanComponent,
-    TipsComponent
+    TipsComponent,
+    ResultComponent
   ]
 })
 export class ScanModule { }

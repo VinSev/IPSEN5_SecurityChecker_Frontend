@@ -1,6 +1,6 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {ScanCategoryType} from "../../shared/models/scan-category.type";
-import {Iterator} from "./iterator.model";
+import {Iterator} from "../../shared/models/iterator.model";
 import {HttpClient} from "@angular/common/http";
 import {Observable, Subscription} from "rxjs";
 import {RequestService} from "../../shared/requesten/request.service";
