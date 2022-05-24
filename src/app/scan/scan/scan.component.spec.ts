@@ -8,7 +8,6 @@ import {BrowserDynamicTestingModule} from "@angular/platform-browser-dynamic/tes
 import {ScanService} from "./scan.service";
 import {ScanModule} from "../scan.module";
 import {FormsModule} from "@angular/forms";
-import {PdfService} from "../../shared/services/pdf.service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {BrowserModule} from "@angular/platform-browser";
 import {Router} from "@angular/router";
@@ -23,7 +22,7 @@ describe('ScanComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ ScanComponent ],
       imports: [ HttpClientTestingModule, FormsModule, RouterTestingModule],
-      providers: [ ScanService, PdfService, {provide: ToastrService, useClass: ToastrModule} ]
+      providers: [ ScanService, {provide: ToastrService, useClass: ToastrModule} ]
     })
     .compileComponents();
   });
