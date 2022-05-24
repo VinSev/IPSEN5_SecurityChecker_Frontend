@@ -11,6 +11,8 @@ import {FormsModule} from "@angular/forms";
 import {PdfService} from "../../shared/services/pdf.service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {BrowserModule} from "@angular/platform-browser";
+import {Router} from "@angular/router";
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe('ScanComponent', () => {
   let component: ScanComponent;
@@ -20,7 +22,7 @@ describe('ScanComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ScanComponent ],
-      imports: [ HttpClientTestingModule, FormsModule],
+      imports: [ HttpClientTestingModule, FormsModule, RouterTestingModule],
       providers: [ ScanService, PdfService, {provide: ToastrService, useClass: ToastrModule} ]
     })
     .compileComponents();

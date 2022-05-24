@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ResultComponent } from "./result.component";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {ScanModule} from "../scan.module";
+import {RouterTestingModule} from "@angular/router/testing";
+import {ToastrModule, ToastrService} from "ngx-toastr";
 
 describe('ResultComponent', () => {
   let component: ResultComponent;
@@ -11,7 +13,8 @@ describe('ResultComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ResultComponent ],
-      imports: [ HttpClientTestingModule ]
+      imports: [ HttpClientTestingModule, RouterTestingModule ],
+      providers: [{provide: ToastrService, useClass: ToastrModule}]
     })
     .compileComponents();
   });
