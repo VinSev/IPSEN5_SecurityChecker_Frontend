@@ -6,6 +6,12 @@ import {Observable, Subscription} from "rxjs";
 import {RequestService} from "../../shared/requesten/request.service";
 import {Scan} from "../../shared/models/scan.model";
 import {UserScanService} from "../../shared/services/user-scan.service";
+import {Observable} from "rxjs";
+import { HttpService } from 'src/app/shared/services/http.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import {userValidation} from "../../shared/models/user-validation.model";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +19,17 @@ import {UserScanService} from "../../shared/services/user-scan.service";
 export class ScanService implements OnDestroy{
   private scanInfo: Scan = new Scan("", false);
   scanSubscription: Subscription = new Subscription();
+export class ScanService {
+  private _name: string = "";
+  private _email: string = "";
+  private _website: string = "";
+  private _ownership: boolean = false;
+  private _scanCategories: ScanCategoryType[] = [];
 
   constructor(private http: HttpClient,
+              private httpService: HttpService,
+              private router: Router,
+              private toastr: ToastrService,
               private requestService: RequestService,
               private userScanService: UserScanService) {
     this.setSubscriptions();
@@ -27,6 +42,34 @@ export class ScanService implements OnDestroy{
         this.scanInfo.scanCategories.push({title: "Headers", path: "", loading: false});
       }
     )
+  }
+
+  set email(value: string) {
+    this._email = value;
+  }
+
+  get website(): string {
+    return this._website;
+  }
+
+  set website(value: string) {
+    this._website = value;
+  }
+
+  get ownership(): boolean {
+    return this._ownership;
+  }
+
+  set ownership(value: boolean) {
+    this._ownership = value;
+  }
+
+  get scanCategories(): ScanCategoryType[] {
+    return this._scanCategories;
+  }
+
+  set scanCategories(value: ScanCategoryType[]) {
+    this._scanCategories = value;
   }
 
   private filterWebsite() {
@@ -91,4 +134,45 @@ export class ScanService implements OnDestroy{
   ngOnDestroy(): void {
     this.scanSubscription.unsubscribe();
   }
+
+  public postUserValidationToDatabase(){
+    let validationUser = new userValidation();
+    validationUser.name = this._name;
+    validationUser.email = this._email;
+    validationUser.website = this._website;
+    validationUser.ownership = this._ownership;
+
+    this.httpService.post<any>('/test/test', validationUser)
+    .subscribe((data) => {
+      if(data.response == 'SUCCESS'){
+        this.toastr.success("Uw gegevens zijn juist verstuurd!", "", {
+          tapToDismiss: true,
+          positionClass: "toast-bottom-right",
+          timeOut: 1500
+        });
+        this.router.navigate(["scan"]);
+      }else{
+        this.toastr.error("Het versturen van uw gegevens is niet gelukt. Controleer uw ingevoerde gegevens!", "", {
+          tapToDismiss: true,
+          positionClass: "toast-bottom-right",
+          timeOut: 1500
+        });
+        }
+    })
+
+  }
+
+  public sendMail() {
+    let body: any = {
+      name: this.name,
+      email: this.email,
+      website: this.website,
+      owners: this.ownership,
+      scanCategories: this.scanCategories
+    }
+    this.httpService.post("/mail", body)
+      .subscribe();
+  }
+
+
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, NgModule, OnInit} from '@angular/core';
 import {ScanService} from "./scan.service";
 import {ToastrService} from "ngx-toastr";
 import {PdfService} from "../../shared/services/pdf.service";
@@ -44,12 +44,16 @@ export class ScanComponent implements OnInit {
   }
 
   public mailResults(): void {
-    this.toastr.success("Resultaten verzonden", "", {
-      tapToDismiss: true,
-      positionClass: "toast-bottom-right",
-      timeOut: 1500
-    });
-    this.pdfService.generatePDF(this.scanService.getCurrentScan().scanCategories, this.scanService.getCurrentScan().name, this.scanService.getCurrentScan().website);
+    this.scanService.sendMail();
+
+    try {
+      this.toastr.success("Resultaten verzonden", "", {
+        tapToDismiss: true,
+        positionClass: "toast-bottom-right",
+        timeOut: 1500
+      });
+    } catch (ignore) {}
+
   }
 
   private makeResult(): void  {

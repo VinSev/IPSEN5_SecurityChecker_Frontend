@@ -1,8 +1,6 @@
 import {Component} from '@angular/core';
-import {Router} from "@angular/router";
-import {ScanService} from "../scan-progress/scan/scan.service";
-import {NgForm} from "@angular/forms";
-import { ValidatieService } from '../shared/services/validatie.service';
+import {ScanService} from "../scan/scan/scan.service";
+
 
 @Component({
   selector: 'app-home',
@@ -10,14 +8,9 @@ import { ValidatieService } from '../shared/services/validatie.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  public wrongSign: boolean = false;
-  constructor(private router: Router,
-              private userScanService: UserScanService,
-              private validateService: ValidatieService) {}
-              private scanService: ScanService,
-              private validatieService: ValidationService) {}
+  constructor(private scanService: ScanService) {}
 
-  public submit(name: HTMLInputElement, website: HTMLInputElement, ownership: HTMLInputElement, form: NgForm): boolean {
+  public submit(name: HTMLInputElement, website: HTMLInputElement, ownership: HTMLInputElement): boolean {
     for(let input of [name, website, ownership]) {
       if(!input.checkValidity()) {
         input.reportValidity();
@@ -29,17 +22,7 @@ export class HomeComponent {
     this.scanService.website = website.value;
     this.scanService.ownership = ownership.value == "on";
 
-    this.userScanService.setScanInfo(website.value ,true, name.value, email.value);
-
-    this.router.navigate(["scan"]);
+    this.scanService.postUserValidationToDatabase()
     return true;
-  }
-
-  //Check if the given input is allowed in the given inputfield, if not let user know that this input is not allowed.
-  CheckInputValidation(event: Event){
-    this.wrongSign = false;
-    if (!this.validatieService.validateInput(event)){
-      this.wrongSign = true;
-    }
   }
 }
