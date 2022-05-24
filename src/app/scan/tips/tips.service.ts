@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {HttpService} from "../../shared/services/http.service";
+import {Tips} from "../../shared/models/tips.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TipsService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpService) { }
 
-  //TODO: This is a temporary 'solution'
-  public get(): Observable<string[]> {
-    return this.http.get<string[]>("http://localhost:8080/api/v1" + "/tips");
+  public getAll(): Observable<Tips[]> {
+    return this.http.getAll("/tips");
   }
 }

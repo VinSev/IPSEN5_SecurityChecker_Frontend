@@ -1,7 +1,6 @@
 import {Component, NgModule, OnInit} from '@angular/core';
 import {ScanService} from "./scan.service";
 import {ToastrService} from "ngx-toastr";
-import {PdfService} from "../../shared/services/pdf.service";
 
 @Component({
   selector: 'app-scan',
@@ -11,8 +10,7 @@ import {PdfService} from "../../shared/services/pdf.service";
 export class ScanComponent implements OnInit {
 
   constructor(public scanService: ScanService,
-              public toastr: ToastrService,
-              public pdfService: PdfService) {
+              public toastr: ToastrService) {
   }
 
   public ngOnInit() {
@@ -36,6 +34,8 @@ export class ScanComponent implements OnInit {
   }
 
   public mailResults(): void {
+    this.scanService.sendMail();
+
     try {
       this.toastr.success("Resultaten verzonden", "", {
         tapToDismiss: true,
@@ -43,10 +43,7 @@ export class ScanComponent implements OnInit {
         timeOut: 1500
       });
     } catch (ignore) {}
-    //TODO:
-    // - Should send request to API to send mail to user;
 
-    // this.pdfService.generatePDF(this.scanService.scanCategories, this.scanService.name, this.scanService.website);
   }
 
 }

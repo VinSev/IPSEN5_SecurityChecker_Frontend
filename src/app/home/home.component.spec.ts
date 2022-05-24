@@ -5,6 +5,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {HomeModule} from "./home.module";
 import {FormsModule} from "@angular/forms";
+import {ToastrModule, ToastrService} from "ngx-toastr";
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -14,7 +15,7 @@ describe('HomeComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ HomeComponent ],
       imports: [RouterTestingModule, HttpClientTestingModule, FormsModule],
-
+      providers: [{provide: ToastrService, useClass: ToastrModule}]
     })
     .compileComponents();
   });
