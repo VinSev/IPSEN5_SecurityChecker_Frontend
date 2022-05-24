@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { httpService } from "./http.service";
+import { HttpService } from "./http.service";
 import { Subject } from "rxjs";
 import { userRequest } from "../models/userRequest.model";
 
@@ -13,7 +13,7 @@ export class authenticationService{
   role: Subject<string> = new Subject<string>();
   email = "";
 
-    constructor(private http: httpService, private router : Router) { }
+    constructor(private http: HttpService, private router : Router) { }
 
     authenticate(email: string, password: string){
         let request = new userRequest(email, password)
