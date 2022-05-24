@@ -1,41 +1,41 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { Md5 } from "ts-md5";
 import { httpService } from "./http.service";
-import jwt_decode from 'jwt-decode';
 import { Subject } from "rxjs";
+import { userRequest } from "../models/userRequest.model";
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class authenticationService{
+  private endpoint = '/auth'
   role: Subject<string> = new Subject<string>();
   email = "";
 
     constructor(private http: httpService, private router : Router) { }
 
     authenticate(email: string, password: string){
-        let hash = this.hashPassword(password);
-        console.log(hash);
-        
-        this.http.post<any>('/test/test', {email: email,password: hash})
-        .subscribe((data) => {
+        let request = new userRequest(email, password)
+
+        this.http.post<any>('/auth/login', request)
+        .subscribe((data) => {          
          if(data !== null){
-           localStorage.setItem("token", data.token);
-           this.router.navigate(['']);
-
-           const tokenPayload: any = jwt_decode(data.token);
-           let role = tokenPayload.role;
-           this.role.next(role);
-           this.email = data.email;
+           this.saveAuthenticatedAdminInLocalStorage(data);
          }
+         //do stuff
         })
-
       }
 
+    saveAuthenticatedAdminInLocalStorage(data: any){
+      let role = data.user.roles;
+      this.role.next(role);
+      this.email = data.user.email;
+      
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("role", role);
+      localStorage.setItem("email", this.email);
 
-    hashPassword(password: string): string{
-        return Md5.hashStr(password);
-      }
+      this.router.navigate(['']);      
+    }
 }
