@@ -5,7 +5,7 @@ import {FormsModule} from "@angular/forms";
 import {HomeRoutingModule} from "./home-routing.module";
 import {ScanModule} from "../scan/scan.module";
 import {SharedModule} from "../shared/shared.module";
-
+import {RecaptchaModule} from "ng-recaptcha";
 
 
 @NgModule({
@@ -14,10 +14,11 @@ import {SharedModule} from "../shared/shared.module";
     HomeRoutingModule,
     SharedModule,
     ScanModule,
-    FormsModule
+    FormsModule,
+    RecaptchaModule
   ],
   declarations: [
-    HomeComponent
+    HomeComponent,
   ],
   exports:[
 
