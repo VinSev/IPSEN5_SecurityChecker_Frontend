@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {ScanService} from "../scan/scan/scan.service";
-import {ValidationService} from "../shared/services/validation.service";
 import {environment} from "../../environments/environment";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
@@ -12,13 +11,12 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  public wrongSign: boolean = false;
+
   public captcha: string;
   public captchaKey: string;
 
   constructor(private router: Router,
               private scanService: ScanService,
-              private validatieService: ValidationService,
               private modalService: NgbModal) {
 
     this.captcha = "";
@@ -42,15 +40,9 @@ export class HomeComponent {
     return true;
   }
 
-  //Check if the given input is allowed in the given inputfield, if not let user know that this input is not allowed.
-  CheckInputValidation(event: Event) {
-    this.wrongSign = !this.validatieService.validateInput(event);
-  }
-
   resolved(captchaResponse: string){
     this.captcha = captchaResponse;
     this.modalService.dismissAll();
-    this.router.navigate(["scan"]);
-    console.log("captcha found: " + this.captcha)
+    this.scanService.postUserValidationToDatabase()
   }
 }
