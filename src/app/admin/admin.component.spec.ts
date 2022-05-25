@@ -28,4 +28,20 @@ describe('AdminComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should return false if inputs are empty', () => {
+    let email: HTMLInputElement = document.createElement('input') as HTMLInputElement
+    let password: HTMLInputElement = document.createElement('input') as HTMLInputElement
+    email.required = true;
+    password.required = true;
+    expect(component.submit(email, password)).toBeFalse();
+  });
+
+  it('should return true if mail is filled', () => {
+    let email: HTMLInputElement = document.createElement('input') as HTMLInputElement
+    let password: HTMLInputElement = document.createElement('input') as HTMLInputElement
+    email.value = "test"
+    password.value = "test"
+    expect(component.submit(email, password)).toBeTrue();
+  });
 });
