@@ -15,7 +15,7 @@ export class ResultComponent implements OnInit {
   }
 
   public sendPdfInfo(){
-    this.pdfService.sendPdfData('bruno','test')
+    this.pdfService.sendPdfData(this.scanService.scanCategories,this.scanService.name,this.scanService.website, this.scanService.email)
   }
 
 }

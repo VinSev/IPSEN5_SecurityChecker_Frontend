@@ -16,16 +16,29 @@ export class PdfService {
   constructor(private http: HttpClient) {
   }
 
-  public sendPdfData( name: string, website: string){
+  public sendPdfData(scans: ScanCategoryType[], name: string, website: string,email: string){
+
     let requestOptions: any = {
       headers: new HttpHeaders(),
     };
     let body: any = {
       "name":name,
-      "website": website
+      "email": email,
+      "owners": true,
+      "website": website,
+      "scanCategories": [
+        {
+          "title": scans[0].title,
+          "path": scans[0].path,
+          "loading": scans[0].loading,
+          "grade": scans[0].grade,
+          "result": "-",
+
+        }
+      ]
     }
     console.log("before posting")
-    return this.http.post(this.baseURL + "pdf",body,requestOptions).subscribe();
+    return this.http.post(this.baseURL + "mail",body,requestOptions).subscribe();
 
   }
 
