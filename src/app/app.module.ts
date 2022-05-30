@@ -20,7 +20,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     HeaderModule,
     FooterModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: "toast-bottom-right"
+    }),
     HttpClientModule,
     NgbModule
   ],

@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import { ValidatieService } from '../shared/services/validatie.service';
 import {UserScanService} from "../shared/services/user-scan.service";
+import {ScanService} from "../scan/scan/scan.service";
 
 @Component({
   selector: 'app-home',
@@ -24,18 +25,11 @@ export class HomeComponent {
     }
 
     this.userScanService.setScanInfo(website.value ,true, name.value, email.value);
+    this.scanService.name = name.value;
+    this.scanService.website = website.value;
+    this.scanService.ownership = ownership.value == "on";
 
-
-    this.router.navigate(["scan"]);
+    this.scanService.postUserValidationToDatabase()
     return true;
-  }
-
-  //Check if the given input is allowed in the given inputfield, if not let user know that this input is not allowed.
-  CheckInputValidation(event: Event){
-    this.wrongSign = false;
-    if (!this.validateService.validateInputOfInputfield(event)){
-      this.wrongSign = true;
-    }
-    // ??     this.wrongSign = !this.validateService.validateInputOfInputfield(event);
   }
 }

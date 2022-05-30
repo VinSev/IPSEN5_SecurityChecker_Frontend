@@ -5,6 +5,7 @@ import {Scan} from "../../shared/models/scan.model";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {ScanRoutingModule} from "../scan-routing.module";
 import {ToastrModule} from "ngx-toastr";
+import { NotFoundComponent } from './not-found.component';
 
 describe('ScanComponent', () => {
   let component: ScanComponent;
@@ -19,12 +20,29 @@ describe('ScanComponent', () => {
     .compileComponents();
   });
 
+    describe('NotFoundComponent', () => {
+      let component: NotFoundComponent;
+      let fixture: ComponentFixture<NotFoundComponent>;
+
+      beforeEach(async () => {
+        await TestBed.configureTestingModule({
+          declarations: [ NotFoundComponent ]
+        })
+          .compileComponents();
+      });
+
   beforeEach(() => {
-    fixture = TestBed.createComponent(ScanComponent);
+    fixture = TestBed.createComponent(NotFoundComponent);
     component = fixture.componentInstance;
-    scan = component.userScan;
     fixture.detectChanges();
   });
+
+  beforeEach(() => {
+        fixture = TestBed.createComponent(ScanComponent);
+        component = fixture.componentInstance;
+        scan = component.userScan;
+        fixture.detectChanges();
+      });
 
   it('should create', () => {
     expect(component).toBeTruthy();
