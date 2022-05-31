@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {UserScanService} from "../shared/services/user-scan.service";
 import {ScanService} from "../shared/services/scan.service";
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
