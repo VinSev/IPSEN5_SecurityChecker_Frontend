@@ -1,5 +1,5 @@
 <div class="features__card">
-  <div class="features__card--box" *ngFor="let scanCategory of this.scanService.scanCategories">
+  <div class="features__card--box" *ngFor="let scanCategory of this.scanService.getCurrentScan().scanCategories">
     <div class="features__card--box--img">
       <div class="circle">
         <span></span>
