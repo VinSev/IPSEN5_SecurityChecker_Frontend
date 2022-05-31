@@ -35,6 +35,8 @@ export class ScanComponent implements OnInit {
       }
     }
 
+    this.scanService.email = email.value;
+
     this.mailResults();
     return true;
   }

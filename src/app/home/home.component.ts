@@ -1,7 +1,9 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {UserScanService} from "../shared/services/user-scan.service";
-import {ScanService} from "../shared/services/scan.service";
+import {ScanService} from "../scan/scan/scan.service";
+import {environment} from "../../environments/environment";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 
 @Component({
@@ -10,20 +12,36 @@ import {ScanService} from "../shared/services/scan.service";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+  public captcha: string;
+  public captchaKey: string;
+
   constructor(private router: Router,
               private userScanService: UserScanService,
-              private scanService: ScanService) {}
+              private scanService: ScanService,
+              private modalService: NgbModal
+  ) {
 
-  public submit(name: HTMLInputElement, website: HTMLInputElement, ownership: HTMLInputElement): boolean {
+    this.captcha = "";
+    this.captchaKey = environment.captchaKey;
+  }
+
+  public submit(name: HTMLInputElement, website: HTMLInputElement, ownership: HTMLInputElement, content?: any): boolean {
     for(let input of [ name, website, ownership]) {
       if(!input.checkValidity()) {
         input.reportValidity();
         return false;
       }
     }
+    this.modalService.open(content)
     this.userScanService.setScanInfo(website.value ,true, name.value);
 
     this.scanService.postUserValidationToDatabase()
     return true;
+  }
+
+  resolved(captchaResponse: string){
+    this.captcha = captchaResponse;
+    this.modalService.dismissAll();
+    this.scanService.postUserValidationToDatabase()
   }
 }
