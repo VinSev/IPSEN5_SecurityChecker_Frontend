@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ScanService} from "../scan/scan.service";
+import {ScanService} from "../../shared/services/scan.service";
 
 @Component({
   selector: 'app-result',

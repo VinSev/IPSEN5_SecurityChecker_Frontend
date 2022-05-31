@@ -1,40 +1,28 @@
 import {Injectable, OnDestroy} from '@angular/core';
-import {ScanCategoryType} from "../../shared/models/scan-category.type";
-import {Iterator} from "../../shared/models/iterator.model";
+import {ScanCategoryType} from "../models/scan-category.type";
+import {Iterator} from "../models/iterator.model";
 import {HttpClient} from "@angular/common/http";
-import {Observable, Subscription} from "rxjs";
-import {RequestService} from "../../shared/requesten/request.service";
-import {Scan} from "../../shared/models/scan.model";
-import {UserScanService} from "../../shared/services/user-scan.service";
-import { HttpService } from 'src/app/shared/services/http.service';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import {userValidation} from "../../shared/models/user-validation.model";
-import {environment} from "../../../environments/environment";
+import {Observable, Subscription, tap} from "rxjs";
+import {Scan} from "../models/scan.model";
+import {UserScanService} from "./user-scan.service";
+import {HttpService} from 'src/app/shared/services/http.service';
+import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {userValidation} from "../models/user-validation.model";
 
 @Injectable({
   providedIn: 'root'
 })
-export class ScanService implements OnDestroy{
+export class ScanService implements OnDestroy {
   private scanInfo: Scan = new Scan("", false);
   scanSubscription: Subscription = new Subscription();
-
-  private _name: string = "";
-  private _email: string = "";
-  private _website: string = "";
-  private _ownership: boolean = false;
-  private _scanCategories: ScanCategoryType[] = [];
 
   constructor(private http: HttpClient,
               private httpService: HttpService,
               private router: Router,
+              private userScanService: UserScanService,
               private toastr: ToastrService) {
-    this._scanCategories.push({title: "Headers", path: "", loading: false});
-  }
-
-  constructor(private http: HttpClient,
-              private requestService: RequestService,
-              private userScanService: UserScanService) {
+    this.userScanService.userScan.value.scanCategories.push({title: "Headers", path: "", loading: false});
     this.setSubscriptions();
   }
 
@@ -45,42 +33,6 @@ export class ScanService implements OnDestroy{
         this.scanInfo.scanCategories.push({title: "Headers", path: "", loading: false});
       }
     )
-  }
-
-  get name(): string {
-      return this._name;
-    }
-
-    set name(value: string) {
-      this._name = value;
-    }
-
-  set email(value: string) {
-    this._email = value;
-  }
-
-  get website(): string {
-    return this._website;
-  }
-
-  set website(value: string) {
-    this._website = value;
-  }
-
-  get ownership(): boolean {
-    return this._ownership;
-  }
-
-  set ownership(value: boolean) {
-    this._ownership = value;
-  }
-
-  get scanCategories(): ScanCategoryType[] {
-    return this._scanCategories;
-  }
-
-  set scanCategories(value: ScanCategoryType[]) {
-    this._scanCategories = value;
   }
 
   private filterWebsite() {
@@ -98,10 +50,22 @@ export class ScanService implements OnDestroy{
   }
 
   public start(): void {
-    this.requestService.requestToScan();
+    this.requestStartScan()
     this.filterWebsite();
     let iterator: Iterator<ScanCategoryType> = new Iterator<ScanCategoryType>(this.scanInfo.scanCategories);
     this.scan(iterator);
+  }
+
+  private requestStartScan() {
+    return this.httpService.get<any>("/result/start",
+      {url: this.userScanService.userScan.value.website}).pipe(
+      tap(
+        (scans: ScanCategoryType[]) => {
+          for(let scan of scans)
+          if (scan.title === "SEO"  && scan.grade != undefined && scan.grade !=  0) {
+            this.userScanService.setScanToFinished(scans)
+          }
+        }));
   }
 
   private async scan(iterator: Iterator<ScanCategoryType>): Promise<void> {
@@ -148,10 +112,10 @@ export class ScanService implements OnDestroy{
 
   public postUserValidationToDatabase(){
     let validationUser = new userValidation();
-    validationUser.name = this._name;
-    validationUser.email = this._email;
-    validationUser.website = this._website;
-    validationUser.ownership = this._ownership;
+    validationUser.name = this.userScanService.userScan.value.name;
+    validationUser.email = this.userScanService.userScan.value.email;
+    validationUser.website = this.userScanService.userScan.value.website;
+    validationUser.ownership = this.userScanService.userScan.value.ownership;
 
     this.httpService.post<any>('/test/test', validationUser)
     .subscribe((data) => {
@@ -175,11 +139,11 @@ export class ScanService implements OnDestroy{
 
   public sendMail() {
     let body: any = {
-      name: this.name,
-      email: this.email,
-      website: this.website,
-      owners: this.ownership,
-      scanCategories: this.scanCategories
+      name: this.userScanService.userScan.value.name,
+      email: this.userScanService.userScan.value.email,
+      website: this.userScanService.userScan.value.website,
+      owners: this.userScanService.userScan.value.ownership,
+      scanCategories: this.userScanService.userScan.value.scanCategories
     }
     this.httpService.post("/mail", body)
       .subscribe();

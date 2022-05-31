@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ScanService } from "./scan.service";
+import { ScanService } from "../../shared/services/scan.service";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import {RouterTestingModule} from "@angular/router/testing";
 import {ToastrModule, ToastrService} from "ngx-toastr";

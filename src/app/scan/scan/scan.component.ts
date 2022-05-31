@@ -1,5 +1,5 @@
-import {Component, NgModule, OnInit} from '@angular/core';
-import {ScanService} from "./scan.service";
+import {Component, OnInit} from '@angular/core';
+import {ScanService} from "../../shared/services/scan.service";
 import {ToastrService} from "ngx-toastr";
 
 @Component({
