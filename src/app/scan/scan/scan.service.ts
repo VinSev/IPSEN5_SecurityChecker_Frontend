@@ -3,10 +3,11 @@ import {ScanCategoryType} from "../../shared/models/scan-category.type";
 import {Iterator} from "../../shared/models/iterator.model";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import { httpService } from 'src/app/shared/services/http.service';
+import { HttpService } from 'src/app/shared/services/http.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import {userValidation} from "../../shared/models/user-validation.model";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class ScanService {
   private _scanCategories: ScanCategoryType[] = [];
 
   constructor(private http: HttpClient,
-              private httpService: httpService,
+              private httpService: HttpService,
               private router: Router,
               private toastr: ToastrService) {
     this._scanCategories.push({title: "Headers", path: "", loading: false});
@@ -145,4 +146,18 @@ export class ScanService {
     })
 
   }
+
+  public sendMail() {
+    let body: any = {
+      name: this.name,
+      email: this.email,
+      website: this.website,
+      owners: this.ownership,
+      scanCategories: this.scanCategories
+    }
+    this.httpService.post("/mail", body)
+      .subscribe();
+  }
+
+
 }
