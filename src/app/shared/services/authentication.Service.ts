@@ -49,6 +49,11 @@ export class authenticationService {
     localStorage.setItem("role", roles);
     localStorage.setItem("email", email);
 
-    this.router.navigate(['']);
+    this.router.navigate(['admin']);
+  }
+
+  logOutAsUser(){
+    localStorage.clear();
+    this.router.navigate(['auth']);
   }
 }

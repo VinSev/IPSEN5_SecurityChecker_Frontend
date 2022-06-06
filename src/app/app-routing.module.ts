@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { RolGuardService } from './admin/role-guard-Service';
 import {NotFoundComponent} from "./shared/error-components/not-found/not-found.component";
 
 const routes: Routes = [
@@ -14,8 +15,13 @@ const routes: Routes = [
     loadChildren: () => import("./home/home.module").then(m => m.HomeModule)
   },
   {
-    path: 'admin',
+    path: 'auth',
     loadChildren: () => import("./admin/admin.module").then(m => m.AdminModule)
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import("./admin/admin-home/admin-home.module").then(m => m.AdminHomeModule)
+    ,canActivate: [RolGuardService], data: {expectedRole: "Admin"}
   },
   {
     path: 'scan',
