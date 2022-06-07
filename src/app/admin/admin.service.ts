@@ -17,4 +17,16 @@ export class AdminService {
   changeDropDownLocation(newLocation :string){
       this.dropDownLocation.next(newLocation)
   }
+
+  createTip(tip: string){
+    
+  }
+
+  updateTip(tip: string){
+
+  }
+
+  deleteTip(){
+
+  }
 }
