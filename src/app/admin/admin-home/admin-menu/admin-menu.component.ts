@@ -15,6 +15,7 @@ export class AdminMenuComponent implements OnInit {
     private adminService : AdminService) { }
 
   ngOnInit(): void {
+    this.adminService.readAllTips();
   }
 
   public activateAdminDropDown(dropDownChoice: string){

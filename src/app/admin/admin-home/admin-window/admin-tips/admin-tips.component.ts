@@ -7,25 +7,40 @@ import { AdminService } from 'src/app/admin/admin.service';
   styleUrls: ['./admin-tips.component.scss']
 })
 export class AdminTipsComponent implements OnInit {
-  inEditMode: boolean = false;
+  inEditMode: boolean = true;
 
   constructor(private adminService : AdminService) { }
 
   ngOnInit(): void {    
   }
 
+  goCreateANewTip(){
+    this.inEditMode = !this.inEditMode;    
+  }
+
   public submit(tip: HTMLInputElement): boolean {
+    console.log("submit");
+    
     for(let input of [tip]) {
       if(!input.checkValidity()) {
         input.reportValidity();
         return false;
       }
     }
-    if(this.inEditMode){
-      this.adminService.updateTip(tip.value);
-      return true;
+      // this.adminService.updateTip(tip.value);
+    return true;
+  }
+
+  public submitCreate(tip: HTMLInputElement): boolean {
+    console.log("submit");
+    
+    for(let input of [tip]) {
+      if(!input.checkValidity()) {
+        input.reportValidity();
+        return false;
+      }
     }
-      this.adminService.createTip(tip.value);
+      // this.adminService.createTip(tip.value);
     return true;
   }
   
