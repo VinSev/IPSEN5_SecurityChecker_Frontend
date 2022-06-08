@@ -2,64 +2,58 @@ import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
 import {HttpService} from "../../shared/services/http.service";
 import {Tips} from "../../shared/models/tips.model";
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TipsService {
-  private currentUsedTip = new BehaviorSubject(true);
-  public _currentusedTip = this.currentUsedTip.asObservable();
+  private isThereACurrentTip = new BehaviorSubject(true);
+  public _isThereACurrentTip = this.isThereACurrentTip.asObservable();
 
-  public tipmodel: Tips = new Tips('');
-  public tipToSend: Tips = new Tips('');
+  public tipToSendWithId: Tips = new Tips('');
+  public tipToSendWithoutId: Tips = new Tips('');
 
   constructor(private http: HttpService,
-              private router: Router,
               private toastr: ToastrService) { }
 
   changeCurrentUsedTip(tip :Tips){
-    this.tipmodel = tip;
-    this.currentUsedTip.next(!this.changeCurrentUsedTip)    
+    this.tipToSendWithId = tip;
+    this.isThereACurrentTip.next(!this.changeCurrentUsedTip)    
 }
+
+  public createTip(tip: string){
+    this.tipToSendWithoutId.text = tip;
+    this.http.post('/tips', this.tipToSendWithoutId)
+    .subscribe((data) => {
+      this.ShowToastOnPage("De tip is aangemaakt")
+    })
+  }
 
   public getAll(): Observable<Tips[]> {
     return this.http.getAll("/tips");
   }
 
-  public createTip(tip: string){
-    this.tipToSend.text = tip;
-    this.http.post('/tips', this.tipToSend)
-    .subscribe((data) => {
-      this.toastr.success("De tip met ID: " + this.tipmodel.id + " is verwijderd!", "", {
-        tapToDismiss: true,
-        positionClass: "toast-bottom-right",
-        timeOut: 1500
-      });
-    })
-  }
-
   public updateTip(tip: string){
-    this.tipmodel.text = tip;
-    this.http.put('/tips', this.tipmodel)
+    this.tipToSendWithId.text = tip;
+    this.http.put('/tips', this.tipToSendWithId)
     .subscribe((data) => {
-      this.toastr.success("De tip met ID: " + this.tipmodel.id + " is verwijderd!", "", {
-        tapToDismiss: true,
-        positionClass: "toast-bottom-right",
-        timeOut: 1500
-      });
+      this.ShowToastOnPage("De tip is aangepast")
     })
   }
 
   public deleteTip(){
-    this.http.delete('/tips', this.tipmodel)
+    this.http.delete('/tips', this.tipToSendWithId)
     .subscribe((data) => {
-      this.toastr.success("De tip met ID: " + this.tipmodel.id + " is verwijderd!", "", {
-        tapToDismiss: true,
-        positionClass: "toast-bottom-right",
-        timeOut: 1500
-      });
+      this.ShowToastOnPage("De tip met ID: " + this.tipToSendWithId.id + " is verwijderd!")
     })
+  }
+
+  public ShowToastOnPage(message: string){
+    this.toastr.success(message, "", {
+      tapToDismiss: true,
+      positionClass: "toast-bottom-right",
+      timeOut: 1500
+    });
   }
 }

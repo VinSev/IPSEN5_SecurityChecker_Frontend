@@ -1,13 +1,13 @@
 <div class="container flexbox">
-    <div class="col-lg-4" style="background-color: lightblue;">
+    <div class="col-lg-4">
         <button (click)="goCreateANewTip()" class="btn">Nieuwe Tip</button>
         <app-admin-tip></app-admin-tip>
     </div>
 
-    <div class="col-lg" style="background-color: rgb(245, 213, 238);">
+    <div class="col-lg">
         <div>
                 <form id="loginForm" #scanForm="ngForm" (ngSubmit)="submit(tip)">
-                  <div class="form-column"><input name="tip" ngModel #tip required type="text" value="{{tipsService.tipmodel.text}}" placeholder="tip*" class="form-control bg2" aria-label="tip"></div>
+                  <div class="form-column"><input name="tip" ngModel #tip required type="text" value="{{tipsService.tipToSendWithId.text}}" placeholder="tip*" class="form-control bg2" aria-label="tip"></div>
                   <div class="form-row">
                     <div class="form-column" *ngIf="!inEditMode"><input class="btn" type="submit" value="create" aria-label="Verzenden"></div>
                     <div class="form-column" *ngIf="inEditMode"><input class="btn" type="submit" value="Login" aria-label="Verzenden"></div>

@@ -28,7 +28,7 @@ export class authenticationService {
           let role = data.user.roles;
           this.role.next(role);
           this.saveAuthenticatedAdminInLocalStorage(role, data.user.email, data.token);
-          this.toastr.success("Uw gegevens zijn juist verstuurd!", "", {
+          this.toastr.success("U bent nu ingelogd!", "", {
             tapToDismiss: true,
             positionClass: "toast-bottom-right",
             timeOut: 1500
@@ -38,7 +38,7 @@ export class authenticationService {
           this.toastr.error("Het versturen van uw gegevens is niet gelukt. Controleer uw ingevoerde gegevens!", "", {
             tapToDismiss: true,
             positionClass: "toast-bottom-right",
-            timeOut: 1500
+            timeOut: 2000
           });
         }
       });
@@ -55,5 +55,10 @@ export class authenticationService {
   logOutAsUser(){
     localStorage.clear();
     this.router.navigate(['auth']);
+    this.toastr.error("U bent uitgelogd!", "", {
+      tapToDismiss: true,
+      positionClass: "toast-bottom-right",
+      timeOut: 1500
+    });
   }
 }

@@ -17,7 +17,7 @@ export class AdminTipsComponent implements OnInit {
   constructor(public tipsService: TipsService) { }
 
   ngOnInit(): void {
-    this.tipsService._currentusedTip.subscribe((result) =>{
+    this.tipsService._isThereACurrentTip.subscribe((result) =>{
       this.inEditMode = true;
     });
   }
