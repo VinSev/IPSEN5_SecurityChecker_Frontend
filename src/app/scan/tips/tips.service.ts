@@ -12,6 +12,7 @@ export class TipsService {
   public _currentusedTip = this.currentUsedTip.asObservable();
 
   public tipmodel: Tips = new Tips('');
+  public tipToSend: Tips = new Tips('');
 
   constructor(private http: HttpService, private router: Router) { }
 
@@ -24,9 +25,9 @@ export class TipsService {
     return this.http.getAll("/tips");
   }
 
-  public createTip(tip: string){    
-    this.tipmodel.text = tip;    
-    this.http.post('/tips', this.tipmodel)
+  public createTip(tip: string){
+    this.tipToSend.text = tip;
+    this.http.post('/tips', this.tipToSend)
     .subscribe((data) => {
       window.location.reload()
     })

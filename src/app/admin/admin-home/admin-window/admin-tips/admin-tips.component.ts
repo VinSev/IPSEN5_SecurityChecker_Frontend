@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { AdminService } from 'src/app/admin/admin.service';
 import { Tips } from 'src/app/shared/models/tips.model';
 import { TipsService } from 'src/app/scan/tips/tips.service';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-tips',
@@ -11,15 +10,15 @@ import { TipsService } from 'src/app/scan/tips/tips.service';
 })
 export class AdminTipsComponent implements OnInit {
   inEditMode: boolean = false;
-  currentEditingTip: Tips = new Tips('');
   tips: Tips[] = [];
 
-  constructor(private tipsService: TipsService) { }
+  tipForm!: FormGroup;
+
+  constructor(public tipsService: TipsService) { }
 
   ngOnInit(): void {
     this.tipsService._currentusedTip.subscribe((result) =>{
-      this.currentEditingTip = this.tipsService.tipmodel;
-          
+      this.inEditMode = true;
     });
   }
 
@@ -27,21 +26,21 @@ export class AdminTipsComponent implements OnInit {
     this.inEditMode = false;  
   }
 
-  public submit(tip: HTMLInputElement): boolean {
+  public submit(tipValue: HTMLInputElement): boolean {
     console.log("submit");
-    if(!this.checkIfFormInputIsValdid(tip)){
+    if(!this.checkIfFormInputIsValdid(tipValue)){
       return false;
     }
     if(this.inEditMode){
-      this.tipsService.updateTip(tip.value);
+      this.tipsService.updateTip(tipValue.value);
       return true
     }
-    this.tipsService.createTip(tip.value);
+    this.tipsService.createTip(tipValue.value);
     return true;
   }
 
-  public checkIfFormInputIsValdid(tip: HTMLInputElement): boolean{
-    for(let input of [tip]) {
+  public checkIfFormInputIsValdid(tipValue: HTMLInputElement): boolean{
+    for(let input of [tipValue]) {
       if(!input.checkValidity()) {
         input.reportValidity();
         return false;
