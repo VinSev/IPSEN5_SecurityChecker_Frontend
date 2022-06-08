@@ -8,25 +8,16 @@ import { TipsService } from 'src/app/scan/tips/tips.service';
   templateUrl: './admin-tip.component.html',
   styleUrls: ['./admin-tip.component.scss']
 })
-export class AdminTipComponent implements OnInit, OnDestroy {
-  private subscription!: Subscription;
+export class AdminTipComponent implements OnInit {
   @Input() tip: Tips | any;
-  tips: Tips[] = [];
 
-  constructor(private tipsService: TipsService) { }
+  constructor(public tipsService: TipsService) { }
 
   ngOnInit(): void {
-    this.subscription = this.tipsService.getAll()
-    .subscribe(response => {      
-      this.tips = response;                    
-    });
+    this.tipsService.setTipsIntoList()
   }
 
-  onTipSelected(tip: Tips){
+  onTipSelected(tip: Tips){    
     this.tipsService.changeCurrentUsedTip(tip);
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe;
   }
 }

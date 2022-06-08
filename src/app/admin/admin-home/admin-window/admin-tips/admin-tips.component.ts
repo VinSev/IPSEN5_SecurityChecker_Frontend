@@ -9,28 +9,22 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./admin-tips.component.scss']
 })
 export class AdminTipsComponent implements OnInit {
-  inEditMode: boolean = false;
   tips: Tips[] = [];
-
-  tipForm!: FormGroup;
-
+  
   constructor(public tipsService: TipsService) { }
 
   ngOnInit(): void {
-    this.tipsService._isThereACurrentTip.subscribe((result) =>{
-      this.inEditMode = true;
-    });
   }
 
-  goCreateANewTip(){
-    this.inEditMode = false;  
+  goCreateANewTip(){   
+    this.tipsService.cleanInputField()
   }
 
   public submit(tipValue: HTMLInputElement): boolean {
     if(!this.checkIfFormInputIsValdid(tipValue)){
       return false;
     }
-    if(this.inEditMode){
+    if(this.tipsService.inEditMode){
       this.tipsService.updateTip(tipValue.value);
       return true
     }

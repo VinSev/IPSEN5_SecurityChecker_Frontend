@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, Observable, Subscription} from "rxjs";
 import {HttpService} from "../../shared/services/http.service";
 import {Tips} from "../../shared/models/tips.model";
 import { ToastrService } from 'ngx-toastr';
@@ -7,25 +7,34 @@ import { ToastrService } from 'ngx-toastr';
 @Injectable({
   providedIn: 'root'
 })
-export class TipsService {
-  private isThereACurrentTip = new BehaviorSubject(true);
-  public _isThereACurrentTip = this.isThereACurrentTip.asObservable();
+export class TipsService{
+  private subscription!: Subscription;
 
+  public inEditMode: boolean = false;
   public tipToSendWithId: Tips = new Tips('');
   public tipToSendWithoutId: Tips = new Tips('');
+  public tips: Tips[] = [];
 
   constructor(private http: HttpService,
               private toastr: ToastrService) { }
 
   changeCurrentUsedTip(tip :Tips){
     this.tipToSendWithId = tip;
-    this.isThereACurrentTip.next(!this.changeCurrentUsedTip)    
+    this.inEditMode = true;   
+}
+
+public setTipsIntoList(){
+  this.subscription = this.getAll()
+  .subscribe(response => {      
+    this.tips = response;                    
+  });
 }
 
   public createTip(tip: string){
     this.tipToSendWithoutId.text = tip;
     this.http.post('/tips', this.tipToSendWithoutId)
     .subscribe((data) => {
+      this.cleanInputField();
       this.ShowToastOnPage("De tip is aangemaakt")
     })
   }
@@ -38,6 +47,7 @@ export class TipsService {
     this.tipToSendWithId.text = tip;
     this.http.put('/tips', this.tipToSendWithId)
     .subscribe((data) => {
+      this.cleanInputField();
       this.ShowToastOnPage("De tip is aangepast")
     })
   }
@@ -45,8 +55,17 @@ export class TipsService {
   public deleteTip(){
     this.http.delete('/tips', this.tipToSendWithId)
     .subscribe((data) => {
+      this.cleanInputField();
       this.ShowToastOnPage("De tip met ID: " + this.tipToSendWithId.id + " is verwijderd!")
     })
+  }
+
+  public cleanInputField(){
+    this.inEditMode = false;
+    this.tipToSendWithId.text = '';
+    this.setTipsIntoList();
+    console.log('clean');
+    
   }
 
   public ShowToastOnPage(message: string){
