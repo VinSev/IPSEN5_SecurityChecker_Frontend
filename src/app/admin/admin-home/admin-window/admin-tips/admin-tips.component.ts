@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/admin/admin.service';
+import { Tips } from 'src/app/shared/models/tips.model';
+import { TipsService } from 'src/app/scan/tips/tips.service';
 
 @Component({
   selector: 'app-admin-tips',
@@ -7,45 +10,47 @@ import { AdminService } from 'src/app/admin/admin.service';
   styleUrls: ['./admin-tips.component.scss']
 })
 export class AdminTipsComponent implements OnInit {
-  inEditMode: boolean = true;
+  inEditMode: boolean = false;
+  currentEditingTip: Tips = new Tips('');
+  tips: Tips[] = [];
 
-  constructor(private adminService : AdminService) { }
+  constructor(private tipsService: TipsService) { }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
+    this.tipsService._currentusedTip.subscribe((result) =>{
+      this.currentEditingTip = this.tipsService.tipmodel;
+          
+    });
   }
 
   goCreateANewTip(){
-    this.inEditMode = !this.inEditMode;    
+    this.inEditMode = false;  
   }
 
   public submit(tip: HTMLInputElement): boolean {
     console.log("submit");
-    
-    for(let input of [tip]) {
-      if(!input.checkValidity()) {
-        input.reportValidity();
-        return false;
-      }
+    if(!this.checkIfFormInputIsValdid(tip)){
+      return false;
     }
-      // this.adminService.updateTip(tip.value);
+    if(this.inEditMode){
+      this.tipsService.updateTip(tip.value);
+      return true
+    }
+    this.tipsService.createTip(tip.value);
     return true;
   }
 
-  public submitCreate(tip: HTMLInputElement): boolean {
-    console.log("submit");
-    
+  public checkIfFormInputIsValdid(tip: HTMLInputElement): boolean{
     for(let input of [tip]) {
       if(!input.checkValidity()) {
         input.reportValidity();
         return false;
       }
     }
-      // this.adminService.createTip(tip.value);
     return true;
   }
   
-  public deleteTip(){
-    this.adminService.deleteTip()
+  public deleteTip(){    
+    this.tipsService.deleteTip()
   }
-
 }

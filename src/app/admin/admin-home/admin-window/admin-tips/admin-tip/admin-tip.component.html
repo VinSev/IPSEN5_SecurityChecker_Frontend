@@ -1,1 +1,7 @@
-<p>admin-tip works!</p>
+<section>
+    <div *ngFor="let tip of tips">
+        <div (click)="onTipSelected(tip)">
+        <p>{{tip.text}}</p>
+        </div>
+    </div>
+</section>

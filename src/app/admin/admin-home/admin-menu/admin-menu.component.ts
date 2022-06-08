@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TipsService } from 'src/app/scan/tips/tips.service';
 import { authenticationService } from 'src/app/shared/services/authentication.Service';
 import { AdminService } from '../../admin.service';
 
@@ -12,10 +13,10 @@ export class AdminMenuComponent implements OnInit {
 
   constructor(
     private auth : authenticationService,
-    private adminService : AdminService) { }
+    private adminService : AdminService,
+    private tipsService: TipsService) { }
 
   ngOnInit(): void {
-    this.adminService.readAllTips();
   }
 
   public activateAdminDropDown(dropDownChoice: string){
