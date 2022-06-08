@@ -27,7 +27,6 @@ export class AdminTipsComponent implements OnInit {
   }
 
   public submit(tipValue: HTMLInputElement): boolean {
-    console.log("submit");
     if(!this.checkIfFormInputIsValdid(tipValue)){
       return false;
     }

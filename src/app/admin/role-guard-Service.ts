@@ -12,10 +12,7 @@ export class RolGuardService implements CanActivate{
 
     canActivate(route: ActivatedRouteSnapshot): boolean{
         const expectedRole = route.data['expectedRole'];
-        console.log(expectedRole);
-        
         const token = localStorage.getItem('token');
-
         if(token){
             let role = localStorage.getItem('role');
             if(!this.Auth.isAuthenticated() || role !== expectedRole){

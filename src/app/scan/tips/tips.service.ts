@@ -3,6 +3,7 @@ import {BehaviorSubject, Observable} from "rxjs";
 import {HttpService} from "../../shared/services/http.service";
 import {Tips} from "../../shared/models/tips.model";
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,9 @@ export class TipsService {
   public tipmodel: Tips = new Tips('');
   public tipToSend: Tips = new Tips('');
 
-  constructor(private http: HttpService, private router: Router) { }
+  constructor(private http: HttpService,
+              private router: Router,
+              private toastr: ToastrService) { }
 
   changeCurrentUsedTip(tip :Tips){
     this.tipmodel = tip;
@@ -29,7 +32,11 @@ export class TipsService {
     this.tipToSend.text = tip;
     this.http.post('/tips', this.tipToSend)
     .subscribe((data) => {
-      window.location.reload()
+      this.toastr.success("De tip met ID: " + this.tipmodel.id + " is verwijderd!", "", {
+        tapToDismiss: true,
+        positionClass: "toast-bottom-right",
+        timeOut: 1500
+      });
     })
   }
 
@@ -37,13 +44,22 @@ export class TipsService {
     this.tipmodel.text = tip;
     this.http.put('/tips', this.tipmodel)
     .subscribe((data) => {
-        console.log(data);
+      this.toastr.success("De tip met ID: " + this.tipmodel.id + " is verwijderd!", "", {
+        tapToDismiss: true,
+        positionClass: "toast-bottom-right",
+        timeOut: 1500
+      });
     })
   }
 
   public deleteTip(){
     this.http.delete('/tips', this.tipmodel)
     .subscribe((data) => {
+      this.toastr.success("De tip met ID: " + this.tipmodel.id + " is verwijderd!", "", {
+        tapToDismiss: true,
+        positionClass: "toast-bottom-right",
+        timeOut: 1500
+      });
     })
   }
 }
