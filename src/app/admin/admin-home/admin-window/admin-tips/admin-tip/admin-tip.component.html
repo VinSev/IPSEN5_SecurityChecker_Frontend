@@ -1,0 +1,7 @@
+<section>
+    <div *ngFor="let tip of tipsService.tips">
+        <div (click)="onTipSelected(tip)" class="btn singleTip">
+        <button><a>{{tip.text}}</a></button>
+        </div>
+    </div>
+</section>
