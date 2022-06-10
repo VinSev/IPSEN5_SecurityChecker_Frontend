@@ -7,8 +7,9 @@ import {AppComponent} from './app.component';
 import {FooterModule} from "./footer/footer.module";
 import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { Http_Intercepter } from './shared/interceptor/Http_intercepter';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,11 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     NgbModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: Http_Intercepter,
+    multi: true
+  },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

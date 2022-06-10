@@ -5,13 +5,13 @@
     </div>
 
     <div class="col-lg">
-        <div>
+        <div class="execute-right">
                 <form id="loginForm" #scanForm="ngForm" (ngSubmit)="submit(tip)">
                   <div class="form-column"><input name="tip" ngModel #tip required type="text" value="{{tipsService.tipToSendWithId.text}}" placeholder="tip*" class="form-control bg2" aria-label="tip"></div>
                   <div class="form-row">
-                    <div class="form-column" *ngIf="!tipsService.inEditMode"><input class="btn" type="submit" value="create" aria-label="Verzenden"></div>
-                    <div class="form-column" *ngIf="tipsService.inEditMode"><input class="btn" type="submit" value="change" aria-label="Verzenden"></div>
-                    <div class="form-column" *ngIf="tipsService.inEditMode"><input class="btn" type="button" (click)="deleteTip()" value="Verwijder tip" aria-label="Verzenden"></div>
+                    <div class="form-column" *ngIf="!tipsService.inEditMode"><input type="submit" value="create" aria-label="Verzenden"></div>
+                    <div class="form-column" *ngIf="tipsService.inEditMode"><input type="submit" value="change" aria-label="Verzenden"></div>
+                    <div class="form-column" *ngIf="tipsService.inEditMode"><input type="submit" (click)="deleteTip()" value="Verwijder tip" aria-label="Verzenden"></div>
                   </div>
                   <noscript>Activeer JavaScript om gebruik te maken van dit formulier.</noscript>
                 </form>

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Tips } from 'src/app/shared/models/tips.model';
 import { TipsService } from 'src/app/scan/tips/tips.service';
-import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-tips',

@@ -10,9 +10,11 @@ export class Http_Intercepter implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler):
     Observable<HttpEvent<any>> {
+        console.log("DIT WORD UITGEVEORD");
+        
         request = request.clone({
             setHeaders: {
-                Authorization:"Bearer " + localStorage.getItem('token')
+                "Authorization" :"Bearer " + localStorage.getItem('token')
             }
         });
 
