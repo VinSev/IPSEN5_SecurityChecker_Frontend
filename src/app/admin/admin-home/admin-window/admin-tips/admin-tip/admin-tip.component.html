@@ -1,4 +1,4 @@
-<div class="tipList">
+<div >
     <div *ngFor="let tip of tipsService.tips.reverse()">
         <div (click)="onTipSelected(tip)" class="singleTip">
         <button><a>{{tip.text}}</a></button>

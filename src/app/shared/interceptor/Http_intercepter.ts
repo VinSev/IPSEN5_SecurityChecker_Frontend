@@ -8,16 +8,17 @@ export class Http_Intercepter implements HttpInterceptor {
 
     constructor(public auth: authenticationService) { }
 
-    intercept(request: HttpRequest<any>, next: HttpHandler):
-    Observable<HttpEvent<any>> {
-        console.log("DIT WORD UITGEVEORD");
-        
-        request = request.clone({
-            setHeaders: {
-                "Authorization" :"Bearer " + localStorage.getItem('token')
-            }
+    public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        let token: string | null = localStorage.getItem("token");
+        if(token == null) {
+          return next.handle(req);
+        }
+    
+        let tokenizedRequest = req.clone({
+          setHeaders: {
+            Authorization: `Bearer ${token}`
+          }
         });
-
-        return next.handle(request);
-    }
+        return next.handle(tokenizedRequest);
+      }
 }
