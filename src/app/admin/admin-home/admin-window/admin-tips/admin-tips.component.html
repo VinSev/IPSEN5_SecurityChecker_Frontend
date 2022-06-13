@@ -1,21 +1,44 @@
-<div class="container flexbox">
-    <div class="col-lg4">
-        <button (click)="goCreateANewTip()" class="btn">Nieuwe Tip</button>
-        <app-admin-tip></app-admin-tip>
+<div class="container">
+  <div class="row align-items-center">
+    <div class="col-lg-12 col-md-12">
+      <div class="">
+        <div class="line">
+          <span></span>
+          <span class="sml-line"></span>
+        </div>
+        <h2>Admin Dashboard - Tips</h2>
+      </div>
     </div>
 
-    <div class="col-lg">
-        <div class="execute-right">
-                <form id="loginForm" #scanForm="ngForm" (ngSubmit)="submit(tip)">
-                  <div class="form-column"><input name="tip" ngModel #tip required type="text" value="{{tipsService.tipToSendWithId.text}}" placeholder="tip*" class="form-control bg2" aria-label="tip"></div>
-                  <div class="form-row">
-                    <div class="form-column" *ngIf="!tipsService.inEditMode"><input type="submit" value="create" aria-label="Verzenden"></div>
-                    <div class="form-column" *ngIf="tipsService.inEditMode"><input type="submit" value="change" aria-label="Verzenden"></div>
-                    <div class="form-column" *ngIf="tipsService.inEditMode"><input type="submit" (click)="deleteTip()" value="Verwijder tip" aria-label="Verzenden"></div>
-                  </div>
-                  <noscript>Activeer JavaScript om gebruik te maken van dit formulier.</noscript>
-                </form>
-        </div>
+    <div class="col-lg-5 col-md-5">
+      <div class="execute-right tipList">
+        <input (click)="goCreateANewTip()" type="button" value="new tip">
+        <app-admin-tip></app-admin-tip>
+      </div>
     </div>
+
+    <div class="col-lg-7 col-md-7">
+      <div class="execute-right">
+        <form id="loginForm" #tipForm="ngForm" (ngSubmit)="submit(tip)">
+          <div class="form-column"><input name="tip" ngModel #tip required type="text"
+                                          value="{{tipsService.tipToSendWithId.text}}" placeholder="tip*"
+                                          class="form-control bg2" aria-label="tip"></div>
+          <div class="form-row">
+            <div class="form-column" *ngIf="!tipsService.inEditMode"><input type="submit" value="create"
+                                                                            aria-label="Verzenden"></div>
+            <div class="form-column" *ngIf="tipsService.inEditMode"><input type="submit" value="change"
+                                                                           aria-label="Verzenden"></div>
+            <div class="form-column" *ngIf="tipsService.inEditMode"><input type="button" (click)="deleteTip()"
+                                                                           value="Verwijder tip" aria-label="Verzenden">
+            </div>
+          </div>
+          <noscript>Activeer JavaScript om gebruik te maken van dit formulier.</noscript>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+
 

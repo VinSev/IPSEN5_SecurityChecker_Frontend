@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Tips } from 'src/app/shared/models/tips.model';
 import { TipsService } from 'src/app/scan/tips/tips.service';
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-admin-tips',
@@ -9,13 +10,13 @@ import { TipsService } from 'src/app/scan/tips/tips.service';
 })
 export class AdminTipsComponent implements OnInit {
   tips: Tips[] = [];
-  
+
   constructor(public tipsService: TipsService) { }
 
   ngOnInit(): void {
   }
 
-  goCreateANewTip(){   
+  goCreateANewTip(){
     this.tipsService.cleanInputField()
   }
 
@@ -28,6 +29,7 @@ export class AdminTipsComponent implements OnInit {
       return true
     }
     this.tipsService.createTip(tipValue.value);
+    tipValue.value = "";
     return true;
   }
 
@@ -40,8 +42,8 @@ export class AdminTipsComponent implements OnInit {
     }
     return true;
   }
-  
-  public deleteTip(){    
+
+  public deleteTip(){
     this.tipsService.deleteTip()
   }
 }
