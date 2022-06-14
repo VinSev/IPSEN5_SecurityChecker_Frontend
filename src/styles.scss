@@ -721,7 +721,7 @@ p {
   margin-bottom: 17px
 }
 
-.execute-right [type=submit] {
+.execute-right [type=submit], .execute-right [type=button] {
   background: linear-gradient(90deg, var(--c1, #f597a9), var(--c2, #f597a9) 51%, var(--c1, #FFC001)) var(--x,0)/200%;
   -moz-background: linear-gradient(90deg, var(--c1, #f597a9), var(--c2, #f597a9) 51%, var(--c1, #FFC001)) var(--x,0)/200%;
   -webkit-background: linear-gradient(90deg, var(--c1, #f597a9), var(--c2, #f597a9) 51%, var(--c1, #FFC001)) var(--x,0)/200%;
@@ -730,7 +730,7 @@ p {
   transition: .4s all ease
 }
 
-.execute-right [type=submit]:hover {
+.execute-right [type=submit]:hover, .execute-right [type=button]:hover {
   --x: 100%
 }
 

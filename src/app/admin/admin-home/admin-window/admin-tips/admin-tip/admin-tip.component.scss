@@ -1,4 +1,15 @@
-.singleTip{
-    width: 90%;
-    margin-bottom: 2px;
+.singleTip {
+  text-align: left;
+  border: 2px;
+  border-bottom-style: dotted;
+  border-color: gray;
+  padding-top: 1em;
+  width: 100%;
+}
+
+.tipList {
+  height: 20em;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  word-break: break-word;
 }

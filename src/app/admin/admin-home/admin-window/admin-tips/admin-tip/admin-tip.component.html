@@ -1,7 +1,5 @@
-<section>
-    <div *ngFor="let tip of tipsService.tips">
-        <div (click)="onTipSelected(tip)" class="btn singleTip">
-        <button><a>{{tip.text}}</a></button>
-        </div>
-    </div>
-</section>
+<div class="tipList">
+  <div *ngFor="let tip of tipsService.tips.reverse()">
+    <button class="singleTip" (click)="onTipSelected(tip)">{{tip.text}}</button>
+  </div>
+</div>
