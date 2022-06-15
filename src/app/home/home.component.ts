@@ -30,7 +30,6 @@ export class HomeComponent {
         return false;
       }
     }
-    console.log(content)
     this.modalService.open(content)
 
     this.scanService.name = name.value;
@@ -39,6 +38,8 @@ export class HomeComponent {
 
     return true;
   }
+
+
 
   resolved(captchaResponse: string){
     this.captcha = captchaResponse;
