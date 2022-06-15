@@ -120,7 +120,6 @@ input, button, select, optgroup, textarea {
 select {
   text-transform: none;
   box-sizing: border-box;
-  margin: 0 0 17px;
   padding: 14px 35px 14px 15px;
   font-size: 16px;
   line-height: 24px;
@@ -136,7 +135,7 @@ select {
   background-size: 24px;
   background-position: 97% 50%;
   border-radius: 7px;
-  margin-bottom: 17px;
+  margin: 0 0 17px;
   text-transform: uppercase
 }
 
@@ -421,11 +420,10 @@ button:not(:disabled), [type=button]:not(:disabled), [type=reset]:not(:disabled)
 }
 
 h1, h2, h3, h4, h5, h6 {
-  margin: 15px 0;
   color: #252525;
   line-height: 1.2;
   font-family: geometros;
-  margin-bottom: .5rem;
+  margin: 15px 0 .5rem;
   overflow: hidden
 }
 
@@ -691,12 +689,16 @@ p {
 }
 
 .execute-area {
-  background: #3a3a3c;
-  background-image: url(assets/images/cta.png);
-  background-repeat: no-repeat;
   background-size: contain;
-  background-position: right bottom;
+  background: #3a3a3c url(assets/images/cta.png) no-repeat right bottom;
   padding: 5em 0
+}
+
+.home-area{
+  min-height: 75vh;
+}
+.admin-area{
+  min-height: 75vh;
 }
 
 .execute-area p {
@@ -709,14 +711,13 @@ p {
   font-size: 16px;
   font-weight: 400;
   color: #949494;
-  padding: 14px 15px;
   background-color: #f3f6fd;
   border: none;
   outline: none;
   background-repeat: no-repeat;
   background-size: 24px;
   background-position: 97% 50%;
-  padding-right: 35px;
+  padding: 14px 35px 14px 15px;
   border-radius: 7px;
   margin-bottom: 17px
 }
@@ -752,8 +753,7 @@ p {
 }
 
 .features {
-  margin: 0 0;
-  margin-bottom: 5em;
+  margin: 0 0 5em;
   background: #f4f6fd;
   padding: 5em 0
 }
@@ -797,8 +797,7 @@ p {
 }
 
 .features__card--box {
-  padding: 2em;
-  padding-bottom: 3rem;
+  padding: 2em 2em 3rem;
   box-shadow: 7px 5px 30px rgba(143, 143, 143, .3);
   background: #fff;
   border-radius: 5px;
@@ -991,12 +990,10 @@ p {
 .ziehharmonika h3 {
   display: flex;
   align-items: center;
-  padding: 4px 0;
   cursor: pointer;
   margin-top: 0;
   margin-bottom: 0;
-  padding-left: 8px;
-  padding-right: 40px;
+  padding: 4px 40px 4px 8px;
   transition: .25s all;
   position: relative;
   background: #3a3a3c;
@@ -1464,7 +1461,7 @@ p {
 @media screen and (min-width: 992px) and (max-width: 1200px) {
   .analyse-bg {
     background-size: 100%;
-    background-position: 0% 36%
+    background-position: 0 36%
   }
   .analyse-bg .row {
     align-items: center
@@ -1491,13 +1488,13 @@ p {
   .analyse-bg {
     background-image: none;
     background-size: 10%;
-    background-position: 0%;
+    background-position: 0;
     padding: 0;
     margin-top: 50px
   }
   .analyse-left {
     padding: 40px 18px 25px;
-    margin: 0%
+    margin: 0
   }
   .analyse-left input {
     font-size: 15px
@@ -1514,11 +1511,8 @@ p {
 }
 
 .check-area {
-  background: #3a3a3c;
-  background-image: url(assets/images/cta.png);
-  background-repeat: no-repeat;
   background-size: contain;
-  background-position: right bottom;
+  background: #3a3a3c url(assets/images/cta.png) no-repeat right bottom;
   padding: 5em 0 6em
 }
 
@@ -1545,12 +1539,10 @@ p {
   color: #000;
   padding: 14px 15px;
   border: none;
-  background: #fff;
   border-radius: 5px;
   outline: none;
-  background-repeat: no-repeat;
   background-size: 42px;
-  background-position: 99% 50%;
+  background: #fff no-repeat 99% 50%;
   margin-right: 10px
 }
 
@@ -1637,7 +1629,7 @@ p {
   -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, .1);
   -moz-box-shadow: 0 0 20px rgba(0, 0, 0, .1);
   border-radius: 4px 4px 2px 2px;
-  margin-right: 0%
+  margin-right: 0
 }
 
 .portfolio__wrap--box:hover .portfolio__wrap--box--img img {
@@ -2087,9 +2079,8 @@ p {
   background-color: #fff;
   border: none;
   outline: none;
-  padding: 14px;
   margin-bottom: 20px;
-  padding-right: 45px;
+  padding: 14px 45px 14px 14px;
   background-repeat: no-repeat;
   background-size: 35px;
   background-position: 98% 50%;
@@ -2879,9 +2870,7 @@ p {
 
 .Mark {
   width: 100%;
-  margin: 0 auto;
-  margin-top: 13rem;
-  margin-bottom: 10rem;
+  margin: 13rem auto 10rem;
   box-shadow: 7px 5px 30px rgba(72, 73, 121, .15);
   height: 33rem;
   border-radius: 5px;
@@ -2903,9 +2892,8 @@ p {
 }
 
 .Mark__social--icon i {
-  background: -webkit-linear-gradient(left, #5ad0ff 0%, #3224e9 50%, #5ad0ff 100%);
   background-size: 300%, 1px;
-  background-position: 0%;
+  background: -webkit-linear-gradient(left, #5ad0ff 0%, #3224e9 50%, #5ad0ff 100%) 0%;
   margin-bottom: 20px;
   color: #fff;
   width: 33px;
@@ -3240,7 +3228,6 @@ body.dark div.brand-part {
   visibility: hidden;
   position: none;
   transform: scale(0);
-  transition: all .3s ease
 }
 
 .fix-chat-trigger button.chat-close svg {
