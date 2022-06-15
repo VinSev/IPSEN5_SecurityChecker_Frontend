@@ -37,11 +37,18 @@
   }
 }
 
-@media screen and (min-width: 767px){
+@media screen and (min-width: 767px) and (min-height: 980px){
   .execute-area{
-    height: calc(100vh - 545px);
+    height: calc(100vh - 545px) !important;
   }
 }
+
+@media screen and (min-width: 767px){
+  .execute-area{
+    height: 75vh;
+  }
+}
+
 .analyse-bg {
   background-image: url(assets/images/contactformulier.png);
 }
