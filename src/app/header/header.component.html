@@ -1,4 +1,4 @@
-<header class="header-area">
+<header class="header-area" [ngClass]="{'header_opened': toggle}">
   <div class="top-bar d-none d-md-block">
     <div class="container">
       <div class="row align-items-center">
@@ -37,7 +37,7 @@
         <a class="navbar-brand" href="/" aria-label="Logo">
           <img src="https://getbigmarketing.nl/wp-content/uploads/2021/04/Getbig_Logo_Final_Fix_Logo_Volledig_PNG-e1619696062304.png.webp" width="200" height="57" alt="Get Big Marketing &amp; Webdesign"> </a>
 
-        <button class="hamburger hamburger--collapse navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" data-no-lazy="1" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="hamburger hamburger--collapse navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" data-no-lazy="1" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" (click)="toggle = !toggle">
           <span class="hamburger-box">
           <span class="hamburger-inner"></span>
           </span>
