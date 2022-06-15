@@ -15,6 +15,7 @@
 
 .execute-area {
   background-image: url(assets/images/cta.png);
+  //background-blend-mode: exclusion; om de image donkerder te maken voor clarity
 }
 
 .execute-right [type=submit], .execute-right [type=button] {
@@ -36,6 +37,11 @@
   }
 }
 
+@media screen and (min-width: 767px){
+  .execute-area{
+    height: calc(100vh - 545px);
+  }
+}
 .analyse-bg {
   background-image: url(assets/images/contactformulier.png);
 }
