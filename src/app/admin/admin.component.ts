@@ -25,7 +25,7 @@ export class AdminComponent{
   ngOnInit(): void {
   }
 
-  public submit(email: HTMLInputElement, password: HTMLInputElement): boolean {
+  public submit(email: HTMLInputElement, password: HTMLInputElement, content?: any): boolean {
     for(let input of [email, password]) {
       if(!input.checkValidity()) {
         input.reportValidity();
@@ -33,13 +33,16 @@ export class AdminComponent{
       }
     }
     this.inputValid = true;
-    this.auth.authenticate(email.value, password.value)
+
+    this.modalService.open(content)
+
     return true;
   }
 
 
-  resolved(captchaResponse: string){
+  resolved(captchaResponse: string, email: HTMLInputElement, password: HTMLInputElement){
     this.adminCaptcha = captchaResponse;
     this.modalService.dismissAll();
+    this.auth.authenticate(email.value, password.value)
   }
 }

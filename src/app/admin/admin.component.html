@@ -12,7 +12,7 @@
       </div>
       <div class="col-lg-12 col-md-12">
         <div class="execute-right">
-          <form id="loginForm" #scanForm="ngForm" (ngSubmit)="submit(email, password)">
+          <form id="loginForm" #scanForm="ngForm" (ngSubmit)="submit(email, password, content)">
             <div class="form-row">
               <div class="form-column"><input name="email" ngModel #email required type="email" placeholder="Email*"
                                               class="form-control bg2" aria-label="Email"></div>
@@ -20,9 +20,18 @@
                                               placeholder="password*" class="form-control bg2" aria-label="password">
               </div>
 
-              <re-captcha *ngIf="adminCaptcha === ''" (resolved)="resolved($event)" [siteKey]="adminCaptchaKey"></re-captcha>
+              <ng-template id="content" #content>
+                <div class="modal-header justify-content-center">
+                  <h4 class="modal-title" id="modal-basic-title">Verification</h4>
+                </div>
+                <div class="modal-body justify-content-center">
+                  <re-captcha (resolved)="resolved($event, email, password)" [siteKey]="adminCaptchaKey"></re-captcha>
+                </div>
+              </ng-template>
 
-              <div *ngIf="adminCaptcha" class="form-column"><input type="submit" value="Login" aria-label="Verzenden"></div>
+
+
+              <div class="form-column"><input type="submit" value="Login" aria-label="Verzenden"></div>
             </div>
             <noscript>Activeer JavaScript om gebruik te maken van dit formulier.</noscript>
           </form>
