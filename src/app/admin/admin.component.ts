@@ -1,6 +1,7 @@
-import { Component, OnInit, NgModule } from '@angular/core';
+import { Component} from '@angular/core';
 import { authenticationService } from '../shared/services/authentication.Service';
-import { NgForm } from '@angular/forms';
+import {environment} from "../../environments/environment";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-admin',
@@ -9,7 +10,17 @@ import { NgForm } from '@angular/forms';
 })
 export class AdminComponent{
 
-  constructor(private auth : authenticationService) { }
+  public adminCaptcha: string;
+  public adminCaptchaKey: string;
+  public inputValid: boolean;
+
+  constructor(private auth : authenticationService,
+              private modalService: NgbModal) {
+
+    this.adminCaptcha = "";
+    this.adminCaptchaKey = environment.captchaKey;
+    this.inputValid = false
+  }
 
   ngOnInit(): void {
   }
@@ -21,8 +32,14 @@ export class AdminComponent{
         return false;
       }
     }
+    this.inputValid = true;
     this.auth.authenticate(email.value, password.value)
     return true;
   }
 
+
+  resolved(captchaResponse: string){
+    this.adminCaptcha = captchaResponse;
+    this.modalService.dismissAll();
+  }
 }

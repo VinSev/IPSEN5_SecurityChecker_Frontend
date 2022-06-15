@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { AdminComponent } from './admin.component';
 import {AdminRoutingModule} from "./admin-routing.module";
+import {RecaptchaModule} from "ng-recaptcha";
 
 
 @NgModule({
     imports: [
         CommonModule,
         AdminRoutingModule,
-        FormsModule
+        FormsModule,
+        RecaptchaModule
     ],
   declarations: [
     AdminComponent
