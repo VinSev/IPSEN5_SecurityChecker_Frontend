@@ -39,7 +39,7 @@
 
 @media screen and (min-width: 767px){
   .execute-area{
-    height: 75vh;
+    height: calc(100vh - 545px);
   }
 }
 .analyse-bg {
