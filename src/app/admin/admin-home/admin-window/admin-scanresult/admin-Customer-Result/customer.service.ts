@@ -21,6 +21,7 @@ export class customerService {
     this.httpService.getAll("/scan/all")
     .subscribe((data) =>{
         console.log(data);
+        console.log('st');
         
     })
   }
