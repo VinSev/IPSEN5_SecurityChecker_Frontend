@@ -44,4 +44,11 @@ describe('AdminComponent', () => {
     password.value = "test"
     expect(component.submit(email, password)).toBeTrue();
   });
+
+  it('should resolve captcha', function () {
+    try {
+      component.resolved('test', new HTMLInputElement(), new HTMLInputElement());
+    } catch (ignore) {}
+    expect(component.adminCaptcha).toEqual('')
+  });
 });

@@ -63,4 +63,11 @@ describe('HomeComponent', () => {
     expect((<any>component).scanService.website).toEqual("test");
     expect((<any>component).scanService.ownership).toEqual(true);
   });
+
+  it('should resolve captcha', function () {
+    try {
+      component.resolved('test');
+    } catch (ignore) {}
+    expect(component.captcha).toEqual('test')
+  });
 });

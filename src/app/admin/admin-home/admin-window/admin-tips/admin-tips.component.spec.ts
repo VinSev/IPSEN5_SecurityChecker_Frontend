@@ -27,4 +27,35 @@ describe('AdminTipsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should clean inputfield', function () {
+    component.tipsService.tipToSendWithId.text = 'hello wolrd'
+    component.goCreateANewTip();
+    expect(component.tipsService.tipToSendWithId.text).toEqual('')
+  });
+
+  it('should submit', function () {
+    let input: HTMLInputElement = document.createElement('input') as HTMLInputElement
+    let b: boolean;
+
+    input.required = true;
+    b = component.submit(input);
+    expect(b).toBeFalse();
+
+    input.required = false;
+    input.value = "test";
+    b = component.submit(input);
+    expect(b).toBeTrue();
+
+    component.tipsService.inEditMode = true;
+    input.value = "test";
+    b = component.submit(input);
+    expect(b).toBeTrue();
+  });
+
+  it('should delete tip', function () {
+    try {
+      component.deleteTip();
+    } catch (ignore) {}
+  });
 });

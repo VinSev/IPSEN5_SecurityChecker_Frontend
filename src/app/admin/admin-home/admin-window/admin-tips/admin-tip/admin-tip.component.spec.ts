@@ -8,10 +8,8 @@ import {ToastrModule, ToastrService} from "ngx-toastr";
 
 describe('AdminTipComponent', () => {
   let component: AdminTipComponent;
+  let service: TipsService;
   let fixture: ComponentFixture<AdminTipComponent>;
-  let adminTip: AdminTipComponent;
-  let tipService: TipsService;
-  let tip : Tips;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -25,11 +23,17 @@ describe('AdminTipComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AdminTipComponent);
     component = fixture.componentInstance;
+    service = TestBed.inject(TipsService)
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should change current tip', function () {
+    component.onTipSelected(new Tips('hello world'));
+    expect(service.tipToSendWithId.text).toEqual('hello world');
   });
 
 });
