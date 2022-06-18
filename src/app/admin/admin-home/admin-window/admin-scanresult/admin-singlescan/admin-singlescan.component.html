@@ -1,1 +1,5 @@
-<p>admin-singlescan works!</p>
+<div class="userScanList">
+    <div *ngFor="let customer of customerService.listOfCustomers">
+      <button class="singleTip" (click)="onCustomerScanSelected()">{{customer}}</button>
+    </div>
+  </div>

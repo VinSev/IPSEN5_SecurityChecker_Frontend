@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { customerService } from '../admin-Customer-Result/customer.service';
 
 @Component({
   selector: 'app-admin-singlescan',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminSinglescanComponent implements OnInit {
 
-  constructor() { }
+  constructor(public customerService: customerService) { }
 
   ngOnInit(): void {
+    this.customerService.getAllCustomerDataFromDataBase();
+  }
+
+  onCustomerScanSelected(){
+
   }
 
 }
