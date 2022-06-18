@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TipsComponent } from "./tips.component";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {ToastrModule, ToastrService} from "ngx-toastr";
 
 describe('TipsComponent', () => {
   let component: TipsComponent;
@@ -10,7 +11,8 @@ describe('TipsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ TipsComponent ],
-      imports: [ HttpClientTestingModule ]
+      imports: [ HttpClientTestingModule ],
+      providers: [{provide: ToastrService, useClass: ToastrModule}]
     })
       .compileComponents();
   });

@@ -3,6 +3,8 @@ import { TipsService } from 'src/app/scan/tips/tips.service';
 import { Tips } from 'src/app/shared/models/tips.model';
 
 import { AdminTipComponent } from './admin-tip.component';
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {ToastrModule, ToastrService} from "ngx-toastr";
 
 describe('AdminTipComponent', () => {
   let component: AdminTipComponent;
@@ -13,7 +15,9 @@ describe('AdminTipComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminTipComponent ]
+      declarations: [ AdminTipComponent ],
+      imports: [HttpClientTestingModule],
+      providers: [{provide: ToastrService, useClass: ToastrModule}]
     })
     .compileComponents();
   });
@@ -28,10 +32,4 @@ describe('AdminTipComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should change current used tip', () => {
-    tip.text = ("new tip Created for this Test!")
-    adminTip.onTipSelected(tip)
-    expect(tipService.tipToSendWithId.text).toEqual("new tip Created for this Test!");
-    expect(tipService._isThereACurrentTip).toBeFalse;
-  });
 });

@@ -1,15 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdminTipsComponent } from './admin-tips.component';
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {ToastrModule, ToastrService} from "ngx-toastr";
+import {FormsModule} from "@angular/forms";
 
 describe('AdminTipsComponent', () => {
   let component: AdminTipsComponent;
   let fixture: ComponentFixture<AdminTipsComponent>;
-  let adminTips: AdminTipsComponent;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminTipsComponent ]
+      declarations: [ AdminTipsComponent ],
+      imports: [HttpClientTestingModule, FormsModule],
+      providers: [{provide: ToastrService, useClass: ToastrModule}]
     })
     .compileComponents();
   });
@@ -23,14 +27,4 @@ describe('AdminTipsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should change value of inEditMode', () =>{
-    adminTips.goCreateANewTip();
-    expect(adminTips.inEditMode).toBeFalse;
-  })
-
-  it('should return true after input is checked', () =>{
-    let tip: HTMLInputElement = document.createElement('input') as HTMLInputElement
-    expect(adminTips.checkIfFormInputIsValdid(tip)).toBeTrue;
-  })
 });
