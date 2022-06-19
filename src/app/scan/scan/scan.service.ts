@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ScanCategoryType} from "../../shared/models/scan-category.type";
 import {Iterator} from "../../shared/models/iterator.model";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import { HttpService } from 'src/app/shared/services/http.service';
 import { Router } from '@angular/router';
@@ -18,6 +18,7 @@ export class ScanService {
   private _website: string = "";
   private _ownership: boolean = false;
   private _scanCategories: ScanCategoryType[] = [];
+
 
   constructor(private http: HttpClient,
               private httpService: HttpService,
@@ -102,31 +103,48 @@ export class ScanService {
 
   public startScan(){
     this.filterWebsite();
-    let validationUser = new userValidation();
-    validationUser.name = this._name;
-    validationUser.email = this._email;
-    validationUser.website = this._website;
-    validationUser.ownership = this._ownership;
+    // let validationUser = new userValidation();
+    // validationUser.name = this._name;
+    // validationUser.email = this._email;
+    // validationUser.website = this._website;
+    // validationUser.ownership = this._ownership;
+    let requestOptions: any = {
+      headers: "none"
+    };
+    let body: any = {
+      "name": this._name,
+      "email": this._email,
+      "url": this._website,
+      "ownership": this._ownership,
+      "updateDate": "none",
+      "scanResult": {}
 
-    this.httpService.post<any>('/test/test', validationUser)
-    .subscribe((data) => {
-      if(data.response == 'SUCCESS'){
-        this.toastr.success("Uw gegevens zijn juist verstuurd!", "", {
-          tapToDismiss: true,
-          positionClass: "toast-bottom-right",
-          timeOut: 1500
-        });
-        console.log(data.response.scanCategories)
-        this.router.navigate(["scan"]);
-      }else{
-        this.toastr.error("Het versturen van uw gegevens is niet gelukt. Controleer uw ingevoerde gegevens!", "", {
-          tapToDismiss: true,
-          positionClass: "toast-bottom-right",
-          timeOut: 1500
-        });
-        }
+    }
+
+
+    this.http.post("result/makeResult", body,requestOptions).subscribe(res =>{
+      console.log(res)
     })
 
+    // this.httpService.post<any>('/test/test', validationUser)
+    // .subscribe((data) => {
+    //   if(data.response == 'SUCCESS'){
+    //     this.toastr.success("Uw gegevens zijn juist verstuurd!", "", {
+    //       tapToDismiss: true,
+    //       positionClass: "toast-bottom-right",
+    //       timeOut: 1500
+    //     });
+    //     console.log(data.response.scanCategories)
+    //     this.router.navigate(["scan"]);
+    //   }else{
+    //     this.toastr.error("Het versturen van uw gegevens is niet gelukt. Controleer uw ingevoerde gegevens!", "", {
+    //       tapToDismiss: true,
+    //       positionClass: "toast-bottom-right",
+    //       timeOut: 1500
+    //     });
+    //     }
+    // })
+    this.router.navigate(["scan"])
   }
 
   public sendMail() {

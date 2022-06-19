@@ -19,6 +19,7 @@ export class ScanComponent implements OnInit {
 
   private startScan(): void {
     this.scanService.start();
+    this.scanService.startScan()
   }
 
   public submit(email: HTMLInputElement): boolean {
