@@ -14,7 +14,9 @@ export class customerService{
     public customers: rapport[] =[];
     public customer: customer = new customer()
     public rapport: scanResult = new scanResult()
-    public currentViewedRapport: rapport = new rapport(this.rapport,this.customer);
+    public currentViewedRapport: rapport = new rapport(this.rapport, this.customer);
+
+    public testRapport: rapport = new rapport(new scanResult(), new customer()); 
 
   constructor(private http: HttpService,
               private toastr: ToastrService) { }
