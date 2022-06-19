@@ -15,7 +15,7 @@
           <app-admin-singlescan></app-admin-singlescan>
         </div>
       </div>
-  
+
       <div class="col-lg-7 col-md-7">
         <div class="d-flex justify-content-between">
           <div>
@@ -41,10 +41,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="scan of customerservice.scanList">
-              <th scope="row">1</th>
-              <td>headers: </td>
-              <td>{{customerservice.currentViewedRapport.scanresult.headers}} /10</td>
+            <tr *ngFor="let item of customerservice.scanList; let i = index">
+              <th scope="row">{{i+1}}</th>
+              <td>{{item}}</td>
+              <td>/10</td>
             </tr>
           </tbody>
         </table>
@@ -53,8 +53,7 @@
       </div>
     </div>
   </div>
-  
-  
-  
-  
-  
+
+
+
+
