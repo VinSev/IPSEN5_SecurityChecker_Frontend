@@ -5,7 +5,7 @@ export class apiScan{
 
     constructor(){
         this.id =0;
-        this.name ='apiScan';
-        this.url = 'apiScan.com';
+        this.name ='none';
+        this.url = 'none';
     }
 }

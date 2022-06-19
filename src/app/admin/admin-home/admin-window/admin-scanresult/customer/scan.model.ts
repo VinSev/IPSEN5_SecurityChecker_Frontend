@@ -8,9 +8,9 @@ export class scan{
     scanUser: customer;
 
     constructor(){
-        this.scanId=0;
-        this.url = 'google.com';
-        this.updateDate = '19-02-2000';
+        this.scanId= 0;
+        this.url = 'none';
+        this.updateDate = '01-01-2022';
         this.scanUser = new customer;
     }
 }
