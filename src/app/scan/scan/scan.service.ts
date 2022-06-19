@@ -101,6 +101,7 @@ export class ScanService {
 
 
   public startScan(){
+    this.filterWebsite();
     let validationUser = new userValidation();
     validationUser.name = this._name;
     validationUser.email = this._email;
@@ -115,6 +116,7 @@ export class ScanService {
           positionClass: "toast-bottom-right",
           timeOut: 1500
         });
+        console.log(data.response.scanCategories)
         this.router.navigate(["scan"]);
       }else{
         this.toastr.error("Het versturen van uw gegevens is niet gelukt. Controleer uw ingevoerde gegevens!", "", {
