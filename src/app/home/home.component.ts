@@ -44,6 +44,6 @@ export class HomeComponent {
   resolved(captchaResponse: string){
     this.captcha = captchaResponse;
     this.modalService.dismissAll();
-    this.scanService.postUserValidationToDatabase()
+    this.scanService.startScan()
   }
 }

@@ -93,34 +93,14 @@ export class ScanService {
     let scanCategory = iterator.next();
     scanCategory.loading = true;
 
-    this.headerScan(scanCategory);
+    // this.headerScan(scanCategory);
 
     this.scan(iterator);
   }
 
-  private headerScan(scanCategory: ScanCategoryType): void {
-    this.invokeHeaderScan()
-      .subscribe( (value: any) => {
-        let grades: {[key: string]: number} = {'A+': 10, 'A': 9.5, 'A-':9, 'B+': 8.5, 'B': 8, 'B-': 7.5, 'C+': 7, 'C': 6, 'C-': 5, 'D+': 4, 'D': 3, 'D-': 2, 'F': 1};
-        let grade: string = value['grade'];
-        scanCategory.grade = grades[grade];
-        let scanId: number = value['scan_id'];
-        return this.getHeaderScanResult(scanId)
-          .subscribe((value: any) => {
-            scanCategory.result = value;
-          });
-      });
-  }
 
-  private invokeHeaderScan(): Observable<any> {
-    return this.http.get("https://http-observatory.security.mozilla.org/api/v1/analyze?host=" + this.website);
-  }
 
-  private getHeaderScanResult(scanId: any): Observable<any> {
-    return this.http.get("https://http-observatory.security.mozilla.org/api/v1/getScanResults?scan=" + scanId);
-  }
-
-  public postUserValidationToDatabase(){
+  public startScan(){
     let validationUser = new userValidation();
     validationUser.name = this._name;
     validationUser.email = this._email;
