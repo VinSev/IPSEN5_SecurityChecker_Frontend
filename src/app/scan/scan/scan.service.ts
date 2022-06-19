@@ -20,8 +20,7 @@ export class ScanService {
   private _scanCategories: ScanCategoryType[] = [];
 
 
-  constructor(private http: HttpClient,
-              private httpService: HttpService,
+  constructor(private httpService: HttpService,
               private router: Router,
               private toastr: ToastrService) {
     this._scanCategories.push({title: "Headers", path: "", loading: false});
@@ -108,9 +107,7 @@ export class ScanService {
     // validationUser.email = this._email;
     // validationUser.website = this._website;
     // validationUser.ownership = this._ownership;
-    let requestOptions: any = {
-      headers: "none"
-    };
+
     let body: any = {
       "name": this._name,
       "email": this._email,
@@ -122,7 +119,7 @@ export class ScanService {
     }
 
 
-    this.http.post("result/makeResult", body,requestOptions).subscribe(res =>{
+    this.httpService.post("/result/makeResult", body).subscribe(res =>{
       console.log(res)
     })
 
