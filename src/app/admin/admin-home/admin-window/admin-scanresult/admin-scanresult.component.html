@@ -17,9 +17,39 @@
       </div>
   
       <div class="col-lg-7 col-md-7">
-        <div class="execute-right">
-          <p>{{customerservice.currentViewedRapport.url}}</p>
+        <div class="d-flex justify-content-between">
+          <div>
+            <h3>{{customerservice.currentViewedRapport.user.name}}</h3>
+            <hr>
+            <p>website: {{customerservice.currentViewedRapport.url}}</p>
+          </div>
+          <div class="border-secondary border p-3">
+            <p>Email: {{customerservice.currentViewedRapport.user.email}}</p>
+            <p>Tell: {{customerservice.currentViewedRapport.user.telephone}}</p>
+          </div>
         </div>
+
+        <hr>
+
+      <div>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">scan</th>
+              <th scope="col">Result</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="scan of customerservice.scanList">
+              <th scope="row">1</th>
+              <td>headers: </td>
+              <td>{{customerservice.currentViewedRapport.scanresult.headers}} /10</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       </div>
     </div>
   </div>

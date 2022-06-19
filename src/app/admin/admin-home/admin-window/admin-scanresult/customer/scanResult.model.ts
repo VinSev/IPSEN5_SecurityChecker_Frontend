@@ -15,14 +15,14 @@ export class scanResult {
 
   constructor(){
     this.scan = new scan;
-    this.headers= 0;
-    this.XSSAndInjection = 0;
-    this.certificates = 0;
-    this.wordPressVulnerability = 0;
-    this.version = 0;
-    this.login = 0;
-    this.dataSecurity = 0;
-    this.seo = 0;
+    this.headers= 1;
+    this.XSSAndInjection = 2;
+    this.certificates = 3;
+    this.wordPressVulnerability = 4;
+    this.version = 5;
+    this.login = 6;
+    this.dataSecurity = 7;
+    this.seo = 8;
     this.scanCategory = new scanCategory;
   }
 }

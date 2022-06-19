@@ -6,9 +6,9 @@ export class customer {
 
     constructor(){
       this.id = 0;
-      this.email = '';
-      this.name = '';
-      this.telephone = '';
+      this.email = 'test@test.com';
+      this.name = 'testAdmin';
+      this.telephone = '0714032666';
     }
   }
   

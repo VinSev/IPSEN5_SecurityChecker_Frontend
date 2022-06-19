@@ -1,9 +1,9 @@
 <div class="">
     <div class="col-lg">
-        <div *ngIf="currentDropDownStatus !== 'scans'">
+        <div *ngIf="currentDropDownStatus === 'scans'">
             <app-admin-tips></app-admin-tips>
         </div>
-        <div *ngIf="currentDropDownStatus === 'scans'" style="height: 40vh;">
+        <div *ngIf="currentDropDownStatus !== 'scans'" style="height: 40vh;">
             <app-admin-scanresult></app-admin-scanresult>
         </div>
     </div>

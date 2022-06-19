@@ -13,8 +13,8 @@ export class scanCategory{
         this.id = 0;
         this.scan = new scan;
         this.loading= false;
-        this.grade = 0;
-        this.result ='';
+        this.grade = 10;
+        this.result ='Very GOOD';
         this.apiScan = new apiScan;
     }
 }

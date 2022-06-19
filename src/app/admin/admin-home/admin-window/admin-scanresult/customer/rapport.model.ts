@@ -11,8 +11,8 @@ export class rapport{
   constructor(scanresult: scanResult, user: customer){
     this.scanId = 0;
     this.scanresult = scanresult;
-    this.updateDate = '';
-    this.url = '';
+    this.updateDate = '19-06-2021';
+    this.url = 'google.com';
     this.user = user;
   }
 

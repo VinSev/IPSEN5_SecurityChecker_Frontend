@@ -12,6 +12,8 @@ import { scanResult } from './scanResult.model';
 export class customerService{
     private subscription!: Subscription;
     public customers: rapport[] =[];
+    public scanList: any[] =[];
+
     public customer: customer = new customer()
     public rapport: scanResult = new scanResult()
     public currentViewedRapport: rapport = new rapport(this.rapport, this.customer);
@@ -25,7 +27,8 @@ public getAllCustomerDataFromDatabase(){
   this.subscription = this.getAll()
   .subscribe(data =>{
     this.customers = data;
-    console.log(this.customers);
+    this.customers.push(this.testRapport)
+    console.log(this.testRapport);
     
   })
 }
@@ -36,7 +39,10 @@ public getAll(): Observable<rapport[]> {
 
 public changeCurrentViewedRapport(rapport: rapport){
   this.currentViewedRapport = rapport;
-  console.log(this.currentViewedRapport);
-  
+  this.scanList.push(rapport.scanresult.XSSAndInjection)
+  this.scanList.push(rapport.scanresult.certificates)
+  this.scanList.push(rapport.scanresult.dataSecurity)
+  this.scanList.push(rapport.scanresult.XSSAndInjection)
+  console.log(this.scanList);  
 }
 }
