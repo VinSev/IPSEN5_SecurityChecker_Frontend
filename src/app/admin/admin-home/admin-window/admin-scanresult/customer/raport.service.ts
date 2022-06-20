@@ -12,26 +12,35 @@ import { ScanReport } from 'src/app/shared/models/scan-report.model';
 export class raportService {
   private subscription!: Subscription;
   public raports: Report[] = [];
-  public scanList: string[] = [];
-  public scanListValues: any[] = [];
   public scanUser: ScanUser = new ScanUser('www.roeland.com',true,'Roeland','roelandvdvelde@gmail.com')
-  public raport: ScanReport[] = []
-  public currentViewedRapport: Report = new Report(this.scanUser,this.raport);
 
-  public emptyRapport: Report = new Report(this.scanUser, this.raport);
+  public scanRaport: ScanReport[] = []
+
+  public currentViewedRapport: Report = new Report(this.scanUser,this.scanRaport);
+
+  public emptyRapport: Report = new Report(this.scanUser, this.scanRaport);
 
   constructor(private http: HttpService,
               private toastr: ToastrService) {
   }
 
   public getAllCustomerDataFromDatabase() {
-    console.log("hallo");
-    this.raports.push(this.emptyRapport)
-    
+
+  this.scanRaport.push(new ScanReport('scan1','end/point/one', 7))
+  this.scanRaport.push(new ScanReport('scan2','end/point/two', 10))
+  this.scanRaport.push(new ScanReport('scan3','end/point/three', 5))
+  this.scanRaport.push(new ScanReport('scan4','end/point/four', 2))
+  this.scanRaport.push(new ScanReport('scan5','end/point/five', 8))
+  this.scanRaport.push(new ScanReport('scan6','end/point/six', 7))
+
+  this.emptyRapport.scanReports = this.scanRaport;
+
+    this.raports.push(this.emptyRapport) 
+    console.log(this.raports);
+
     this.subscription = this.getAll()
       .subscribe(data => {
-        this.raports = data;
-        console.log('fuckyes');
+        this.raports = data;        
       })
   }
 
@@ -41,24 +50,5 @@ export class raportService {
 
   public changeCurrentViewedRapport(raport: Report) {
     this.currentViewedRapport = raport;
-
-    this.scanList = [];
-    this.scanListValues = []; 
-
-    for (let item in raport.scanReports){
-      this.scanList.push(item)
-    }
-    this.scanList.shift()
-    this.scanList.pop();
-
-    // this.scanListValues.push(raport.scanReports.headers)
-    // this.scanListValues.push(raport.scanReports.XSSAndInjection)
-    // this.scanListValues.push(raport.scanReports.certificates)
-    // this.scanListValues.push(raport.scanReports.wordPressVulnerability)
-    // this.scanListValues.push(raport.scanReports.version)
-    // this.scanListValues.push(raport.scanReports.login)
-    // this.scanListValues.push(raport.scanReports.dataSecurity)
-    // this.scanListValues.push(raport.scanReports.seo)
-    // this.scanListValues.push(rapport.scanresult.scanCategory.grade)
   }
 }
