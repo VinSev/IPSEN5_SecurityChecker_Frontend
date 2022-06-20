@@ -29,4 +29,6 @@ describe('ScanService', () => {
     (<any>service).filterWebsite();
     expect(service.website).toEqual("www.google.com");
   });
+
+
 });

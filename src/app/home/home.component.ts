@@ -32,18 +32,16 @@ export class HomeComponent {
     }
     this.modalService.open(content)
 
-    this.scanService.name = name.value;
-    this.scanService.website = website.value;
-    this.scanService.ownership = ownership.value == "on";
+    this.scanService.report.scanUser.name = name.value;
+    this.scanService.report.scanUser.website = website.value;
+    this.scanService.report.scanUser.ownership = ownership.value == "on";
 
     return true;
   }
 
-
-
-  resolved(captchaResponse: string){
+  public resolved(captchaResponse: string): void {
     this.captcha = captchaResponse;
     this.modalService.dismissAll();
-    this.scanService.postUserValidationToDatabase()
+    this.router.navigate(["scan"]);
   }
 }

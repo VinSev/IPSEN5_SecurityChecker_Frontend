@@ -1,17 +1,17 @@
 <div class="features__wrap container"
-     [ngSwitch]="this.scanService.scanCategories[this.scanService.scanCategories.length - 1]
-     .loading == true && this.scanService.scanCategories[this.scanService.scanCategories.length - 1]
+     [ngSwitch]="this.scanService.report.scanReports[this.scanService.report.scanReports.length - 1]
+     .loading == true && this.scanService.report.scanReports[this.scanService.report.scanReports.length - 1]
      .grade != undefined">
   <div class="line">
     <span></span>
     <span class="sml-line"></span>
   </div>
   <div *ngSwitchCase="false">
-    <h2>Scannen Website - {{this.scanService.website}}</h2>
+    <h2>Scannen Website - {{this.scanService.report.scanUser.website}}</h2>
     <app-tips></app-tips>
   </div>
   <div *ngSwitchCase="true">
-    <h2>Scannen Website - {{this.scanService.website}} - Voltooid</h2>
+    <h2>Scannen Website - {{this.scanService.report.scanUser.website}} - Voltooid</h2>
 
     <div class="execute-right">
       <form id="emailForm" ngForm #emailForm="ngForm" (ngSubmit)="submit(email)">

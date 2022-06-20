@@ -14,10 +14,6 @@ export class ScanComponent implements OnInit {
   }
 
   public ngOnInit() {
-    this.startScan();
-  }
-
-  private startScan(): void {
     this.scanService.start();
   }
 
@@ -29,7 +25,7 @@ export class ScanComponent implements OnInit {
       }
     }
 
-    this.scanService.email = email.value;
+    this.scanService.report.scanUser.email = email.value;
 
     this.mailResults();
     return true;
