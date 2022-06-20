@@ -1,1 +1,6 @@
-<p>admin-singlescan works!</p>
+<div class="scanList">
+    <div *ngFor="let rapport of customerservice.customers.reverse()">
+      <button class="singleCustomer" (click)="onRapportSelected(rapport)">{{rapport.user.name}}</button>
+    </div>
+  </div>
+  

@@ -5,7 +5,7 @@ import { BehaviorSubject } from "rxjs";
   providedIn: 'root'
 })
 export class AdminService {
-    private dropDownLocation = new BehaviorSubject('');
+    private dropDownLocation = new BehaviorSubject('scans');
     _dropDownLocation = this.dropDownLocation.asObservable();
 
   constructor() {

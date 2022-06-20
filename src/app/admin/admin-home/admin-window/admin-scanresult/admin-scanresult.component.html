@@ -1,1 +1,72 @@
-<p>admin-scanresult works!</p>
+<div class="container">
+  <div class="row align-items-center">
+    <div class="col-lg-12 col-md-12">
+      <div class="">
+        <div class="line">
+          <span></span>
+          <span class="sml-line"></span>
+        </div>
+        <h2>Admin Dashboard - Scans</h2>
+      </div>
+    </div>
+
+    <div class="col-lg-5 col-md-5">
+      <div class="execute-right tipList">
+        <app-admin-singlescan></app-admin-singlescan>
+      </div>
+    </div>
+
+    <div class="col-lg-7 col-md-7">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h3>{{customerservice.currentViewedRapport.user.name}}</h3>
+          <hr>
+          <p>website: {{customerservice.currentViewedRapport.url}}</p>
+        </div>
+        <div class="border-secondary border p-3">
+          <p>Email: {{customerservice.currentViewedRapport.user.email}}</p>
+          <p>Tell: {{customerservice.currentViewedRapport.user.telephone}}</p>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row text-center mx-auto mb-2" style="width: 98%">
+        <div class="col-3 w-25 fw-bolder">#</div>
+        <div class="col-3 w-50 fw-bolder">Scantype</div>
+        <div class="col-3 w-25 fw-bolder">Cijfer</div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+
+          <div class="col-6 w-25 text-center ">
+            <div class="d-flex flex-row justify-content-center border-bottom mb-2"
+                 *ngFor="let test of customerservice.scanList; let i = index;">
+              <div>{{i + 1}}</div>
+
+            </div>
+          </div>
+
+          <div class="col-6 w-50 text-center">
+            <div class="d-flex flex-row justify-content-center border-bottom mb-2"
+                 *ngFor="let scannaam of customerservice.scanList; let i = index;">
+              <div>{{scannaam}}</div>
+            </div>
+          </div>
+
+          <div class="col-6 w-25">
+            <div class="d-flex flex-row justify-content-center border-bottom mb-2"
+                 *ngFor="let scancijfer of customerservice.scanListValues">
+              <div>{{scancijfer}}/10</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
