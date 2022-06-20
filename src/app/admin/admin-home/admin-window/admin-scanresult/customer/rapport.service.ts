@@ -18,7 +18,7 @@ export class customerService {
   public rapport: scanResult = new scanResult()
   public currentViewedRapport: rapport = new rapport(this.rapport, this.customer);
 
-  public testRapport: rapport = new rapport(new scanResult(), new customer());
+  public emptyRapport: rapport = new rapport(new scanResult(), new customer());
 
   constructor(private http: HttpService,
               private toastr: ToastrService) {
@@ -28,9 +28,7 @@ export class customerService {
     this.subscription = this.getAll()
       .subscribe(data => {
         this.customers = data;
-        this.customers.push(this.testRapport)
-        console.log(this.testRapport);
-
+        this.changeCurrentViewedRapport(this.emptyRapport);
       })
   }
 
@@ -40,6 +38,9 @@ export class customerService {
 
   public changeCurrentViewedRapport(rapport: rapport) {
     this.currentViewedRapport = rapport;
+
+    this.scanList = [];
+    this.scanListValues = []; 
 
     for (let item in rapport.scanresult){
       this.scanList.push(item)
@@ -56,9 +57,5 @@ export class customerService {
     this.scanListValues.push(rapport.scanresult.dataSecurity)
     this.scanListValues.push(rapport.scanresult.seo)
     // this.scanListValues.push(rapport.scanresult.scanCategory.grade)
-
-    console.log(this.scanList);
-    console.log(this.scanListValues)
-
   }
 }

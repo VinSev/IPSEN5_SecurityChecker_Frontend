@@ -1,10 +1,10 @@
 <div class="">
     <div class="col-lg">
         <div *ngIf="currentDropDownStatus === 'scans'">
-            <app-admin-tips></app-admin-tips>
+            <app-admin-scanresult></app-admin-scanresult>
         </div>
         <div *ngIf="currentDropDownStatus !== 'scans'">
-            <app-admin-scanresult></app-admin-scanresult>
+            <app-admin-tips></app-admin-tips>
         </div>
     </div>
 </div>
