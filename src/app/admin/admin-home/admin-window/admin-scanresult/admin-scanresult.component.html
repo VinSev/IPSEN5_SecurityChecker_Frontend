@@ -19,13 +19,13 @@
     <div class="col-lg-7 col-md-7">
       <div class="d-flex justify-content-between">
         <div>
-          <h3>{{customerservice.currentViewedRapport.user.name}}</h3>
+          <h3>{{raportService.currentViewedRapport.scanUser.name}}</h3>
           <hr>
-          <p>website: {{customerservice.currentViewedRapport.url}}</p>
+          <p>website: {{raportService.currentViewedRapport.scanUser.website}}</p>
         </div>
         <div class="border-secondary border p-3">
-          <p>Email: {{customerservice.currentViewedRapport.user.email}}</p>
-          <p>Tell: {{customerservice.currentViewedRapport.user.telephone}}</p>
+          <p>Email: {{raportService.currentViewedRapport.scanUser.email}}</p>
+          <p>Ownership: {{raportService.currentViewedRapport.scanUser.ownership}}</p>
         </div>
       </div>
 
@@ -42,7 +42,7 @@
 
           <div class="col-6 w-25 text-center ">
             <div class="d-flex flex-row justify-content-center border-bottom mb-2"
-                 *ngFor="let test of customerservice.scanList; let i = index;">
+                 *ngFor="let test of raportService.scanList; let i = index;">
               <div>{{i + 1}}</div>
 
             </div>
@@ -50,14 +50,14 @@
 
           <div class="col-6 w-50 text-center">
             <div class="d-flex flex-row justify-content-center border-bottom mb-2"
-                 *ngFor="let scannaam of customerservice.scanList; let i = index;">
+                 *ngFor="let scannaam of raportService.scanList; let i = index;">
               <div>{{scannaam}}</div>
             </div>
           </div>
 
           <div class="col-6 w-25">
             <div class="d-flex flex-row justify-content-center border-bottom mb-2"
-                 *ngFor="let scancijfer of customerservice.scanListValues">
+                 *ngFor="let scancijfer of raportService.scanListValues">
               <div>{{scancijfer}}/10</div>
             </div>
           </div>
