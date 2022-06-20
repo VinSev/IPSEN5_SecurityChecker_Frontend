@@ -14,12 +14,7 @@ export class ScanComponent implements OnInit {
   }
 
   public ngOnInit() {
-    this.startScan();
-  }
-
-  private startScan(): void {
     this.scanService.start();
-    this.scanService.startScan()
   }
 
   public submit(email: HTMLInputElement): boolean {
@@ -30,7 +25,7 @@ export class ScanComponent implements OnInit {
       }
     }
 
-    this.scanService.email = email.value;
+    this.scanService.report.scanUser.email = email.value;
 
     this.mailResults();
     return true;
