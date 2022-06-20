@@ -11,7 +11,7 @@ export class scanResult {
   login: number;
   dataSecurity: number;
   seo: number;
-  scanCategory: scanCategory;
+  scanCategory: scanCategory[];
 
   constructor(){
     this.scan_scan_id = 0;
@@ -23,7 +23,7 @@ export class scanResult {
     this.login = 0;
     this.dataSecurity = 0;
     this.seo = 0;
-    this.scanCategory = new scanCategory;
+    this.scanCategory = [];
   }
 }
   
