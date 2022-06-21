@@ -41,16 +41,11 @@ describe('AdminMenuComponent', () => {
     expect(localStorage.getItem('token')).toBeNull;
   });
 
-  it('should switch between dropdown of scans and scanlimit to tips', () => {
+  it('should switch between dropdown of scans and tips', () => {
     component.activateAdminDropDown('tips')
-        expect(service.adminPageNavigation).toEqual('tips');
-  });
-  it('should switch between dropdown of tips and scanlimit to scans', () => {
-    component.activateAdminDropDown('scans')
-        expect(service.adminPageNavigation).toEqual('scans');
-  });
-  it('should switch between dropdown of scans and tips to scanlimit', () => {
-    component.activateAdminDropDown('scanLimit')
-        expect(service.adminPageNavigation).toEqual('scanLimit');
+    service._dropDownLocation
+      .subscribe(result => {
+        expect(result).toEqual('tips');
+      })
   });
 });

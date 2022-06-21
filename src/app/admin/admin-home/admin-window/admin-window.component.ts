@@ -7,8 +7,14 @@ import { AdminService } from '../../admin.service';
   styleUrls: ['./admin-window.component.scss']
 })
 export class AdminWindowComponent implements OnInit {
-  constructor(public adminService : AdminService) { }
+  currentDropDownStatus: string = '';
+  items: string[] = [];
+
+  constructor(private adminService : AdminService) { }
 
   ngOnInit(): void {
+   this.adminService._dropDownLocation.subscribe((result) =>{
+     this.currentDropDownStatus = result;
+   });
   }
 }
