@@ -11,30 +11,30 @@ import { ScanReport } from 'src/app/shared/models/scan-report.model';
 })
 export class raportService {
   public emptyScanUser: ScanUser = new ScanUser('www.getBigMarketing.com',true,'getBigMarketing','-')
-  public emptyScanRaport: ScanReport[] = []
-  public emptyRapport: Report = new Report(this.emptyScanUser, this.emptyScanRaport,"22-06-22");
+  public emptyScanReport: ScanReport[] = []
+  public emptyReport: Report = new Report(this.emptyScanUser, this.emptyScanReport,"22-06-22");
 
   public scanLimit: number = 0;
   private subscription!: Subscription;
-  public raports: Report[] = [];
-  public currentViewedRapport: Report = new Report(this.emptyScanUser,this.emptyScanRaport, "22-06-22");
+  public reports: Report[] = [];
+  public currentViewedReport: Report = new Report(this.emptyScanUser,this.emptyScanReport, "22-06-22");
 
   constructor(private http: HttpService,
               private toastr: ToastrService) {
   }
 
   public getAllCustomerDataFromDatabase() {
-  this.emptyScanRaport.push(new ScanReport('emptyScan','end/point/emptyScan',[], 10))
-  this.emptyRapport.scanReports = this.emptyScanRaport;
+  this.emptyScanReport.push(new ScanReport('emptyScan','end/point/emptyScan',[], 10))
+  this.emptyReport.scanReports = this.emptyScanReport;
     this.getScanLimit();
     this.subscription = this.getAll()
       .subscribe(data => {
-        this.raports = data;        
+        this.reports = data;
       })
   }
 
   public getAll(): Observable<Report[]> {
-    return this.http.getAll("/scan/all");
+    return this.http.getAll("/reports");
   }
 
   public getScanLimit(){
@@ -42,14 +42,14 @@ export class raportService {
       this.scanLimit = data;
     })
   }
-  
+
   public changeMaxScanLimit(maxScanLimit: HTMLInputElement){
     this.scanLimit = +maxScanLimit.value;
-    this.http.post<number>("/scan.scanlimiet", this.scanLimit).subscribe((data) =>{
+    this.http.post<number>("/scan/scanlimiet", this.scanLimit).subscribe((data) =>{
     })
   }
 
-  public changeCurrentViewedRapport(raport: Report) {
-    this.currentViewedRapport = raport;
+  public changeCurrentViewedRapport(report: Report) {
+    this.currentViewedReport = report;
   }
 }

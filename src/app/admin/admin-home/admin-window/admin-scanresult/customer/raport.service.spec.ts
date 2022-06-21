@@ -36,6 +36,6 @@ describe('raportService', () => {
     let raport = new Report(scanUser,scanRaport,'')
 
     service.changeCurrentViewedRapport(raport);
-    expect(service.currentViewedRapport).toEqual(raport);
+    expect(service.currentViewedReport).toEqual(raport);
   });
 });
