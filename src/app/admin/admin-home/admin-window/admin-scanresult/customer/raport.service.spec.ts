@@ -1,4 +1,5 @@
-import { reportService } from "./report.service";
+
+import { raportService } from "./raport.service";
 import {TestBed} from "@angular/core/testing";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {RouterTestingModule} from "@angular/router/testing";
@@ -7,7 +8,8 @@ import { ScanUser } from "src/app/shared/models/scan-user.model";
 import { ScanReport } from "src/app/shared/models/scan-report.model";
 
 describe('raportService', () => {
-  let service: reportService;
+
+  let service: raportService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -17,7 +19,7 @@ describe('raportService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(reportService);
+    service = TestBed.inject(raportService);
   });
 
   it('should be created', () => {
@@ -27,7 +29,8 @@ describe('raportService', () => {
   it('should change currentViewed Rapport to the selected raport', () => {
     let scanUser = new ScanUser();
     let scanRaport: ScanReport[] = [];
-    let raport = new Report(scanUser,scanRaport,'22-06-22')
+
+    let raport = new Report(scanUser,scanRaport,'')
 
     service.changeCurrentViewedRapport(raport);
     expect(service.currentViewedRapport).toEqual(raport);

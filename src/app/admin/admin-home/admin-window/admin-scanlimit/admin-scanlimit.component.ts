@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { reportService } from '../admin-scanresult/customer/report.service';
+
+import { raportService } from '../admin-scanresult/customer/raport.service';
 
 @Component({
   selector: 'app-admin-scanlimit',
@@ -8,7 +9,8 @@ import { reportService } from '../admin-scanresult/customer/report.service';
 })
 export class AdminScanlimitComponent implements OnInit {
 
-  constructor(public reportService: reportService) { }
+
+  constructor(public raportService: raportService) { }
 
   ngOnInit(): void {
   }
@@ -16,8 +18,9 @@ export class AdminScanlimitComponent implements OnInit {
   public submit(maxScanLimit: HTMLInputElement): boolean {
     if(!this.checkIfFormInputIsValdid(maxScanLimit)){
       return false;
-    }
-    this.reportService.changeMaxScanLimit(maxScanLimit);
+
+    }    
+    this.raportService.changeMaxScanLimit(maxScanLimit);
     return true;
   }
 

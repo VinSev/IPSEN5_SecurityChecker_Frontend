@@ -11,6 +11,7 @@ import { AdminTipComponent } from "./admin-window/admin-tips/admin-tip/admin-tip
 import { AdminSingleScanComponent } from "./admin-window/admin-scanresult/admin-singlescan/admin-single-scan.component";
 import { AdminScanlimitComponent } from "./admin-window/admin-scanlimit/admin-scanlimit.component";
 
+
 @NgModule({
     imports: [
         CommonModule,
