@@ -12,6 +12,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {BrowserModule} from "@angular/platform-browser";
 import {Router} from "@angular/router";
 import {RouterTestingModule} from "@angular/router/testing";
+import {JSONFile} from "@angular/cli/utilities/json-file";
 
 describe('ScanComponent', () => {
   let component: ScanComponent;
@@ -30,7 +31,8 @@ describe('ScanComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ScanComponent);
     component = fixture.componentInstance;
-    component.scanService.scanCategories[0].result = {};
+    component.scanService.report.scanReports[0].result;
+
     fixture.detectChanges();
   });
 
@@ -52,6 +54,6 @@ describe('ScanComponent', () => {
 
   it('should start scan', () => {
     component.ngOnInit();
-    expect(component.scanService.scanCategories[0].loading).toBeTrue();
+    expect(component.scanService.report.scanReports[0].loading).toBeTrue();
   });
 });

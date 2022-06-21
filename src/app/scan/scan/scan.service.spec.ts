@@ -25,9 +25,9 @@ describe('ScanService', () => {
   });
 
   it('should filter website url',  () => {
-    service.website = "https://www.google.com/?gws_rd=ssl";
+    service.report.scanUser.website = "https://www.google.com/?gws_rd=ssl";
     (<any>service).filterWebsite();
-    expect(service.website).toEqual("www.google.com");
+    expect(service.report.scanUser.website).toEqual("www.google.com");
   });
 
 
