@@ -11,6 +11,8 @@ export class AdminScanresultComponent implements OnInit {
   constructor(public raportService: raportService) { }
 
   ngOnInit(): void {
+    this.customerservice.getAllCustomerDataFromDatabase();
+
   }
 
 }

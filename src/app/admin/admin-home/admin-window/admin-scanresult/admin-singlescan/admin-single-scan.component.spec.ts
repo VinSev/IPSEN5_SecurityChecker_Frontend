@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminSinglescanComponent } from './admin-singlescan.component';
+import { AdminSingleScanComponent } from './admin-single-scan.component';
 
 describe('AdminSinglescanComponent', () => {
-  let component: AdminSinglescanComponent;
-  let fixture: ComponentFixture<AdminSinglescanComponent>;
+  let component: AdminSingleScanComponent;
+  let fixture: ComponentFixture<AdminSingleScanComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminSinglescanComponent ]
+      declarations: [ AdminSingleScanComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AdminSinglescanComponent);
+    fixture = TestBed.createComponent(AdminSingleScanComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
