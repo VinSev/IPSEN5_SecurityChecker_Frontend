@@ -6,6 +6,8 @@ import {RouterTestingModule} from "@angular/router/testing";
 import { Report } from "src/app/shared/models/report.model";
 import { ScanUser } from "src/app/shared/models/scan-user.model";
 import { ScanReport } from "src/app/shared/models/scan-report.model";
+import {ToastrModule, ToastrService} from "ngx-toastr";
+import {HttpService} from "../../../../../shared/services/http.service";
 
 describe('raportService', () => {
 
@@ -14,6 +16,7 @@ describe('raportService', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule ],
+      providers: [{provide: ToastrService, useClass: ToastrModule}, HttpService]
     });
   });
 
