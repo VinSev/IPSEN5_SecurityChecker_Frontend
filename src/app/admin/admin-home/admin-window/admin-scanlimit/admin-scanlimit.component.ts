@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { raportService } from '../admin-scanresult/customer/raport.service';
+import { reportService } from '../admin-scanresult/customer/report.service';
 
 @Component({
   selector: 'app-admin-scanlimit',
@@ -8,7 +8,7 @@ import { raportService } from '../admin-scanresult/customer/raport.service';
 })
 export class AdminScanlimitComponent implements OnInit {
 
-  constructor(public raportService: raportService) { }
+  constructor(public raportService: reportService) { }
 
   ngOnInit(): void {
   }

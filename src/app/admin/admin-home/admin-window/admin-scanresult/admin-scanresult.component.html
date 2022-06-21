@@ -19,20 +19,20 @@
     <div class="col-lg-7 col-md-7">
       <div class="d-flex justify-content-between">
         <div>
-          <h3>{{raportService.currentViewedRapport.scanUser.name}}</h3>
+          <h3>{{reportService.currentViewedRapport.scanUser.name}}</h3>
           <hr>
-          <p>website: {{raportService.currentViewedRapport.scanUser.website}}</p>
-          <p>Datum: {{raportService.currentViewedRapport.dateCreated}}</p>
+          <p>website: {{reportService.currentViewedRapport.scanUser.website}}</p>
+          <p>Datum: {{reportService.currentViewedRapport.dateCreated}}</p>
         </div>
         <div class="border-secondary border p-3">
-          <p>Email: {{raportService.currentViewedRapport.scanUser.email}}</p>
-          <p>Ownership: {{raportService.currentViewedRapport.scanUser.ownership}}</p>
+          <p>Email: {{reportService.currentViewedRapport.scanUser.email}}</p>
+          <p>Ownership: {{reportService.currentViewedRapport.scanUser.ownership}}</p>
         </div>
       </div>
 
       <hr>
     <div class="scanresult">
-      <div class="border-secondary border p-3 m-2" *ngFor="let scanresult of raportService.currentViewedRapport.scanReports; let index = index">
+      <div class="border-secondary border p-3 m-2" *ngFor="let scanresult of reportService.currentViewedRapport.scanReports; let index = index">
         <div class="row text-center mx-auto mb-1" style="width: 98%">
           <p class="col-2 w-25 fw-bolder">Titel: </p>
           <h5 class="col w-25"> {{scanresult.title}}</h5>

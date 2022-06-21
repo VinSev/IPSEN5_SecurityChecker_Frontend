@@ -4,7 +4,7 @@ import { reportService } from '../customer/report.service';
 
 @Component({
   selector: 'app-admin-singlescan',
-  templateUrl: './admin-single-scan.component.html',
+  templateUrl: './admin-singlescan.component.html',
   styleUrls: ['./admin-single-scan.component.scss']
 })
 export class AdminSingleScanComponent implements OnInit {
@@ -13,7 +13,6 @@ export class AdminSingleScanComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.reportService.getAllCustomerDataFromDatabase();
   }
 
   onCustomerScanSelected(){

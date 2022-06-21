@@ -10,28 +10,26 @@ import { ScanReport } from 'src/app/shared/models/scan-report.model';
   providedIn: 'root'
 })
 export class reportService {
-  private subscription!: Subscription;
-  public reports: Report[] = [];
-  public scanList: string[] = [];
-  public scanListValues: any[] = [];
-  public scanUser: ScanUser = new ScanUser('www.roeland.com',true,'Roeland','roelandvdvelde@gmail.com')
-  public report: ScanReport[] =[]
-  public currentViewedRapport: Report = new Report(this.scanUser,this.report);
+  public emptyScanUser: ScanUser = new ScanUser('www.getBigMarketing.com',true,'getBigMarketing','-')
+  public emptyScanRaport: ScanReport[] = []
+  public emptyRapport: Report = new Report(this.emptyScanUser, this.emptyScanRaport,"22-06-22");
 
-  public emptyRapport: Report = new Report(this.scanUser, this.report);
+  public scanLimit: number = 0;
+  private subscription!: Subscription;
+  public raports: Report[] = [];
+  public currentViewedRapport: Report = new Report(this.emptyScanUser,this.emptyScanRaport, "22-06-22");
 
   constructor(private http: HttpService,
               private toastr: ToastrService) {
   }
 
   public getAllCustomerDataFromDatabase() {
-    console.log("hallo");
-    this.reports.push(this.emptyRapport)
-
+  this.emptyScanRaport.push(new ScanReport('emptyScan','end/point/emptyScan',[], 10))
+  this.emptyRapport.scanReports = this.emptyScanRaport;
+    this.getScanLimit();
     this.subscription = this.getAll()
       .subscribe(data => {
-        this.reports = data;
-        console.log('fuckyes');
+        this.raports = data;        
       })
   }
 
@@ -39,26 +37,19 @@ export class reportService {
     return this.http.getAll("/scan/all");
   }
 
-  public changeCurrentViewedRapport(report: Report) {
-    this.currentViewedRapport = report;
+  public getScanLimit(){
+    this.http.get<number>("/scan/scanlimiet").subscribe((data) =>{
+      this.scanLimit = data;
+    })
+  }
+  
+  public changeMaxScanLimit(maxScanLimit: HTMLInputElement){
+    this.scanLimit = +maxScanLimit.value;
+    this.http.post<number>("/scan.scanlimiet", this.scanLimit).subscribe((data) =>{
+    })
+  }
 
-    this.scanList = [];
-    this.scanListValues = [];
-
-    for (let item in report.scanReports){
-      this.scanList.push(item)
-    }
-    this.scanList.shift()
-    this.scanList.pop();
-
-    // this.scanListValues.push(rapport.scanresult.headers)
-    // this.scanListValues.push(rapport.scanresult.XSSAndInjection)
-    // this.scanListValues.push(rapport.scanresult.certificates)
-    // this.scanListValues.push(rapport.scanresult.wordPressVulnerability)
-    // this.scanListValues.push(rapport.scanresult.version)
-    // this.scanListValues.push(rapport.scanresult.login)
-    // this.scanListValues.push(rapport.scanresult.dataSecurity)
-    // this.scanListValues.push(rapport.scanresult.seo)
-    // this.scanListValues.push(rapport.scanresult.scanCategory.grade)
+  public changeCurrentViewedRapport(raport: Report) {
+    this.currentViewedRapport = raport;
   }
 }
