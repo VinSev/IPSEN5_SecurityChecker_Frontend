@@ -9,16 +9,16 @@ import { ScanReport } from 'src/app/shared/models/scan-report.model';
 @Injectable({
   providedIn: 'root'
 })
-export class raportService {
+export class reportService {
   private subscription!: Subscription;
-  public raports: Report[] = [];
+  public reports: Report[] = [];
   public scanList: string[] = [];
   public scanListValues: any[] = [];
   public scanUser: ScanUser = new ScanUser('www.roeland.com',true,'Roeland','roelandvdvelde@gmail.com')
-  public raport: ScanReport[] =[]
-  public currentViewedRapport: Report = new Report(this.scanUser,this.raport);
+  public report: ScanReport[] =[]
+  public currentViewedRapport: Report = new Report(this.scanUser,this.report);
 
-  public emptyRapport: Report = new Report(this.scanUser, this.raport);
+  public emptyRapport: Report = new Report(this.scanUser, this.report);
 
   constructor(private http: HttpService,
               private toastr: ToastrService) {
@@ -26,11 +26,11 @@ export class raportService {
 
   public getAllCustomerDataFromDatabase() {
     console.log("hallo");
-    this.raports.push(this.emptyRapport)
+    this.reports.push(this.emptyRapport)
 
     this.subscription = this.getAll()
       .subscribe(data => {
-        this.raports = data;
+        this.reports = data;
         console.log('fuckyes');
       })
   }
@@ -39,13 +39,13 @@ export class raportService {
     return this.http.getAll("/scan/all");
   }
 
-  public changeCurrentViewedRapport(raport: Report) {
-    this.currentViewedRapport = raport;
+  public changeCurrentViewedRapport(report: Report) {
+    this.currentViewedRapport = report;
 
     this.scanList = [];
-    this.scanListValues = []; 
+    this.scanListValues = [];
 
-    for (let item in raport.scanReports){
+    for (let item in report.scanReports){
       this.scanList.push(item)
     }
     this.scanList.shift()
