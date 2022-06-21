@@ -6,7 +6,6 @@ import {RouterTestingModule} from "@angular/router/testing";
 import {ToastrModule, ToastrService} from "ngx-toastr";
 import {FormsModule} from "@angular/forms";
 import {HttpService} from "../shared/services/http.service";
-import {HttpClient} from "@angular/common/http";
 
 describe('AdminComponent', () => {
   let component: AdminComponent;

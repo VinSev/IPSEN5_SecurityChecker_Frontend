@@ -25,13 +25,11 @@ export class reportService {
   }
 
   public getAllCustomerDataFromDatabase() {
-    console.log("hallo");
     this.reports.push(this.emptyRapport)
 
     this.subscription = this.getAll()
       .subscribe(data => {
         this.reports = data;
-        console.log('fuckyes');
       })
   }
 
@@ -50,15 +48,5 @@ export class reportService {
     }
     this.scanList.shift()
     this.scanList.pop();
-
-    // this.scanListValues.push(rapport.scanresult.headers)
-    // this.scanListValues.push(rapport.scanresult.XSSAndInjection)
-    // this.scanListValues.push(rapport.scanresult.certificates)
-    // this.scanListValues.push(rapport.scanresult.wordPressVulnerability)
-    // this.scanListValues.push(rapport.scanresult.version)
-    // this.scanListValues.push(rapport.scanresult.login)
-    // this.scanListValues.push(rapport.scanresult.dataSecurity)
-    // this.scanListValues.push(rapport.scanresult.seo)
-    // this.scanListValues.push(rapport.scanresult.scanCategory.grade)
   }
 }

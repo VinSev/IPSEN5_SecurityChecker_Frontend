@@ -2,21 +2,13 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ScanComponent } from './scan.component';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {InjectionToken} from "@angular/core";
-import {TOAST_CONFIG, ToastContainerModule, ToastrModule, ToastrService} from "ngx-toastr";
-import {BrowserDynamicTestingModule} from "@angular/platform-browser-dynamic/testing";
+import { ToastrModule, ToastrService} from "ngx-toastr";
 import {ScanService} from "./scan.service";
-import {ScanModule} from "../scan.module";
 import {FormsModule} from "@angular/forms";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {BrowserModule} from "@angular/platform-browser";
-import {Router} from "@angular/router";
 import {RouterTestingModule} from "@angular/router/testing";
-import {JSONFile} from "@angular/cli/utilities/json-file";
 
 describe('ScanComponent', () => {
   let component: ScanComponent;
-  let toastr: ToastrService;
   let fixture: ComponentFixture<ScanComponent>;
 
   beforeEach(async () => {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable, Subscription} from "rxjs";
+import { Observable, Subscription} from "rxjs";
 import {HttpService} from "../../shared/services/http.service";
 import {Tips} from "../../shared/models/tips.model";
 import { ToastrService } from 'ngx-toastr';
@@ -20,20 +20,20 @@ export class TipsService{
 
   changeCurrentUsedTip(tip :Tips){
     this.tipToSendWithId = tip;
-    this.inEditMode = true;   
+    this.inEditMode = true;
 }
 
 public setTipsIntoList(){
   this.subscription = this.getAll()
-  .subscribe(response => {      
-    this.tips = response;                    
+  .subscribe(response => {
+    this.tips = response;
   });
 }
 
   public createTip(tip: string){
     this.tipToSendWithoutId.text = tip;
     this.http.post('/tips', this.tipToSendWithoutId)
-    .subscribe((data) => {
+    .subscribe(() => {
       this.cleanInputField();
       this.ShowToastOnPage("De tip is aangemaakt")
     })
@@ -46,7 +46,7 @@ public setTipsIntoList(){
   public updateTip(tip: string){
     this.tipToSendWithId.text = tip;
     this.http.put('/tips', this.tipToSendWithId)
-    .subscribe((data) => {
+    .subscribe(() => {
       this.cleanInputField();
       this.ShowToastOnPage("De tip is aangepast")
     })
@@ -54,7 +54,7 @@ public setTipsIntoList(){
 
   public deleteTip(){
     this.http.delete('/tips', this.tipToSendWithId)
-    .subscribe((data) => {
+    .subscribe(() => {
       this.cleanInputField();
       this.ShowToastOnPage("De tip met ID: " + this.tipToSendWithId.id + " is verwijderd!")
     })
@@ -64,8 +64,7 @@ public setTipsIntoList(){
     this.inEditMode = false;
     this.tipToSendWithId.text = '';
     this.setTipsIntoList();
-    console.log('clean');
-    
+
   }
 
   public ShowToastOnPage(message: string){

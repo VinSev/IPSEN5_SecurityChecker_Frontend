@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RolGuardService } from './admin/role-guard-Service';
-import {NotFoundComponent} from "./shared/error-components/not-found/not-found.component";
 import {ResultComponent} from "./scan/result/result.component";
 
 const routes: Routes = [
@@ -32,8 +31,7 @@ const routes: Routes = [
     path: 'result', component: ResultComponent
   },
   {
-    path: '**',
-    component: NotFoundComponent
+    path: '**', redirectTo:'home'
   },
 
 
