@@ -10,7 +10,6 @@ import {ToastrService} from "ngx-toastr";
 })
 
 export class authenticationService {
-  private endpoint = '/auth'
   role: Subject<string> = new Subject<string>();
   email = "";
 

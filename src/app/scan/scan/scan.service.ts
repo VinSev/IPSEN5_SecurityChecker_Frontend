@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Iterator} from "../../shared/models/iterator.model";
 import { HttpService } from 'src/app/shared/services/http.service';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import {Report} from "../../shared/models/report.model";
 import {ScanReport} from "../../shared/models/scan-report.model";
 import {ScanUser} from "../../shared/models/scan-user.model";
@@ -14,13 +12,11 @@ export class ScanService {
   public report: Report = new Report(new ScanUser(), [],'');
 
   constructor(private http: HttpService,
-              private router: Router,
-              private toastr: ToastrService,
               ) {
     this.report.scanReports.push(new ScanReport("Header", "/header", []));
     this.report.scanReports.push(new ScanReport("Certificate", "/certificate", []));
     this.report.scanReports.push(new ScanReport("Vulnerability", "/vulnerability", []));
-    // this.report.scanReports.push(new ScanReport("XSS & Injection", "/xss-and-injection", []));
+    this.report.scanReports.push(new ScanReport("XSS & Injection", "/xss-and-injection", []));
     this.report.scanReports.push(new ScanReport("Seo", "/seo", []));
   }
 
@@ -46,9 +42,8 @@ export class ScanService {
         complete: () => {
           this.scan(iterator);
         },
-        error: error => {
+        error: () => {
           scanReport.grade = -1;
-          console.log("Error : " + error)
           this.scan(iterator);
         }
       });
