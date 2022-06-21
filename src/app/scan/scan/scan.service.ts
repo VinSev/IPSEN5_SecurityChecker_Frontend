@@ -20,7 +20,7 @@ export class ScanService {
     this.report.scanReports.push(new ScanReport("Header", "/header"));
     this.report.scanReports.push(new ScanReport("Certificate", "/certificate"));
     this.report.scanReports.push(new ScanReport("Vulnerability", "/vulnerability"));
-    // this.report.scanReports.push(new ScanReport("XSS & Injection", "/xss-and-injection"));
+    this.report.scanReports.push(new ScanReport("XSS & Injection", "/xss-and-injection"));
     // this.report.scanReports.push(new ScanReport("Seo", "/seo"));
   }
 
@@ -74,5 +74,9 @@ export class ScanService {
       let pathIndex = this.report.scanUser.website.indexOf("/") > -1 ? this.report.scanUser.website.indexOf("/") : this.report.scanUser.website.length;
       this.report.scanUser.website = this.report.scanUser.website.slice(0, pathIndex);
     }
+  }
+
+  public sendReport(){
+    this.http.post("/reports",this.report)
   }
 }
