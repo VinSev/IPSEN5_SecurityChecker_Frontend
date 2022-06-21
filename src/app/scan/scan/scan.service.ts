@@ -31,7 +31,7 @@ export class ScanService {
 
   private async scan(iterator: Iterator<ScanReport>): Promise<void> {
     if (!iterator.hasNext()) {
-
+      this.sendReport();
       return;
     }
     let scanReport: ScanReport = iterator.next();
@@ -45,7 +45,6 @@ export class ScanService {
         },
         complete: () => {
           this.scan(iterator);
-          this.sendReport();
         },
         error: error => {
           scanReport.grade = -1;
