@@ -17,11 +17,11 @@ export class ScanService {
               private router: Router,
               private toastr: ToastrService,
               ) {
-    // this.report.scanReports.push(new ScanReport("Header", "/header"));
+    this.report.scanReports.push(new ScanReport("Header", "/header"));
     // this.report.scanReports.push(new ScanReport("Certificate", "/certificate"));
     // this.report.scanReports.push(new ScanReport("Vulnerability", "/vulnerability"));
     // this.report.scanReports.push(new ScanReport("XSS & Injection", "/scan/xss-and-injection"));
-    this.report.scanReports.push(new ScanReport("Seo", "/seo"));
+    // this.report.scanReports.push(new ScanReport("Seo", "/seo"));
   }
 
   public start(): void {
@@ -40,9 +40,9 @@ export class ScanService {
     this.filterWebsite();
     this.http.post<any>("/scan" + scanReport.endpoint + "/" + this.report.scanUser.website, this.report)
       .subscribe({
-        next: (response) => {
-          scanReport.result = response.result
-          console.log(scanReport.title + " : " + scanReport.result)
+        next: (response: ScanReport) => {
+          scanReport.grade = response.grade;
+          scanReport.result = response.result;
         },
         complete: () => {
           this.scan(iterator);
