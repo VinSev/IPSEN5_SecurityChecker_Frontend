@@ -46,6 +46,7 @@ export class ScanService {
         },
         complete: () => {
           this.scan(iterator);
+          this.sendReport();
         },
         error: error => {
           scanReport.grade = -1;
