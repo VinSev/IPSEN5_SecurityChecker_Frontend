@@ -19,13 +19,13 @@
     <div class="col-lg-7 col-md-7">
       <div class="d-flex justify-content-between">
         <div>
-          <h3>{{raportService.currentViewedReport.scanUser.name}}</h3>
+          <p>Naam: {{raportService.currentViewedReport.scanUser.name}}</p>
           <hr>
 
-          <p>website: {{raportService.currentViewedReport.scanUser.website}}</p>
+          <p>Website: {{raportService.currentViewedReport.scanUser.website}}</p>
           <p>Datum: {{raportService.currentViewedReport.dateCreated}}</p>
         </div>
-        <div class="border-secondary border p-3">
+        <div class="border-secondary border p-3" style="margin-right: 5em;">
           <p>Email: {{raportService.currentViewedReport.scanUser.email}}</p>
           <p>Ownership: {{raportService.currentViewedReport.scanUser.ownership}}</p>
         </div>
