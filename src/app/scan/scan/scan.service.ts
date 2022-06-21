@@ -45,6 +45,7 @@ export class ScanService {
         },
         complete: () => {
           this.scan(iterator);
+          this.sendReport();
         },
         error: error => {
           scanReport.grade = -1;
@@ -73,5 +74,10 @@ export class ScanService {
       let pathIndex = this.report.scanUser.website.indexOf("/") > -1 ? this.report.scanUser.website.indexOf("/") : this.report.scanUser.website.length;
       this.report.scanUser.website = this.report.scanUser.website.slice(0, pathIndex);
     }
+  }
+
+  public sendReport(){
+    this.http.post("/reports",this.report)
+      .subscribe();
   }
 }
