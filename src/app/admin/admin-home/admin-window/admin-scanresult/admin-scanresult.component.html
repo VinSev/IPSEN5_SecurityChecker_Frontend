@@ -9,8 +9,8 @@
         <h2>Admin Dashboard - Scans</h2>
       </div>
     </div>
+    <div class="col-lg-5">
 
-    <div class="col-lg-4 col-md-5">
       <div class="execute-right">
         <app-admin-singlescan></app-admin-singlescan>
       </div>
@@ -22,6 +22,7 @@
           <h3>{{raportService.currentViewedRapport.scanUser.name}}</h3>
           <hr>
           <p>website: {{raportService.currentViewedRapport.scanUser.website}}</p>
+          <p>Datum: {{raportService.currentViewedRapport.dateCreated}}</p>
         </div>
         <div class="border-secondary border p-3">
           <p>Email: {{raportService.currentViewedRapport.scanUser.email}}</p>
@@ -44,9 +45,8 @@
           </div>
 
           <div class="col w-25 fw-bolder">
-            <p>Endpoint: {{scanresult.endpoint}}</p>
-            <hr>
-            <textarea class="form-control">{{scanresult.result}}</textarea>
+            <p>Endpoint: </p>
+            <h6>{{scanresult.endpoint}}</h6>
           </div>
         </div>
       </div>

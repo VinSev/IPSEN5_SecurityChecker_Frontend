@@ -3,8 +3,11 @@
         <div *ngIf="currentDropDownStatus === 'scans'">
             <app-admin-scanresult></app-admin-scanresult>
         </div>
-        <div *ngIf="currentDropDownStatus !== 'scans'">
+        <div *ngIf="currentDropDownStatus === 'tips'">
             <app-admin-tips></app-admin-tips>
+        </div>
+        <div *ngIf="currentDropDownStatus === 'scanlimit'">
+            <app-admin-scanlimit></app-admin-scanlimit>
         </div>
     </div>
 </div>

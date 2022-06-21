@@ -10,15 +10,14 @@ import { ScanReport } from 'src/app/shared/models/scan-report.model';
   providedIn: 'root'
 })
 export class raportService {
+  public emptyScanUser: ScanUser = new ScanUser('www.getBigMarketing.com',true,'getBigMarketing','-')
+  public emptyScanRaport: ScanReport[] = []
+  public emptyRapport: Report = new Report(this.emptyScanUser, this.emptyScanRaport,"22-06-22");
+
+  public scanLimit: number = 0;
   private subscription!: Subscription;
   public raports: Report[] = [];
-  public scanUser: ScanUser = new ScanUser('www.roeland.com',true,'Roeland','roelandvdvelde@gmail.com')
-
-  public scanRaport: ScanReport[] = []
-
-  public currentViewedRapport: Report = new Report(this.scanUser,this.scanRaport);
-
-  public emptyRapport: Report = new Report(this.scanUser, this.scanRaport);
+  public currentViewedRapport: Report = new Report(this.emptyScanUser,this.emptyScanRaport, "22-06-22");
 
   constructor(private http: HttpService,
               private toastr: ToastrService) {
@@ -26,18 +25,18 @@ export class raportService {
 
   public getAllCustomerDataFromDatabase() {
 
-  this.scanRaport.push(new ScanReport('scan1','end/point/one', 7))
-  this.scanRaport.push(new ScanReport('scan2','end/point/two', 10))
-  this.scanRaport.push(new ScanReport('scan3','end/point/three', 5))
-  this.scanRaport.push(new ScanReport('scan4','end/point/four', 2))
-  this.scanRaport.push(new ScanReport('scan5','end/point/five', 8))
-  this.scanRaport.push(new ScanReport('scan6','end/point/six', 7))
+  this.emptyScanRaport.push(new ScanReport('scan1','end/point/one', 7))
+  this.emptyScanRaport.push(new ScanReport('scan2','end/point/two', 10))
+  this.emptyScanRaport.push(new ScanReport('scan3','end/point/three', 5))
+  this.emptyScanRaport.push(new ScanReport('scan4','end/point/four', 2))
+  this.emptyScanRaport.push(new ScanReport('scan5','end/point/five', 8))
+  this.emptyScanRaport.push(new ScanReport('scan6','end/point/six', 7))
 
-  this.emptyRapport.scanReports = this.scanRaport;
+  this.emptyRapport.scanReports = this.emptyScanRaport;
 
     this.raports.push(this.emptyRapport) 
-    console.log(this.raports);
 
+    this.getScanLimit();
     this.subscription = this.getAll()
       .subscribe(data => {
         this.raports = data;        
@@ -46,6 +45,20 @@ export class raportService {
 
   public getAll(): Observable<Report[]> {
     return this.http.getAll("/scan/all");
+  }
+
+  public getScanLimit(){
+    this.http.get<number>("/scan/scanlimiet").subscribe((data) =>{
+      this.scanLimit = data;
+    })
+  }
+  
+  public changeMaxScanLimit(maxScanLimit: HTMLInputElement){
+    this.scanLimit = +maxScanLimit.value;
+    this.http.post<number>("/scan.scanlimiet", this.scanLimit).subscribe((data) =>{
+      console.log('succes');
+      
+    })
   }
 
   public changeCurrentViewedRapport(raport: Report) {
