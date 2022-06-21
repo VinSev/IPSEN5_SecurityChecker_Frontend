@@ -13,6 +13,8 @@ export class AdminScanlimitComponent implements OnInit {
   constructor(public raportService: raportService) { }
 
   ngOnInit(): void {
+    this.raportService.getScanLimit();
+
   }
 
   public submit(maxScanLimit: HTMLInputElement): boolean {

@@ -10,23 +10,22 @@ import { ScanReport } from 'src/app/shared/models/scan-report.model';
   providedIn: 'root'
 })
 export class raportService {
-  public emptyScanUser: ScanUser = new ScanUser('www.getBigMarketing.com',true,'getBigMarketing','-')
+  public emptyScanUser: ScanUser = new ScanUser('-',true,'-','-')
   public emptyScanReport: ScanReport[] = []
   public emptyReport: Report = new Report(this.emptyScanUser, this.emptyScanReport,"22-06-22");
 
   public scanLimit: number = 0;
   private subscription!: Subscription;
   public reports: Report[] = [];
-  public currentViewedReport: Report = new Report(this.emptyScanUser,this.emptyScanReport, "22-06-22");
+  public currentViewedReport: Report = new Report(this.emptyScanUser,this.emptyScanReport, "-");
 
   constructor(private http: HttpService,
               private toastr: ToastrService) {
   }
 
   public getAllCustomerDataFromDatabase() {
-  this.emptyScanReport.push(new ScanReport('emptyScan','end/point/emptyScan',[], 10))
+  this.emptyScanReport.push(new ScanReport('-','-',[], 1))
   this.emptyReport.scanReports = this.emptyScanReport;
-    this.getScanLimit();
     this.subscription = this.getAll()
       .subscribe(data => {
         this.reports = data;
