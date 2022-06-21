@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Report } from 'src/app/shared/models/report.model';
-import { reportService } from '../customer/report.service';
+import { raportService } from '../customer/raport.service';
 
 @Component({
   selector: 'app-admin-singlescan',
@@ -9,7 +9,7 @@ import { reportService } from '../customer/report.service';
 })
 export class AdminSingleScanComponent implements OnInit {
 
-  constructor(public reportService: reportService) { }
+  constructor(public reportService: raportService) { }
 
 
   ngOnInit(): void {
