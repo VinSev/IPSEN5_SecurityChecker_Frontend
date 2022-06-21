@@ -9,7 +9,7 @@ import {ScanUser} from "../../shared/models/scan-user.model";
   providedIn: 'root'
 })
 export class ScanService {
-  public report: Report = new Report(new ScanUser(), []);
+  public report: Report = new Report(new ScanUser(), [],'');
 
   constructor(private http: HttpService,
               ) {

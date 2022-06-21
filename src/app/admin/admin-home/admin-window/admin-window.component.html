@@ -1,10 +1,13 @@
 <div class="">
     <div class="col-lg">
-        <div *ngIf="currentDropDownStatus === 'scans'">
+        <div *ngIf="adminService.adminPageNavigation === 'scans'">
             <app-admin-scanresult></app-admin-scanresult>
         </div>
-        <div *ngIf="currentDropDownStatus !== 'scans'">
+        <div *ngIf="adminService.adminPageNavigation === 'tips'">
             <app-admin-tips></app-admin-tips>
+        </div>
+        <div *ngIf="adminService.adminPageNavigation === 'scanlimit'">
+            <app-admin-scanlimit></app-admin-scanlimit>
         </div>
     </div>
 </div>

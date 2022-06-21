@@ -9,9 +9,9 @@
         <h2>Admin Dashboard - Scans</h2>
       </div>
     </div>
+    <div class="col-lg-5">
 
-    <div class="col-lg-5 col-md-5">
-      <div class="execute-right tipList">
+      <div class="execute-right">
         <app-admin-singlescan></app-admin-singlescan>
       </div>
     </div>
@@ -19,49 +19,38 @@
     <div class="col-lg-7 col-md-7">
       <div class="d-flex justify-content-between">
         <div>
-          <h3>{{raportService.currentViewedRapport.scanUser.name}}</h3>
+          <h3>{{raportService.currentViewedReport.scanUser.name}}</h3>
           <hr>
-          <p>website: {{raportService.currentViewedRapport.scanUser.website}}</p>
+
+          <p>website: {{raportService.currentViewedReport.scanUser.website}}</p>
+          <p>Datum: {{raportService.currentViewedReport.dateCreated}}</p>
         </div>
         <div class="border-secondary border p-3">
-          <p>Email: {{raportService.currentViewedRapport.scanUser.email}}</p>
-          <p>Ownership: {{raportService.currentViewedRapport.scanUser.ownership}}</p>
+          <p>Email: {{raportService.currentViewedReport.scanUser.email}}</p>
+          <p>Ownership: {{raportService.currentViewedReport.scanUser.ownership}}</p>
         </div>
       </div>
 
       <hr>
-
-      <div class="row text-center mx-auto mb-2" style="width: 98%">
-        <div class="col-3 w-25 fw-bolder">#</div>
-        <div class="col-3 w-50 fw-bolder">Scantype</div>
-        <div class="col-3 w-25 fw-bolder">Cijfer</div>
-      </div>
-
-      <div class="container">
-        <div class="row">
-
-          <div class="col-6 w-25 text-center ">
-            <div class="d-flex flex-row justify-content-center border-bottom mb-2"
-                 *ngFor="let test of raportService.scanList; let i = index;">
-              <div>{{i + 1}}</div>
-
-            </div>
+    <div class="scanresult">
+      <div class="border-secondary border p-3 m-2" *ngFor="let scanresult of raportService.currentViewedReport.scanReports; let index = index">
+        <div class="row text-center mx-auto mb-1" style="width: 98%">
+          <p class="col-2 w-25 fw-bolder">Titel: </p>
+          <h5 class="col w-25"> {{scanresult.title}}</h5>
+        </div>
+        <hr>
+        <div class="row text-center mx-auto mb-2">
+          <div class="col-3 w-25 fw-bolder border">
+            <h6>cijfer:</h6>
+            <h1> {{scanresult.grade}}/10</h1>
           </div>
 
-          <div class="col-6 w-50 text-center">
-            <div class="d-flex flex-row justify-content-center border-bottom mb-2"
-                 *ngFor="let scannaam of raportService.scanList; let i = index;">
-              <div>{{scannaam}}</div>
-            </div>
-          </div>
-
-          <div class="col-6 w-25">
-            <div class="d-flex flex-row justify-content-center border-bottom mb-2"
-                 *ngFor="let scancijfer of raportService.scanListValues">
-              <div>{{scancijfer}}/10</div>
-            </div>
+          <div class="col w-25 fw-bolder">
+            <p>Endpoint: </p>
+            <h6>{{scanresult.endpoint}}</h6>
           </div>
         </div>
+      </div>
       </div>
     </div>
   </div>
