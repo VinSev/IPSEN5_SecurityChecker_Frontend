@@ -24,18 +24,8 @@ export class raportService {
   }
 
   public getAllCustomerDataFromDatabase() {
-
-  this.emptyScanRaport.push(new ScanReport('scan1','end/point/one', 7))
-  this.emptyScanRaport.push(new ScanReport('scan2','end/point/two', 10))
-  this.emptyScanRaport.push(new ScanReport('scan3','end/point/three', 5))
-  this.emptyScanRaport.push(new ScanReport('scan4','end/point/four', 2))
-  this.emptyScanRaport.push(new ScanReport('scan5','end/point/five', 8))
-  this.emptyScanRaport.push(new ScanReport('scan6','end/point/six', 7))
-
+  this.emptyScanRaport.push(new ScanReport('emptyScan','end/point/emptyScan',[], 10))
   this.emptyRapport.scanReports = this.emptyScanRaport;
-
-    this.raports.push(this.emptyRapport) 
-
     this.getScanLimit();
     this.subscription = this.getAll()
       .subscribe(data => {
@@ -56,8 +46,6 @@ export class raportService {
   public changeMaxScanLimit(maxScanLimit: HTMLInputElement){
     this.scanLimit = +maxScanLimit.value;
     this.http.post<number>("/scan.scanlimiet", this.scanLimit).subscribe((data) =>{
-      console.log('succes');
-      
     })
   }
 
