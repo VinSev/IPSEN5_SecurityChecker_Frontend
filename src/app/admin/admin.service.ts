@@ -5,12 +5,13 @@ import { BehaviorSubject } from "rxjs";
   providedIn: 'root'
 })
 export class AdminService {
-  public adminPageNavigation: string = 'scans';
+    private dropDownLocation = new BehaviorSubject('scans');
+    _dropDownLocation = this.dropDownLocation.asObservable();
 
   constructor() {
   }
 
   changeDropDownLocation(newLocation :string){
-      this.adminPageNavigation = newLocation;
+      this.dropDownLocation.next(newLocation)
   }
 }

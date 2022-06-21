@@ -8,8 +8,7 @@ import { AdminWindowComponent } from './admin-window/admin-window.component';
 import { AdminTipsComponent } from './admin-window/admin-tips/admin-tips.component';
 import { AdminScanresultComponent } from './admin-window/admin-scanresult/admin-scanresult.component';
 import { AdminTipComponent } from "./admin-window/admin-tips/admin-tip/admin-tip.component";
-import { AdminSinglescanComponent } from './admin-window/admin-scanresult/admin-singlescan/admin-singlescan.component';
-import { AdminScanlimitComponent } from './admin-window/admin-scanlimit/admin-scanlimit.component';
+import { AdminSingleScanComponent } from './admin-window/admin-scanresult/admin-singlescan/admin-single-scan.component';
 
 @NgModule({
     imports: [
@@ -24,8 +23,7 @@ import { AdminScanlimitComponent } from './admin-window/admin-scanlimit/admin-sc
         AdminTipsComponent,
         AdminScanresultComponent,
         AdminTipComponent,
-        AdminSinglescanComponent,
-        AdminScanlimitComponent
+        AdminSingleScanComponent
     ],
     exports:[
     ]
