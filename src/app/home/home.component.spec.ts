@@ -59,9 +59,9 @@ describe('HomeComponent', () => {
     website.value = "test";
     ownership.value = "on"
     component.submit(name, website, ownership, content);
-    expect((<any>component).scanService.name).toEqual("test");
-    expect((<any>component).scanService.website).toEqual("test");
-    expect((<any>component).scanService.ownership).toEqual(true);
+    expect((<any>component).scanService.report.scanUser.name).toEqual("test");
+    expect((<any>component).scanService.report.scanUser.website).toEqual("test");
+    expect((<any>component).scanService.report.scanUser.ownership).toEqual(true);
   });
 
   it('should resolve captcha', function () {

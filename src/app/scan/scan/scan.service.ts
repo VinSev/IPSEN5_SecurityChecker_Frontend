@@ -11,7 +11,7 @@ import {ScanUser} from "../../shared/models/scan-user.model";
   providedIn: 'root'
 })
 export class ScanService {
-  public report: Report = new Report(new ScanUser(), [],'');
+  public report: Report = new Report(new ScanUser(), []);
 
   constructor(private http: HttpService,
               private router: Router,
@@ -75,8 +75,8 @@ export class ScanService {
     }
   }
 
-  public sendReport(){
-    this.http.post("/reports",this.report)
+  public sendReport() {
+    this.http.post("/reports", this.report)
       .subscribe();
   }
 }

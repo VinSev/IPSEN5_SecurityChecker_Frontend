@@ -1,10 +1,12 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AdminComponent } from './admin.component';
+import {AdminComponent} from './admin.component';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {RouterTestingModule} from "@angular/router/testing";
 import {ToastrModule, ToastrService} from "ngx-toastr";
 import {FormsModule} from "@angular/forms";
+import {HttpService} from "../shared/services/http.service";
+import {HttpClient} from "@angular/common/http";
 
 describe('AdminComponent', () => {
   let component: AdminComponent;
@@ -14,7 +16,7 @@ describe('AdminComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ AdminComponent ],
       imports: [HttpClientTestingModule, RouterTestingModule, FormsModule],
-      providers: [{provide: ToastrService, useClass: ToastrModule}]
+      providers: [{provide: ToastrService, useClass: ToastrModule}, HttpService]
     })
     .compileComponents();
   });
@@ -26,6 +28,7 @@ describe('AdminComponent', () => {
   });
 
   it('should create', () => {
+    const component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
 

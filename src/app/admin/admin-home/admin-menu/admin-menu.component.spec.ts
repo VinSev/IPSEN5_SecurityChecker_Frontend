@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AdminService } from '../../admin.service';
-import { AdminWindowComponent } from '../admin-window/admin-window.component';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {AdminService} from '../../admin.service';
 
-import { AdminMenuComponent } from './admin-menu.component';
+import {AdminMenuComponent} from './admin-menu.component';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {RouterTestingModule} from "@angular/router/testing";
 import {ToastrModule, ToastrService} from "ngx-toastr";
+import {HttpService} from "../../../shared/services/http.service";
 
 describe('AdminMenuComponent', () => {
   let component: AdminMenuComponent;
@@ -16,7 +16,7 @@ describe('AdminMenuComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ AdminMenuComponent ],
       imports: [HttpClientTestingModule, RouterTestingModule],
-      providers: [{provide: ToastrService, useClass: ToastrModule}]
+      providers: [{provide: ToastrService, useClass: ToastrModule}, HttpService]
     })
     .compileComponents();
   });
@@ -41,16 +41,11 @@ describe('AdminMenuComponent', () => {
     expect(localStorage.getItem('token')).toBeNull;
   });
 
-  it('should switch between dropdown of scans and scanlimit to tips', () => {
+  it('should switch between dropdown of scans and tips', () => {
     component.activateAdminDropDown('tips')
-        expect(service.adminPageNavigation).toEqual('tips');
-  });
-  it('should switch between dropdown of tips and scanlimit to scans', () => {
-    component.activateAdminDropDown('scans')
-        expect(service.adminPageNavigation).toEqual('scans');
-  });
-  it('should switch between dropdown of scans and tips to scanlimit', () => {
-    component.activateAdminDropDown('scanLimit')
-        expect(service.adminPageNavigation).toEqual('scanLimit');
+    service._dropDownLocation
+      .subscribe(result => {
+        expect(result).toEqual('tips');
+      })
   });
 });
