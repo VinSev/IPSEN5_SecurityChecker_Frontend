@@ -14,12 +14,12 @@
           <div class="col-lg-12 col-md-12">
             <div class="execute-right">
               <form id="scanForm" ngForm #scanForm="ngForm" (ngSubmit)="submit(maxScanLimit)">
-                <div class="form-row">
-                   <div class="form-column d-flex justify-content-center align-content-bottom">
+                <div class="form-row align-self-center my-4">
+                   <div class="form-column d-flex justify-content-center align-self-center">
                    <label for="maxScanLimit">maximaal aantal scans per website:</label>
                   </div>
-                  <div class="form-column"><input name="maxScanLimit" ngModel #maxScanLimit min="0" max="100" required type="number" placeholder="{{raportService.scanLimit}}" value="{{raportService.scanLimit}}" class="form-control bg1" aria-label="maxScanLimit"></div>    
-                  <div class="form-column"><input type="submit" value="pas scan limiet aan" aria-label="Verzenden"></div>
+                  <div class="form-column d-flex justify-content-center align-self-center"><input name="maxScanLimit" ngModel #maxScanLimit min="0" max="100" required type="number" placeholder="{{raportService.scanLimit}}" value="{{raportService.scanLimit}}" class="form-control bg1 my-0" aria-label="maxScanLimit"></div>
+                  <div class="form-column d-flex justify-content-center align-self-center"><input class="my-0" type="submit" value="pas scan limiet aan" aria-label="Verzenden"></div>
                 </div>
                 <noscript>Activeer JavaScript om gebruik te maken van dit formulier.</noscript>
               </form>
@@ -29,7 +29,7 @@
             <div class="execute-left">
               <h3>scan Limiet</h3>
               <p>met een scan limiet zorg je ervoor dat mensen niet te vaak hun website gaan scannen.</p>
-              <p>Door het limiet op 0 te zetten zorg je ervoor dat niemand kan scannen,<br> 
+              <p>Door het limiet op 0 te zetten zorg je ervoor dat niemand kan scannen,<br>
                 waardoor je eventuele problemen kan oplossen. Zonder dat de backend Gebruikt word!</p>
             </div>
           </div>
