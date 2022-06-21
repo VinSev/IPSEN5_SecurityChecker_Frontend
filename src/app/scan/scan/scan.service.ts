@@ -18,8 +18,8 @@ export class ScanService {
               private toastr: ToastrService,
               ) {
     // this.report.scanReports.push(new ScanReport("Header", "/header"));
-    this.report.scanReports.push(new ScanReport("Certificate", "/certificate"));
-    this.report.scanReports.push(new ScanReport("Vulnerability", "/vulnerability"));
+    // this.report.scanReports.push(new ScanReport("Certificate", "/certificate"));
+    // this.report.scanReports.push(new ScanReport("Vulnerability", "/vulnerability"));
     // this.report.scanReports.push(new ScanReport("XSS & Injection", "/scan/xss-and-injection"));
     this.report.scanReports.push(new ScanReport("Seo", "/seo"));
   }
@@ -31,16 +31,17 @@ export class ScanService {
 
   private async scan(iterator: Iterator<ScanReport>): Promise<void> {
     if (!iterator.hasNext()) {
+
       return;
     }
     let scanReport: ScanReport = iterator.next();
     scanReport.loading = true;
     console.log(scanReport.title);
     this.filterWebsite();
-    this.http.post<any>("/scan" + scanReport.endpoint + "/" + this.report.scanUser.website, {scanReport: this.report})
+    this.http.post<any>("/scan" + scanReport.endpoint + "/" + this.report.scanUser.website, this.report)
       .subscribe({
         next: (response) => {
-          scanReport = response;
+          scanReport.result = response.result
           console.log(scanReport.title + " : " + scanReport.result)
         },
         complete: () => {
