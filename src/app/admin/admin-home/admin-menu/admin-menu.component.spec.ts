@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AdminService } from '../../admin.service';
-import { AdminWindowComponent } from '../admin-window/admin-window.component';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {AdminService} from '../../admin.service';
 
-import { AdminMenuComponent } from './admin-menu.component';
+import {AdminMenuComponent} from './admin-menu.component';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {RouterTestingModule} from "@angular/router/testing";
 import {ToastrModule, ToastrService} from "ngx-toastr";
+import {HttpService} from "../../../shared/services/http.service";
 
 describe('AdminMenuComponent', () => {
   let component: AdminMenuComponent;
@@ -16,7 +16,7 @@ describe('AdminMenuComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ AdminMenuComponent ],
       imports: [HttpClientTestingModule, RouterTestingModule],
-      providers: [{provide: ToastrService, useClass: ToastrModule}]
+      providers: [{provide: ToastrService, useClass: ToastrModule}, HttpService]
     })
     .compileComponents();
   });
