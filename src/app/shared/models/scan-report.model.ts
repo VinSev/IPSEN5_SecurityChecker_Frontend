@@ -1,10 +1,12 @@
+import {ScanAlert} from "./scan-alert.model";
+
 export class ScanReport {
   public loading: boolean = false;
 
   constructor(public title: string,
               public endpoint: string,
-              public grade?: number,
-              public result?: JSON) {
+              public result: ScanAlert[],
+              public grade?: number) {
   }
 }
 

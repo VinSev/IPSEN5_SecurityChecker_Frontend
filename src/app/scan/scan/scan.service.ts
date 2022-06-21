@@ -17,11 +17,11 @@ export class ScanService {
               private router: Router,
               private toastr: ToastrService,
               ) {
-    this.report.scanReports.push(new ScanReport("Header", "/header"));
-    this.report.scanReports.push(new ScanReport("Certificate", "/certificate"));
-    this.report.scanReports.push(new ScanReport("Vulnerability", "/vulnerability"));
-    // this.report.scanReports.push(new ScanReport("XSS & Injection", "/xss-and-injection"));
-    // this.report.scanReports.push(new ScanReport("Seo", "/seo"));
+    this.report.scanReports.push(new ScanReport("Header", "/header", []));
+    this.report.scanReports.push(new ScanReport("Certificate", "/certificate", []));
+    this.report.scanReports.push(new ScanReport("Vulnerability", "/vulnerability", []));
+    this.report.scanReports.push(new ScanReport("XSS & Injection", "/xss-and-injection", []));
+    this.report.scanReports.push(new ScanReport("Seo", "/seo", []));
   }
 
   public start(): void {
@@ -36,9 +36,8 @@ export class ScanService {
     }
     let scanReport: ScanReport = iterator.next();
     scanReport.loading = true;
-    console.log(scanReport.title);
     this.filterWebsite();
-    this.http.post<any>("/scan" + scanReport.endpoint + "/" + this.report.scanUser.website, this.report)
+    this.http.post<any>("/scan" + scanReport.endpoint + "/" + this.report.scanUser.website, scanReport)
       .subscribe({
         next: (response: ScanReport) => {
           scanReport.grade = response.grade;
