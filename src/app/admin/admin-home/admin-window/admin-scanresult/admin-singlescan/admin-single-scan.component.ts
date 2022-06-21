@@ -4,20 +4,12 @@ import { raportService } from '../customer/raport.service';
 
 @Component({
   selector: 'app-admin-singlescan',
-  templateUrl: './admin-singlescan.component.html',
+  templateUrl: './admin-single-scan.component.html',
   styleUrls: ['./admin-single-scan.component.scss']
 })
-export class AdminSingleScanComponent implements OnInit {
+export class AdminSingleScanComponent {
 
   constructor(public reportService: raportService) { }
-
-
-  ngOnInit(): void {
-  }
-
-  onCustomerScanSelected(){
-
-  }
 
   public onRapportSelected(rapport: Report){
     this.reportService.changeCurrentViewedRapport(rapport);
