@@ -71,6 +71,8 @@ export class ScanService {
 
   public sendReport() {
     this.http.post("/reports", this.report)
-      .subscribe();
+      .subscribe((response: Report) => {
+        this.report = response;
+      });
   }
 }
