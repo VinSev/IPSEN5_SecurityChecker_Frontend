@@ -15,7 +15,7 @@ export class ScanService {
   constructor(private http: HttpService,
               ) {
     this.report.scanReports.push(new ScanReport("Header", "/header", []));
-    this.report.scanReports.push(new ScanReport("Certificate", "/certificate", []));
+    // this.report.scanReports.push(new ScanReport("Certificate", "/certificate", []));
     this.report.scanReports.push(new ScanReport("Vulnerability", "/vulnerability", []));
     this.report.scanReports.push(new ScanReport("Seo", "/seo", []));
   }
@@ -51,8 +51,6 @@ export class ScanService {
   }
 
   public sendMail(): void {
-    console.log(this.report)
-
     this.http.post("/reports", this.report)
       .subscribe();
 
