@@ -1,7 +1,5 @@
 <div class="features__wrap container"
-     [ngSwitch]="this.scanService.report.scanReports[this.scanService.report.scanReports.length - 1]
-     .loading == true && this.scanService.report.scanReports[this.scanService.report.scanReports.length - 1]
-     .grade != undefined">
+     [ngSwitch]="this.scanService.finished">
   <div class="line">
     <span></span>
     <span class="sml-line"></span>

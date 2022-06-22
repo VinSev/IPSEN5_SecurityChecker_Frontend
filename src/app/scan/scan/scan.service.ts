@@ -10,6 +10,7 @@ import {ScanUser} from "../../shared/models/scan-user.model";
 })
 export class ScanService {
   public report: Report = new Report(new ScanUser(), [],'');
+  public finished: boolean = false;
 
   constructor(private http: HttpService,
               ) {
@@ -27,6 +28,7 @@ export class ScanService {
   private async scan(iterator: Iterator<ScanReport>): Promise<void> {
     if (!iterator.hasNext()) {
       this.sendReport();
+      this.finished = true;
       return;
     }
     let scanReport: ScanReport = iterator.next();
