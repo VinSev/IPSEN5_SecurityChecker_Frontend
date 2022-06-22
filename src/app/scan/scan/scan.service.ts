@@ -51,7 +51,6 @@ export class ScanService {
   }
 
   public sendMail(): void {
-    console.log(this.report)
     this.http.post("/reports", this.report)
       .subscribe();
 
