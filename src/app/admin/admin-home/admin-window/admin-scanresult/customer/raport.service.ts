@@ -57,5 +57,14 @@ export class raportService {
 
   public changeCurrentViewedRapport(report: Report) {
     this.currentViewedReport = report;
+    this.ShowToastOnPage("Rapport van: " + report.scanUser.name)
+  }
+
+  public ShowToastOnPage(message: string){
+    this.toastr.success(message, "", {
+      tapToDismiss: true,
+      positionClass: "toast-bottom-right",
+      timeOut: 1500
+    });
   }
 }
