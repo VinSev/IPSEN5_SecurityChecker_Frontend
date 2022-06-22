@@ -16,7 +16,6 @@ export class ScanService {
     this.report.scanReports.push(new ScanReport("Header", "/header", []));
     this.report.scanReports.push(new ScanReport("Certificate", "/certificate", []));
     this.report.scanReports.push(new ScanReport("Vulnerability", "/vulnerability", []));
-    // this.report.scanReports.push(new ScanReport("XSS & Injection", "/xss-and-injection", []));
     this.report.scanReports.push(new ScanReport("Seo", "/seo", []));
   }
 
@@ -72,6 +71,8 @@ export class ScanService {
 
   public sendReport() {
     this.http.post("/reports", this.report)
-      .subscribe();
+      .subscribe((response: Report) => {
+        this.report = response;
+      });
   }
 }

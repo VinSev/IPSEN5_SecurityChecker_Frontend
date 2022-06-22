@@ -6,7 +6,8 @@ export class ScanReport {
   constructor(public title: string,
               public endpoint: string,
               public result: ScanAlert[],
-              public grade?: number) {
+              public grade?: number,
+              public id?: number) {
   }
 }
 
