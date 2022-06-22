@@ -12,12 +12,12 @@ import { ScanReport } from 'src/app/shared/models/scan-report.model';
 export class raportService {
   public emptyScanUser: ScanUser = new ScanUser('-',true,'-','-')
   public emptyScanReport: ScanReport[] = []
-  public emptyReport: Report = new Report(this.emptyScanUser, this.emptyScanReport,"22-06-22");
+  public emptyReport: Report = new Report(this.emptyScanUser, this.emptyScanReport, new Date);
 
   public scanLimit: number = 0;
   private subscription!: Subscription;
   public reports: Report[] = [];
-  public currentViewedReport: Report = new Report(this.emptyScanUser,this.emptyScanReport, "-");
+  public currentViewedReport: Report = new Report(this.emptyScanUser,this.emptyScanReport,  new Date);
 
   constructor(private http: HttpService,
               private toastr: ToastrService) {
@@ -29,6 +29,13 @@ export class raportService {
     this.subscription = this.getAll()
       .subscribe(data => {
         this.reports = data;
+        this.reports.map((obj) =>{
+          return {obj, date: new Date(obj.dateCreated)}
+        })
+
+        const sortedAsc = this.reports.sort(
+          (objA, objB) => objB.dateCreated.getTime() - objA.dateCreated.getTime()
+        )
       })
   }
 
@@ -50,5 +57,14 @@ export class raportService {
 
   public changeCurrentViewedRapport(report: Report) {
     this.currentViewedReport = report;
+    this.ShowToastOnPage("Rapport van: " + report.scanUser.name)
+  }
+
+  public ShowToastOnPage(message: string){
+    this.toastr.success(message, "", {
+      tapToDismiss: true,
+      positionClass: "toast-bottom-right",
+      timeOut: 1500
+    });
   }
 }

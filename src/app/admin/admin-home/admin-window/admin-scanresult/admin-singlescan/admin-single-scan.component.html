@@ -1,6 +1,6 @@
 <div class="scanList">
 
-    <div *ngFor="let raport of reportService.reports.reverse()">
+    <div *ngFor="let raport of reportService.reports">
       <button class="singleCustomer" (click)="onRapportSelected(raport)">{{raport.scanUser.name}}</button>
     </div>
   </div>
